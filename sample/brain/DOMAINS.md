@@ -1,0 +1,24 @@
+# Domains
+
+Each folder below is a domain: one area of this brain, with its own `{DOMAIN}.md` saying what goes in, what stays out and which files it holds. Read a domain's file only when the task touches it.
+
+## Core domains (every brain has these)
+
+| Domain | File | What it holds |
+|---|---|---|
+| automations | `automations/AUTOMATIONS.md` | Jobs the person has asked an AI app to run on a schedule |
+| memory | `memory/MEMORY.md` | What has happened: calendar, conversations, decisions, events, profile |
+| scripts | `scripts/SCRIPTS.md` | Small helper programs, such as the jobs list |
+| skills | `skills/SKILLS.md` | Things an AI can do for the person, one folder each |
+| tools | `tools/TOOLS.md` | AI tools and connectors in use, and how to point each at this folder |
+
+## Personal domains (chosen for this person)
+
+| Domain | File | What it holds |
+|---|---|---|
+| network | `network/NETWORK.md` | People I know, and every conversation or meeting with them |
+| work | `work/WORK.md` | My job, business or ventures, and their projects |
+
+## Adding a domain
+
+Add one when a kind of information keeps coming up and fits none of the folders above. Make the folder, write its `{DOMAIN}.md` (what goes in, what stays out, its files), add a row here and a line to the routing table in `AGENTS.md`, and note the decision in `memory/decisions.jsonl`. Ask the person first.

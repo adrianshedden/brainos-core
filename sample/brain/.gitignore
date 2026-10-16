@@ -1,0 +1,3 @@
+# Raw export files stay on this computer: they are never part of the GitHub backup.
+exports/*
+!exports/README.md

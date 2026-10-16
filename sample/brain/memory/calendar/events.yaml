@@ -1,0 +1,73 @@
+# Calendar meetings, one entry per occurrence. Written by importers/calendar_ics.py; re-running replaces this file.
+# Times are in Europe/London.
+- date: "2024-01-04"
+  time: "10:00"
+  title: "Weekly sync"
+  all_day: false
+  recurring: true
+  with:
+    - "Priya Demo"
+    - "Sam Sample"
+  source: "calendar"
+- date: "2024-01-11"
+  time: "10:00"
+  title: "Weekly sync"
+  all_day: false
+  recurring: true
+  with:
+    - "Priya Demo"
+    - "Sam Sample"
+  source: "calendar"
+- date: "2024-01-18"
+  time: "10:00"
+  title: "Weekly sync"
+  all_day: false
+  recurring: true
+  with:
+    - "Priya Demo"
+    - "Sam Sample"
+  source: "calendar"
+- date: "2024-01-25"
+  time: "10:00"
+  title: "Weekly sync"
+  all_day: false
+  recurring: true
+  with:
+    - "Priya Demo"
+    - "Sam Sample"
+  source: "calendar"
+- date: "2024-02-01"
+  time: "10:00"
+  title: "Weekly sync"
+  all_day: false
+  recurring: true
+  with:
+    - "Priya Demo"
+    - "Sam Sample"
+  source: "calendar"
+- date: "2024-02-01"
+  time: "14:00"
+  title: "Planning"
+  all_day: false
+  recurring: false
+  with:
+    - "Jo Placeholder"
+    - "Priya Demo"
+  source: "calendar"
+- date: "2024-02-08"
+  time: "10:00"
+  title: "Weekly sync"
+  all_day: false
+  recurring: true
+  with:
+    - "Priya Demo"
+    - "Sam Sample"
+  source: "calendar"
+- date: "2024-03-15"
+  time: null
+  title: "Team offsite"
+  all_day: true
+  recurring: false
+  with:
+    - "Sam Sample"
+  source: "calendar"
