@@ -4,6 +4,8 @@ BrainOS core makes an empty brain (a folder of Markdown and YAML files) on the p
 
 Setting a brain up for the first time, because the person pasted the Remyn setup instruction? Follow `SETUP.md` instead: it is the guided first run (where the folder goes, what to connect first, steps only for what they pick). This file is the reference for every step.
 
+On Windows, type `py` wherever this kit says `python3` (`python3` there is usually missing or opens the Microsoft Store); if `py` is missing too, try `python`.
+
 The order is: check, choose domains, create the brain, import, mine my context, first skills.
 
 0. Check the setup first: `python3 check_setup.py <folder>`. It changes nothing. Tell the person what it found, then follow its next step.
