@@ -9,7 +9,7 @@ import nonet
 
 nonet.install()
 CORE = Path(__file__).resolve().parents[1]
-DOCS = ["README.md", "INSTRUCTIONS.md", "GITHUB.md", "template/LEVEL1.md", "template/AGENTS.md", "template/README.md",
+DOCS = ["README.md", "INSTRUCTIONS.md", "SETUP.md", "GITHUB.md", "template/LEVEL1.md", "template/AGENTS.md", "template/README.md",
         "template/exports/README.md", "template/tools/TOOLS.md", "template/tools/ai-tools/claude-desktop.md"]
 # What the AI reads: the kit's own instructions, and in the brain the rules (level 1, template/LEVEL1.md) and importing (AGENTS.md).
 AI_INSTRUCTIONS = ["INSTRUCTIONS.md", "template/LEVEL1.md"]
@@ -22,7 +22,7 @@ APPROVED = ("Your brain is stored as plain files on your laptop. When you use a 
             "OpenAI and others), whatever their agent reads is processed by that provider, like any chat. Run it "
             "with a local model in the future and it stays fully private on your machine. That is what we are "
             "working towards.")
-SAYS_WHERE = ["README.md", "INSTRUCTIONS.md", "template/LEVEL1.md", "template/tools/TOOLS.md",
+SAYS_WHERE = ["README.md", "INSTRUCTIONS.md", "SETUP.md", "template/LEVEL1.md", "template/tools/TOOLS.md",
               "sample/brain/CLAUDE.md", "sample/brain/tools/TOOLS.md"]
 # The wording it replaced, which must not come back.
 OLD = ["stored as files on your own computer", "processed by that tool's provider", "processed by that AI's provider",

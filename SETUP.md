@@ -79,7 +79,7 @@ Work through the picks in this order: LinkedIn, WhatsApp, then the rest. One sou
 
 ## 5. Bring in what is ready now
 
-1. Tell the person once where their data goes, in the words under "Where the data goes" in `kit/INSTRUCTIONS.md`. Then go ahead.
+1. Before you run the first importer, send the person this, in a message of its own (it is required, once per setup): "Your brain is stored as plain files on your laptop. When you use a cloud AI provider (Anthropic, OpenAI and others), whatever their agent reads is processed by that provider, like any chat. Run it with a local model in the future and it stays fully private on your machine. That is what we are working towards. The importers never use the internet. Nothing is published unless you back up to your own private GitHub." Then go ahead.
 2. Run `python3 kit/check_setup.py .` It lists the export files in `exports` and the exact line to run for each. Run them. Before the first WhatsApp import, ask once for their own name as it shows in their chats.
 3. Each connection they switched on: add its line to `tools/TOOLS.md` and tell them in one line. Use it to answer their questions. Do not copy whole mailboxes, calendars or drives into the brain. With their yes, add the people they deal with most (up to 20) to the people list named in `AGENTS.md`, each with `"source": "<connection>, <date>"` and `"confidence": "medium"`.
 4. Say what came in, in plain numbers: people, messages, meetings, and anything skipped.
