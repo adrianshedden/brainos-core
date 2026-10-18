@@ -9,8 +9,9 @@ Pick the card for your tool, in `ai-tools/`:
 - `claude-desktop.md`: the Claude app's Chat tab (Cowork, the old name, is now part of Chat)
 - `claude-ai.md`: Claude in a web browser
 - `claude-code.md`: Claude Code
-- `chatgpt.md`: ChatGPT
+- `chatgpt.md`: ChatGPT (use the desktop app's Codex for your brain)
 - `codex.md`: OpenAI Codex
+- `gemini.md`: Gemini, in Google's Antigravity app
 - `opencode.md`: OpenCode
 - `cursor.md`: Cursor
 - `orca.md`: Orca

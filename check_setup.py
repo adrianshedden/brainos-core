@@ -10,7 +10,9 @@ Read-only: it changes nothing and never touches the network. It says, in plain E
   context, first skills.
 
 It always finishes with exit code 0, whatever it finds. Only wrong arguments stop it."""
+import os
 import shlex
+import subprocess
 import sys
 import zipfile
 from pathlib import Path
@@ -22,7 +24,8 @@ import whatsapp  # noqa: E402
 import x_export  # noqa: E402
 
 MIN_PYTHON = (3, 8)
-NEEDED = ["create_brain.py", "template/brain.yaml", "template/CLAUDE.md", "template/AGENTS.md", "importers/common.py",
+NEEDED = ["create_brain.py", "level1.py", "SETUP.md", "template/brain.yaml", "template/LEVEL1.md", "template/AGENTS.md",
+          "importers/common.py",
           "importers/linkedin.py", "importers/whatsapp.py", "importers/calendar_ics.py",
           "importers/apple_contacts.py", "importers/x_export.py"]
 # Files that are ours, or the computer's own, in exports/: never reported.
@@ -103,9 +106,17 @@ def kind_of(path):
     return None, ""
 
 
+def command(*args, windows=None):
+    """One line the person's AI can run. On Windows Python is `py` (python.org) and paths take double quotes;
+    `python3` there is missing or opens the Microsoft Store."""
+    windows = os.name == "nt" if windows is None else windows
+    if windows:
+        return subprocess.list2cmdline(["py"] + [str(a) for a in args])
+    return " ".join(shlex.quote(str(a)) for a in ("python3",) + args)
+
+
 def importer_line(kind, export, brain):
-    script = KIT / KINDS[kind][1]
-    return " ".join(shlex.quote(str(a)) for a in ("python3", script, export, brain))
+    return command(KIT / KINDS[kind][1], export, brain)
 
 
 def brain_state(folder):
@@ -117,9 +128,19 @@ def brain_state(folder):
         return "not-empty"
     if (folder / "brain.yaml").is_file():
         return "brain"
-    if all(p.name in ("exports", ".DS_Store") for p in folder.iterdir()):
+    if all(p.name in ("exports", "kit", ".DS_Store") for p in folder.iterdir()):
         return "empty"
     return "not-empty"
+
+
+def level1_note(folder):
+    """One line on whether level 1 says the same at every front door (CLAUDE.md, GEMINI.md, top of AGENTS.md)."""
+    import level1
+    problems = level1.check(folder)
+    if not problems:
+        return "Level 1 is the same in CLAUDE.md, GEMINI.md and the top of AGENTS.md."
+    return ("Level 1 copies differ (" + "; ".join(problems) + "). Edit CLAUDE.md, then run: "
+            + command(KIT / "level1.py", "sync", folder))
 
 
 def report(folder):
@@ -137,7 +158,7 @@ def report(folder):
     out.append("Brain folder: " + {
         "missing": f"{folder} does not exist yet. create_brain.py will make it.",
         "empty": f"{folder} is empty and ready for create_brain.py.",
-        "brain": f"{folder} is a brain.",
+        "brain": f"{folder} is a brain. " + level1_note(folder),
         "not-empty": f"{folder} already has other things in it and is not a brain. "
                      "create_brain.py needs a new or empty folder.",
     }[state])
@@ -172,7 +193,7 @@ def report(folder):
     elif old_python:
         step = "Install a newer Python 3 (3.8 or later), then run this check again."
     elif state in ("missing", "empty"):
-        line = " ".join(shlex.quote(str(a)) for a in ("python3", KIT / "create_brain.py", folder, "--domains", "network"))
+        line = command(KIT / "create_brain.py", folder, "--domains", "network")
         step = (f"Choose the personal domains that fit you (network, work, knowledge, family, health, finance; "
                 f"network holds the people you know), then make the brain: {line}")
     elif state == "not-empty":

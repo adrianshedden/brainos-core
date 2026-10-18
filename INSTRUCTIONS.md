@@ -2,12 +2,16 @@
 
 BrainOS core makes an empty brain (a folder of Markdown and YAML files) on the person's own computer and fills it from their own exports. Plain Python 3, nothing to install. No script in this kit uses the internet, except the optional GitHub backup, which the person starts themselves (`GITHUB.md`). Run each step for the person and tell them the result in plain English.
 
+Setting a brain up for the first time, because the person pasted the Remyn setup instruction? Follow `SETUP.md` instead: it is the guided first run (where the folder goes, what to connect first, steps only for what they pick). This file is the reference for every step.
+
+On Windows, type `py` wherever this kit says `python3` (`python3` there is usually missing or opens the Microsoft Store); if `py` is missing too, try `python`.
+
 The order is: check, choose domains, create the brain, import, mine my context, first skills.
 
 0. Check the setup first: `python3 check_setup.py <folder>`. It changes nothing. Tell the person what it found, then follow its next step.
 1. Choose the personal domains, before creating the brain. A domain is one area of their life with its own folder and instructions file. Every brain has five core domains (automations, memory, scripts, skills, tools); personal domains come from this list: network (the people they know and every conversation with them), work (job, business or ventures), knowledge (notes and reading), family, health, finance. Offer three to five that fit, based on what they have told you and which exports they have (any LinkedIn, WhatsApp, calendar or contacts export means network). Ask them to pick, in one short message. More can be added later.
 2. Create the brain with their choice: `python3 create_brain.py <folder> --domains network,work` (their domains, comma-separated; `--domains none` for none). The folder must be new or empty; it may already hold an `exports` folder.
-3. Read `<folder>/CLAUDE.md`, then `<folder>/AGENTS.md`. They say how the brain is laid out, which domain or skill answers which request, and what you may do with it. Each domain folder has its own `{DOMAIN}.md`; read one only when the task touches it.
+3. Read level 1, then level 2. Level 1 is written once in `template/LEVEL1.md` and copied word for word to every AI's front door: `<folder>/CLAUDE.md`, `<folder>/GEMINI.md` and the top of `<folder>/AGENTS.md` (check with `python3 <folder>/scripts/level1.py check <folder>`). Level 2 is the rest of `<folder>/AGENTS.md`. They say how the brain is laid out, which domain or skill answers which request, and what you may do with it. Each domain folder has its own `{DOMAIN}.md`; read one only when the task touches it.
 4. Before the first import, tell the person once, in plain words, where their data goes (the words are under "Where the data goes" below). Then, if they have asked for the import, go ahead. Do not stop to offer other ways of doing it.
 5. Find the exports. Look in `<folder>/exports/` first: `check_setup.py` lists what is there and the exact line to run for each file. If you cannot see the export files, send the person one short message with these two choices, and no others:
    - "Drag your export files into the brain's `exports` folder. Then I only need the brain folder."
