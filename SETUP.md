@@ -7,15 +7,16 @@ How to work, the whole way through:
 - Plain English and British spelling. Short messages. One question at a time, unless a step says to ask two together.
 - Ask before you create anything. Change files only inside the brain folder the person chooses (and your own scratch space, if your app has one). Never delete anything.
 - Never send, upload or post the person's files anywhere. The kit's scripts never use the internet.
+- On Windows, run every `python3` command in this kit as `py` instead (for example `py kit/create_brain.py . --domains network,work`): `python3` there is usually missing or opens the Microsoft Store. If `py` is missing too, try `python`.
 - Show each command before you run it, and say in one line what it does. Your app may also ask the person to approve it: that is normal.
 - Never block the setup on something slow. If an export is still on its way, carry on with the rest and tell the person how to add it later.
 
 ## 1. Check you can do this here
 
-You need to open and change a folder on the person's computer and run Python 3 (`python3 --version`; on Windows `py --version` also works).
+You need to open and change a folder on the person's computer and run Python 3 (`python3 --version`; on Windows `py --version`).
 
 - If you cannot reach folders on their computer (for example ChatGPT chat, the Gemini web app, or any phone app), stop and say, in one or two lines: "I can't work on folders on your computer from here. Open the Claude app, the ChatGPT desktop app (Codex), Google's Antigravity or Cursor on your computer, and paste the same instruction there."
-- If Python 3 is missing, say so in one line and offer to walk them through installing it from python.org. Do not install anything without their yes.
+- If Python 3 is missing, say so in one line and offer to walk them through installing it from python.org. Do not install anything without their yes. On Windows, the python.org installer's defaults are fine; afterwards the person may need to close and reopen your app before `py` works.
 
 ## 2. Ask where the brain should live, then build it
 

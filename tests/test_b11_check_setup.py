@@ -171,5 +171,14 @@ class CheckSetup(unittest.TestCase):
                 self.assertIn("Usage:", r.stderr)
 
 
+    def test_windows_lines_use_py_and_double_quotes(self):
+        # On Windows `python3` is missing or opens the Microsoft Store, and cmd.exe ignores single quotes.
+        import check_setup
+        line = check_setup.command(r"C:\Users\A B\brain\kit\importers\whatsapp.py", r"C:\Users\A B\brain\exports\chat.txt", ".", windows=True)
+        self.assertTrue(line.startswith("py "), line)
+        self.assertIn('"C:\\Users\\A B\\brain\\exports\\chat.txt"', line)
+        self.assertNotIn("'", line)
+        self.assertTrue(check_setup.command("x.py", windows=False).startswith("python3 "))
+
 if __name__ == "__main__":
     unittest.main()

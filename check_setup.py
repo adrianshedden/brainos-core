@@ -10,7 +10,9 @@ Read-only: it changes nothing and never touches the network. It says, in plain E
   context, first skills.
 
 It always finishes with exit code 0, whatever it finds. Only wrong arguments stop it."""
+import os
 import shlex
+import subprocess
 import sys
 import zipfile
 from pathlib import Path
@@ -104,9 +106,17 @@ def kind_of(path):
     return None, ""
 
 
+def command(*args, windows=None):
+    """One line the person's AI can run. On Windows Python is `py` (python.org) and paths take double quotes;
+    `python3` there is missing or opens the Microsoft Store."""
+    windows = os.name == "nt" if windows is None else windows
+    if windows:
+        return subprocess.list2cmdline(["py"] + [str(a) for a in args])
+    return " ".join(shlex.quote(str(a)) for a in ("python3",) + args)
+
+
 def importer_line(kind, export, brain):
-    script = KIT / KINDS[kind][1]
-    return " ".join(shlex.quote(str(a)) for a in ("python3", script, export, brain))
+    return command(KIT / KINDS[kind][1], export, brain)
 
 
 def brain_state(folder):
@@ -129,8 +139,8 @@ def level1_note(folder):
     problems = level1.check(folder)
     if not problems:
         return "Level 1 is the same in CLAUDE.md, GEMINI.md and the top of AGENTS.md."
-    return ("Level 1 copies differ (" + "; ".join(problems) + "). Edit CLAUDE.md, then run: python3 "
-            + shlex.quote(str(KIT / "level1.py")) + " sync " + shlex.quote(str(folder)))
+    return ("Level 1 copies differ (" + "; ".join(problems) + "). Edit CLAUDE.md, then run: "
+            + command(KIT / "level1.py", "sync", folder))
 
 
 def report(folder):
@@ -183,7 +193,7 @@ def report(folder):
     elif old_python:
         step = "Install a newer Python 3 (3.8 or later), then run this check again."
     elif state in ("missing", "empty"):
-        line = " ".join(shlex.quote(str(a)) for a in ("python3", KIT / "create_brain.py", folder, "--domains", "network"))
+        line = command(KIT / "create_brain.py", folder, "--domains", "network")
         step = (f"Choose the personal domains that fit you (network, work, knowledge, family, health, finance; "
                 f"network holds the people you know), then make the brain: {line}")
     elif state == "not-empty":
