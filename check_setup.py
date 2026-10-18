@@ -22,7 +22,8 @@ import whatsapp  # noqa: E402
 import x_export  # noqa: E402
 
 MIN_PYTHON = (3, 8)
-NEEDED = ["create_brain.py", "template/brain.yaml", "template/CLAUDE.md", "template/AGENTS.md", "importers/common.py",
+NEEDED = ["create_brain.py", "level1.py", "SETUP.md", "template/brain.yaml", "template/LEVEL1.md", "template/AGENTS.md",
+          "importers/common.py",
           "importers/linkedin.py", "importers/whatsapp.py", "importers/calendar_ics.py",
           "importers/apple_contacts.py", "importers/x_export.py"]
 # Files that are ours, or the computer's own, in exports/: never reported.
@@ -117,9 +118,19 @@ def brain_state(folder):
         return "not-empty"
     if (folder / "brain.yaml").is_file():
         return "brain"
-    if all(p.name in ("exports", ".DS_Store") for p in folder.iterdir()):
+    if all(p.name in ("exports", "kit", ".DS_Store") for p in folder.iterdir()):
         return "empty"
     return "not-empty"
+
+
+def level1_note(folder):
+    """One line on whether level 1 says the same at every front door (CLAUDE.md, GEMINI.md, top of AGENTS.md)."""
+    import level1
+    problems = level1.check(folder)
+    if not problems:
+        return "Level 1 is the same in CLAUDE.md, GEMINI.md and the top of AGENTS.md."
+    return ("Level 1 copies differ (" + "; ".join(problems) + "). Edit CLAUDE.md, then run: python3 "
+            + shlex.quote(str(KIT / "level1.py")) + " sync " + shlex.quote(str(folder)))
 
 
 def report(folder):
@@ -137,7 +148,7 @@ def report(folder):
     out.append("Brain folder: " + {
         "missing": f"{folder} does not exist yet. create_brain.py will make it.",
         "empty": f"{folder} is empty and ready for create_brain.py.",
-        "brain": f"{folder} is a brain.",
+        "brain": f"{folder} is a brain. " + level1_note(folder),
         "not-empty": f"{folder} already has other things in it and is not a brain. "
                      "create_brain.py needs a new or empty folder.",
     }[state])

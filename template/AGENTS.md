@@ -1,6 +1,6 @@
 # How this brain works (level 2)
 
-Read `CLAUDE.md` first. This file says which domain or skill answers which request, where every file is, and the conventions for adding to it. Read a domain's `{DOMAIN}.md` only when the task touches it.
+Read level 1 first: it is the block above (the same words as `CLAUDE.md` and `GEMINI.md`). This manual says which domain or skill answers which request, where every file is, and the conventions for adding to it. Read a domain's `{DOMAIN}.md` only when the task touches it.
 
 ## Routing table
 
@@ -15,6 +15,7 @@ Read `CLAUDE.md` first. This file says which domain or skill answers which reque
 | What have I been putting off? | Follow `skills/what-am-i-putting-off/SKILL.md` |
 | Prep me for my next meeting, get me ready for a meeting or call | Follow `skills/prep-my-next-meeting/SKILL.md` |
 | Who have I gone quiet with? Who should I reconnect with? | Follow `skills/who-have-i-gone-quiet-with/SKILL.md` |
+| Set up my BrainOS, finish my setup, connect something new | Follow `kit/SETUP.md` (the setup guide in the BrainOS kit) |
 | Import an export, add my LinkedIn, WhatsApp, calendar, contacts or X | See "Importing" below |
 | Note a decision, or something that happened | Add one line to `memory/decisions.jsonl` or `memory/events.jsonl` (see `memory/MEMORY.md`) |
 | Run something every week, a scheduled job | Read `automations/AUTOMATIONS.md` |
@@ -27,15 +28,17 @@ Read `CLAUDE.md` first. This file says which domain or skill answers which reque
 ## File index
 
 ```
-CLAUDE.md          level 1: who this is for, how to start, the rules
-AGENTS.md          level 2: this file
+CLAUDE.md          level 1 for Claude: who this is for, how to start, the rules (edit level 1 here)
+GEMINI.md          level 1 for Gemini: the same words, copied by scripts/level1.py
+AGENTS.md          level 1 block (the same words), then level 2: this manual
 DOMAINS.md         the domains this brain has
 README.md          what the folder is, for the person
 brain.yaml         the files a brain must have (checked by the kit's tests)
 exports/           raw export files; read only to import them; never backed up
+kit/               the BrainOS kit (setup guide, importers); never edit it; never backed up
 automations/       AUTOMATIONS.md: scheduled jobs
 memory/            MEMORY.md, decisions.jsonl, events.jsonl, calendar/, conversations/, profile/
-scripts/           SCRIPTS.md, jobs.py
+scripts/           SCRIPTS.md, jobs.py, level1.py
 skills/            SKILLS.md, one folder per skill with its SKILL.md
 tools/             TOOLS.md, ai-tools/ (one card per AI tool)
 {{PERSONAL_INDEX}}
@@ -52,15 +55,15 @@ tools/             TOOLS.md, ai-tools/ (one card per AI tool)
 
 ## Importing
 
-Importers live in the `importers` folder of the BrainOS download. Each takes an export file and this brain folder. Run them with Python 3 (nothing to install). Look for the export files in this brain's `exports/` folder first: `python3 check_setup.py <this-brain-folder>` lists them, with the exact line to run for each.
+Importers live in the BrainOS kit, in this brain's `kit/importers/` folder. If there is no `kit/` folder, ask the person to paste their Remyn setup instruction again: it names the kit, and its `SETUP.md` puts the kit back in `kit/` without touching the brain. Each importer takes an export file and this brain folder. Run them from this folder with Python 3 (nothing to install). Look for the export files in this brain's `exports/` folder first: `python3 kit/check_setup.py .` lists them, with the exact line to run for each.
 
 If you cannot see the export files, send the person one short message with two choices, and no others: drag the files into this brain's `exports` folder (then you need only this folder); or leave them in Downloads, and they click "Allow once" when you ask to use Downloads (it lasts this chat only; heads-up: you can then read and change everything in Downloads for this chat, and the files you read are processed by your provider).
 
-- LinkedIn: `python3 importers/linkedin.py <linkedin-archive.zip> <this-brain-folder>`
-- WhatsApp: `python3 importers/whatsapp.py <chat-export.txt or .zip or folder> <this-brain-folder> --me "<their name>"`. Ask once, before the first WhatsApp import, for their own name as it shows in their WhatsApp chats (often just a first name). The brain remembers it in `brain.yaml`, so they are never asked again and never listed as a contact. If the importer stops and lists the names in the chats, ask which one is theirs, then run it again with `--me`.
-- Calendar: `python3 importers/calendar_ics.py <calendar.ics or .zip> <this-brain-folder>` (add `--me <their email>` once for each of the person's own addresses)
-- Apple Contacts (Mac): `python3 importers/apple_contacts.py <contacts.vcf> <this-brain-folder>`
-- X / Twitter archive: `python3 importers/x_export.py <archive.zip or folder> <this-brain-folder>`
+- LinkedIn: `python3 kit/importers/linkedin.py <linkedin-archive.zip> .`
+- WhatsApp: `python3 kit/importers/whatsapp.py <chat-export.txt or .zip or folder> . --me "<their name>"`. Ask once, before the first WhatsApp import, for their own name as it shows in their WhatsApp chats (often just a first name). The brain remembers it in `brain.yaml`, so they are never asked again and never listed as a contact. If the importer stops and lists the names in the chats, ask which one is theirs, then run it again with `--me`.
+- Calendar: `python3 kit/importers/calendar_ics.py <calendar.ics or .zip> .` (add `--me <their email>` once for each of the person's own addresses)
+- Apple Contacts (Mac): `python3 kit/importers/apple_contacts.py <contacts.vcf> .`
+- X / Twitter archive: `python3 kit/importers/x_export.py <archive.zip or folder> .`
 
 Where they write: people (from LinkedIn, WhatsApp, calendar and contacts) to `{{PEOPLE}}people.jsonl`; messages and meetings to `{{PEOPLE}}interactions.jsonl`; meetings also to `memory/calendar/events.yaml`; readable chats and your own posts to `memory/conversations/`; your LinkedIn and X profiles to `memory/profile/`.
 

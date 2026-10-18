@@ -7,6 +7,7 @@ domains: [network, work]
 files:
   - brain.yaml
   - CLAUDE.md
+  - GEMINI.md
   - AGENTS.md
   - DOMAINS.md
   - README.md
@@ -18,6 +19,7 @@ files:
   - memory/events.jsonl
   - scripts/SCRIPTS.md
   - scripts/jobs.py
+  - scripts/level1.py
   - skills/SKILLS.md
   - skills/mine-my-context/SKILL.md
   - skills/whats-on-my-plate/SKILL.md
@@ -33,6 +35,7 @@ files:
   - tools/ai-tools/claude-code.md
   - tools/ai-tools/chatgpt.md
   - tools/ai-tools/codex.md
+  - tools/ai-tools/gemini.md
   - tools/ai-tools/opencode.md
   - tools/ai-tools/cursor.md
   - tools/ai-tools/orca.md

@@ -3,19 +3,27 @@
 
 <folder> must be new or empty. It may already hold an exports/ folder of export files: those are kept.
 
-Every brain has the spine (CLAUDE.md, AGENTS.md, DOMAINS.md) and five core domains: automations, memory,
+Every brain has the spine (CLAUDE.md, GEMINI.md, AGENTS.md, DOMAINS.md) and five core domains: automations, memory,
 scripts, skills and tools, each with its own {DOMAIN}.md. --domains adds personal domains from the
 library in template/domains/ (default: network, the home for the people you know). --domains none adds
-no personal domain: imported people then go to memory/people/."""
+no personal domain: imported people then go to memory/people/.
+
+Level 1 is written once, in template/LEVEL1.md, and copied word for word to every AI's front door:
+CLAUDE.md, GEMINI.md and a marked block at the top of AGENTS.md (see level1.py). The folder may already
+hold a kit/ folder (this kit, downloaded there by the setup): it is kept and left untouched."""
 import shutil
 import sys
+
+import level1
 from pathlib import Path
 
 KIT = Path(__file__).resolve().parent
 TEMPLATE = KIT / "template"
 LIBRARY = TEMPLATE / "domains"
 # What a folder may already hold and still count as empty: the person's exports, and the Finder's own file.
-MAY_HOLD = {"exports", ".DS_Store"}
+MAY_HOLD = {"exports", "kit", ".DS_Store"}
+# Folders in a brain that are not the brain's own text: never rendered, never checked as brain files.
+NOT_BRAIN = {"exports", "kit"}
 # Personal domains: what each holds, the requests AGENTS.md routes to it, and its files.
 DOMAINS = {
     "network": ("People I know, and every conversation or meeting with them",
@@ -47,7 +55,7 @@ def ready_for_brain(dest):
     if not dest.exists():
         return True
     return dest.is_dir() and all(p.name in MAY_HOLD for p in dest.iterdir()) \
-        and (not (dest / "exports").exists() or (dest / "exports").is_dir())
+        and all(not (dest / d).exists() or (dest / d).is_dir() for d in NOT_BRAIN)
 
 
 def parse_domains(text):
@@ -77,8 +85,14 @@ def create_brain(folder, domains=None):
         raise SystemExit(f"Not creating a brain: {dest} already exists and is not empty. "
                          "Choose a new folder (it may hold an exports folder, nothing else).")
     shutil.copytree(TEMPLATE, dest, dirs_exist_ok=True,
-                    ignore=lambda d, names: ["domains"] if Path(d) == TEMPLATE else [])
+                    ignore=lambda d, names: ["domains", "LEVEL1.md", "AGENTS.md"] if Path(d) == TEMPLATE else [])
+    words = (TEMPLATE / "LEVEL1.md").read_text(encoding="utf-8")
+    for door in ("CLAUDE.md", "GEMINI.md"):
+        (dest / door).write_text(words, encoding="utf-8")
+    (dest / "AGENTS.md").write_text(level1.join(words, (TEMPLATE / "AGENTS.md").read_text(encoding="utf-8")),
+                                    encoding="utf-8")
     shutil.copy(KIT / "jobs.py", dest / "scripts" / "jobs.py")
+    shutil.copy(KIT / "level1.py", dest / "scripts" / "level1.py")
     for name in domains:
         (dest / name).mkdir(exist_ok=True)
         shutil.copy(LIBRARY / f"{name}.md", dest / name / f"{name.upper()}.md")
@@ -92,8 +106,11 @@ def create_brain(folder, domains=None):
         "PERSONAL_INDEX": "\n".join(f"{n + '/':<19}{n.upper()}.md, {DOMAINS[n][2]}" for n in domains),
     }
     for path in sorted(dest.rglob("*.md")) + [dest / "brain.yaml"]:
-        if path.relative_to(dest).parts[0] != "exports":
+        if path.relative_to(dest).parts[0] not in NOT_BRAIN:
             _render(path, values)
+    problems = level1.check(dest)
+    if problems:  # cannot happen unless the template is broken; never hand over a brain with mismatched doors
+        raise SystemExit("Level 1 copies differ: " + "; ".join(problems))
     return dest
 
 
@@ -110,7 +127,7 @@ def main(argv):
     dest = create_brain(args[0], domains)
     chosen = ", ".join(DEFAULT_DOMAINS if domains is None else domains) or "none"
     print(f"Created an empty brain in {dest} with personal domains: {chosen}. "
-          f"Start with {dest / 'CLAUDE.md'}. Put export files in {dest / 'exports'}.")
+          f"Level 1 is in CLAUDE.md, GEMINI.md and the top of AGENTS.md. Put export files in {dest / 'exports'}.")
 
 
 if __name__ == "__main__":

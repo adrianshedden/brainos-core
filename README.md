@@ -4,7 +4,7 @@ Your own second brain: a folder of plain Markdown and YAML on your own computer,
 Plain Python 3, nothing to install, no account. The kit's scripts never use the internet, except the
 backup to a private GitHub repo of your own, if you choose to make one (step 7).
 
-This is the free edition used by the Oxford bootcamp, under the GNU Affero General Public License v3.0 (AGPL-3.0). The paid edition (the live
+This is the free edition, under the GNU Affero General Public License v3.0 (AGPL-3.0). The paid edition (the live
 connections library) is a separate product and is not in this folder.
 
 Who makes it: BrainOS is the product, Remyn is the brand, and AI Ops is the company behind both.
@@ -25,7 +25,11 @@ Your brain is stored as plain files on your laptop. When you use a cloud AI prov
 - Free: this kit. Your AI sets up your brain in a chat, from export files you download yourself.
 - Paid: BrainOS Pro. One Mac app sets everything up for you, with no Terminal. It also connects your live accounts, such as Gmail, Outlook, Google Calendar, Notion and Slack, and reads them into your brain.
 
-## Quick start
+## Set up with your AI (no commands)
+
+Paste the setup instruction from your Remyn setup page into the Claude app, the ChatGPT desktop app (Codex), Google's Antigravity or Cursor. Your AI follows `SETUP.md`: it asks where your brain should live, builds it, asks what to connect first, and gives you steps only for what you pick. This is kit version 1.0 (`VERSION`).
+
+## Quick start (by hand)
 
 Run these from the top of your BrainOS download:
 
@@ -47,12 +51,15 @@ Each importer prints what it found and what it skipped, and is safe to re-run.
 ## What is in here
 
 - `check_setup.py` — checks Python, the kit, the brain folder and your exports, and says the next step. Changes nothing.
+- `SETUP.md` — the guided first run your AI follows when you paste the setup instruction.
 - `create_brain.py` — stamps an empty brain from `template/`, with the personal domains you choose.
+- `level1.py` — keeps level 1 the same at every AI's front door; each brain gets a copy in `scripts/`.
 - `importers/` — LinkedIn, WhatsApp, calendar, Apple Contacts and X export readers. They only ever read a file you give them.
 - `jobs.py` — lists the brain's skills and which are due, and marks one done. Each brain gets its own copy in `scripts/`.
 - `publish_github.py` and `GITHUB.md` — back the brain up to a private GitHub repository you own, step by step.
-- `template/` — the brain itself. `CLAUDE.md` (read first: who it is for, the rules), `AGENTS.md` (which folder or skill
-  answers which request) and `DOMAINS.md`; five core domains, each with its own instructions file: `automations/`,
+- `template/` — the brain itself. `LEVEL1.md` is level 1 (who it is for, how to start, the rules), written once and
+  copied word for word to `CLAUDE.md` (Claude), `GEMINI.md` (Gemini) and the top of `AGENTS.md` (Codex, Cursor and
+  others); `AGENTS.md` is level 2 (which folder or skill answers which request) and `DOMAINS.md` lists level 3; five core domains, each with its own instructions file: `automations/`,
   `memory/`, `scripts/`, `skills/` (eight skills: mine-my-context and one per week-one question), `tools/` (one card per AI tool);
   `exports/`; and `domains/`, the library of personal domains (network, work, knowledge, family, health, finance).
 - `sample/` — a filled brain made of invented people, so you can see the shape. Rebuild it with

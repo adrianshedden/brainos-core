@@ -32,7 +32,7 @@ Work out, each with the file(s) it rests on and how sure you are (high: stated o
 - Show the person a short summary, in plain English, with the source and confidence after each point.
 - Ask at most five short questions, the ones that matter most: anything low confidence, the goals, and any domain you recommend. Accept "skip".
 - Then write only what they confirmed or corrected:
-  - `CLAUDE.md`: fill "Who this is for" and "Goals this quarter". After each line, in brackets: the source file(s), the confidence, and "confirmed by you on YYYY-MM-DD".
+  - `CLAUDE.md`: fill "Who this is for" and "Goals this quarter". After each line, in brackets: the source file(s), the confidence, and "confirmed by you on YYYY-MM-DD". Then run `python3 scripts/level1.py sync .` so `GEMINI.md` and the top of `AGENTS.md` say the same.
   - Each relevant `{DOMAIN}.md`: replace the placeholder under "What's here" with one to three lines, each with its source and confidence (for example `memory/MEMORY.md` and `network/NETWORK.md`).
   - `memory/decisions.jsonl`: one line for each choice the person made here (goals, a domain added or declined), shaped as `memory/MEMORY.md` says, with `"source": "mine-my-context, confirmed by you"` and a `confidence`.
   - A domain they agree to add: follow "Adding a domain" in `DOMAINS.md`.

@@ -1,19 +1,19 @@
 # ChatGPT
 
-Put the brain's most useful files in a Project, then ask your questions inside that Project.
+Use the ChatGPT desktop app's Codex for your brain: it opens this folder and always sees your latest files.
 
 ## How to point it at your brain
 
-- Add files to a ChatGPT Project by uploading them or pasting text. (Source: https://help.openai.com/en/articles/10169521-projects-in-chatgpt, checked 1 October 2026)
-- Or connect ChatGPT's GitHub app to your brain's private repo. (Source: https://help.openai.com/en/articles/11145903-connecting-github-to-chatgpt, checked 1 October 2026)
+- In the ChatGPT desktop app, Codex works on a folder on your computer that you choose, and you sign in with your ChatGPT account. (Source: https://learn.chatgpt.com/docs/app, checked 18 October 2026)
+- Codex reads `AGENTS.md` by itself; this brain's `AGENTS.md` opens with level 1. See `codex.md`. (Source: https://learn.chatgpt.com/docs/agent-configuration/agents-md, checked 18 October 2026)
+- ChatGPT chat (the chat window, on the web or a phone) cannot open a folder on your computer. If you really want to ask there too, connect ChatGPT's GitHub app to your brain's private backup: it reads the repo but cannot change it. (Source: https://help.openai.com/en/articles/11145903-connecting-github-to-chatgpt, checked 1 October 2026)
 
 ## What it can do
 
-- With the GitHub app, read and search your repo when it needs to, without keeping its own synced copy. (Source: https://help.openai.com/en/articles/11145903-connecting-github-to-chatgpt, checked 1 October 2026)
+- With Codex, read and change the files in your brain folder and run the kit's importers, asking you first. (Source: https://learn.chatgpt.com/codex/cli, checked 1 October 2026)
+- With the GitHub app, ChatGPT chat can read and search your private backup when it needs to. (Source: https://help.openai.com/en/articles/11145903-connecting-github-to-chatgpt, checked 1 October 2026)
 
 ## What it cannot do
 
-- Change your repo. The GitHub app only reads, and OpenAI points you to Codex for changes. (Source: https://help.openai.com/en/articles/11145903-connecting-github-to-chatgpt, checked 1 October 2026)
-- Take the whole brain at once. A Project holds 5 files on Free, 25 on Go and Plus, and 40 on Edu, Pro, Business and Enterprise, uploaded 10 at a time, so pick CLAUDE.md, AGENTS.md and the parts of memory/ and network/ that matter. (Source: https://help.openai.com/en/articles/10169521-projects-in-chatgpt, checked 1 October 2026)
-- Promise which plans get Projects or the GitHub app: OpenAI says it depends on plan and workspace and does not list them. (Source: https://help.openai.com/en/articles/11145903-connecting-github-to-chatgpt, checked 1 October 2026)
-- Notice when your folder changes. (Not checked: the help page does not say, so re-upload after you re-import.)
+- ChatGPT chat cannot change your brain: the GitHub app only reads, and OpenAI points you to Codex for changes. (Source: https://help.openai.com/en/articles/11145903-connecting-github-to-chatgpt, checked 1 October 2026)
+- ChatGPT chat sees your backup only as of your last backup, not your folder as it is now. (Not checked: OpenAI's page does not say how often it refreshes.)
