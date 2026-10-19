@@ -100,6 +100,18 @@ class NineSteps(unittest.TestCase):
             self.assertIn(must, three)
         self.assertIn("progress.py . pick", two)
 
+    def test_the_connection_ladder_has_four_rungs_with_outlook_on_each(self):
+        # Locked (dec_20261019_1925, point 7): official, then custom, then local, then export; Outlook the example.
+        ladder = self.setup.split("## The connection ladder", 1)[1].split("\n## ", 1)[0]
+        rungs = [ladder.index(f"{n}. **{name}:**") for n, name in enumerate(("Official", "Custom", "Local", "Export"), 1)]
+        self.assertEqual(rungs, sorted(rungs))
+        self.assertIn("Go down a rung only when the one above fails", ladder)
+        example = ladder.split("Outlook is the worked example", 1)[1]
+        for must in ("Microsoft 365", "skips this rung for Outlook", "Softeria", "calendar file"):
+            self.assertIn(must, example)
+        self.assertNotIn("cannot connect", ladder)
+        self.assertIn("1. official", (CORE / "README.md").read_text(encoding="utf-8"))
+
     def test_step_two_uses_tick_boxes_when_the_app_has_them(self):
         # Rian's Mac test, 19 Oct 2026 (card UT): "for selecting the connectors it would be tick boxes".
         self.assertNotIn("**Code** tab", self.setup)

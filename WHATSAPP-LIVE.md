@@ -17,7 +17,7 @@ Wait for a clear yes. Anything else is a no: stop, and remind them that exportin
 
 ## 2. Pick a route
 
-- **Quick route: wacli.** A small free program (github.com/openclaw/wacli) that links to WhatsApp and keeps a copy of your chats on your computer. About ten minutes. Mac (macOS 15 or newer) and Windows. Works with Claude Code (in a terminal, or the Claude app's Code tab), Codex, OpenCode and Orca: the AI runs it for you. Not in the Claude app's chat.
+- **Quick route: wacli.** A small free program (github.com/openclaw/wacli) that links to WhatsApp and keeps a copy of your chats on your computer. About ten minutes. Mac (macOS 15 or newer) and Windows. Works with Claude Code (in a terminal), Codex, OpenCode and Orca: the AI runs it for you. Not in the Claude app's chat.
 - **Sustainable route: Beeper.** A free chat app (beeper.com) that holds WhatsApp beside your other chats and lets your AI apps read it. Longer to set up, and the better choice to keep. Mac and Windows. Works in every AI app the kit supports.
 
 Sending, with a yes for each message, works only in Claude Code, on either route. Only Claude Code lets the kit add a check before each message goes (the send guard). Everywhere else, it is reading only. The Windows steps have not yet been tried: if a screen looks different, stop and offer the export. New messages do not arrive by themselves on either route: you read WhatsApp when the person asks.

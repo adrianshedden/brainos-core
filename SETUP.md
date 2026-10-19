@@ -71,10 +71,10 @@ Two lines: where the brain is, and that it is a plain folder of text files they 
 
 **What you do**
 
-1. Read `kit/connections.yaml`. Each source (for example `google-calendar`, `gmail`, `whatsapp`) has routes, each for one app (`app`) and of one type (`type`), already in the right order: the app's own connector (`builtin`), then a custom connector (`custom`), then a connector on the computer (`local`), then a command-line tool (`cli`), then an export file (`export`).
+1. Read `kit/connections.yaml`. Each source (for example `google-calendar`, `gmail`, `whatsapp`) has routes, each for one app (`app`) and of one type (`type`), already in the order of the connection ladder (see "The connection ladder" at the end): official (`builtin`), then custom (`custom`), then local (`local`), with a command-line tool on the same rung for technical people only (`cli`), then export (`export`).
 2. For each source, keep only the routes that work here: `app` is the name you saved in step 1, or `any`. Drop `technical_only: true` routes unless the person has said they are technical. Leave out any source with no route left.
    - WhatsApp: keep only its export routes, for everyone, even technical people. Setup never links WhatsApp live. If they ask about a live link, say: "That's possible later, once your brain is set up. At the bootcamp, Rian shows it in the afternoon."
-3. Make a short list from what is left, most useful first: calendar, email, documents (Google Drive, OneDrive), Notion, Slack, their existing notes, WhatsApp, LinkedIn, then the rest. Put the same kind together so the list stays short ("Calendar: Google or Outlook"). After each, one line on why it fills the brain, and say plainly when the only route is a file they download ("a few chats you export from your phone"). Say LinkedIn is optional: "It takes up to a day, so you can add it later." Never ask them to export their calendar: connect it. A calendar file is only the fallback when it will not connect. Claude's own Microsoft button needs a work account, so a personal Outlook.com or Hotmail account connects through the kit's own route (see "Adding a custom connection" at the end). A calendar file is the fallback only if that fails.
+3. Make a short list from what is left, most useful first: calendar, email, documents (Google Drive, OneDrive), Notion, Slack, their existing notes, WhatsApp, LinkedIn, then the rest. Put the same kind together so the list stays short ("Calendar: Google or Outlook"). After each, one line on why it fills the brain, and say plainly when the only route is a file they download ("a few chats you export from your phone"). Say LinkedIn is optional: "It takes up to a day, so you can add it later." Never ask them to export their calendar: connect it. A calendar file is only the fallback when it will not connect. Claude's own Microsoft button needs a work account, so a personal Outlook.com or Hotmail account connects through the kit's own route (rung 3 of "The connection ladder" at the end). A calendar file is the fallback only if that fails.
 
 **What you ask**
 
@@ -220,9 +220,23 @@ That is the setup. Stop there and wait for the person.
 
 When the person pastes the line again after setup is finished, `check_setup.py` says so on its first line. Ask what they would like: connect something new (step 3 for that one source, then step 4 for it), add a domain (step 5), or a new skill or scheduled job (steps 7 and 8). Only if they ask for a live link to WhatsApp, follow `kit/WHATSAPP-LIVE.md`. Save each change with `kit/progress.py` as above.
 
-## Adding a custom connection
+## The connection ladder
 
-One worked example, so the person sees how: a personal Outlook.com or Hotmail account. Claude's own Microsoft button needs a work account, so personal Hotmail connects through the kit's own route (the `local` route for `outlook-calendar` and `outlook-mail` in `connections.yaml`). Say in one line what it is: "Your Outlook is a personal account, so it needs a free connection that runs on your computer. It only reads." Then give the route's clicks: the person installs what it needs from its own website, you show the lines you will add to the app's own settings and add them only after a yes, and the person signs in on Microsoft's own page. To remove it, take the lines out again, with a yes. The kit does not try to cover every tool: for anything else, use the app's own connections or the export.
+Every source is connected by trying four rungs, in this order. Go down a rung only when the one above fails or does not exist for this person. Tell the person in one line which rung you are on ("Claude's own Outlook button needs a work account, so we'll use the kit's own route").
+
+1. **Official:** the AI app's own connection buttons (in the Claude app: **Customize**, **Connectors**, **+ Add**).
+2. **Custom:** paste a web address from the tool's maker into **+ Add custom connection**.
+3. **Local:** a small free program on the person's laptop that the app talks to (`local` routes; `cli` routes only for technical people).
+4. **Export:** a file the person downloads and drops in `exports`. It always works.
+
+Outlook is the worked example, rung by rung:
+
+1. Official: the **Microsoft 365** button. It needs a work or school account, and the IT team's approval.
+2. Custom: Microsoft offers no web address for personal accounts. Hosted services could stand in, but that means another account and your mail passing through them, so the kit skips this rung for Outlook.
+3. Local: personal Outlook.com or Hotmail connects through the kit's own route, Softeria's free Microsoft connection (the `local` route for `outlook-calendar` and `outlook-mail`). The person installs Node.js from nodejs.org; you show the lines you will add to the app's own settings and add them only after a yes; the person signs in on Microsoft's own page with a one-time code. Never ask for a password or code in the chat. To remove it, take the lines out again, with a yes.
+4. Export: the calendar file from outlook.com (see "Export steps", Calendar).
+
+The kit does not try to cover every tool: for anything else, use the app's own connections or the export.
 
 ## Export steps
 
