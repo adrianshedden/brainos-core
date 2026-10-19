@@ -1,5 +1,6 @@
 """B11: the setup check. Read-only, always exit 0 on good arguments, names every export in exports/
 with the exact importer line to run, and gives one next step. No network."""
+import os
 import shlex
 import shutil
 import subprocess
@@ -120,8 +121,11 @@ class CheckSetup(unittest.TestCase):
 
             # Every printed line is a real command: running it imports the export into the brain.
             for name, command in commands.items():
-                argv = shlex.split(command)
-                self.assertEqual(argv[0], "python3")
+                if os.name == "nt":  # Windows prints py and double quotes (check_setup.command)
+                    argv = [a.strip('"') for a in shlex.split(command, posix=False)]
+                else:
+                    argv = shlex.split(command)
+                self.assertEqual(argv[0], "py" if os.name == "nt" else "python3")
                 self.assertEqual(argv[-1], str(brain.resolve()))
                 r = subprocess.run([sys.executable, *argv[1:]], capture_output=True, text=True)
                 self.assertEqual(r.returncode, 0, f"{name}: {r.stderr}")

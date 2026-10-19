@@ -240,7 +240,7 @@ sources:
         proof_read: "List tomorrow's events: times and titles only."
         technical_only: false
         checked_on: "2026-10-19"
-        notes: "Work or school accounts only. A personal Outlook.com or Hotmail account cannot connect here: use the next route (a connection on your computer), or the export. Your IT admin must approve Claude once for the whole organisation, so ask IT first. Read-only unless you add more. Help: support.claude.com/en/articles/12542951."
+        notes: "Work or school accounts only. Claude's own Microsoft button needs a work account, so a personal Outlook.com or Hotmail account connects through the kit's own route instead (the next one). Your IT admin must approve Claude once for the whole organisation, so ask IT first. Read-only unless you add more. Help: support.claude.com/en/articles/12542951."
       - app: "chatgpt"
         type: "builtin"
         clicks:
@@ -282,8 +282,8 @@ sources:
           - "Say done."
         proof_read: "List tomorrow's events: times and titles only."
         technical_only: false
-        checked_on: null
-        notes: "Not yet tried. The one worked example of adding your own connection (SETUP.md, \"Adding a custom connection\"). For the AI: github.com/softeria/ms-365-mcp-server (free, open source; personal accounts work). One connection covers email and calendar. In the Claude app's settings file (Settings, Developer, Edit Config), under mcpServers, add \"outlook\": {\"command\": \"npx\", \"args\": [\"-y\", \"@softeria/ms-365-mcp-server\", \"--preset\", \"mail,calendar\", \"--read-only\"]} (on Windows: \"command\": \"cmd\", with \"/c\", \"npx\" first in args). Show the person first. Keep --read-only. Sign-in is on Microsoft's page with a one-time code: never ask for the password or code in the chat."
+        checked_on: "2026-10-19"
+        notes: "The kit's own route for a personal Outlook.com or Hotmail account, and the one worked example of adding your own connection (SETUP.md, \"Adding a custom connection\"). Checked on 19 Oct 2026 on a Mac and on Windows: these exact settings start the connection, it offers only reading tools (no sending or changing), and it opens Microsoft's sign-in page with a one-time code. Not yet checked: the last step, signing in with a real Hotmail account. For the AI: github.com/softeria/ms-365-mcp-server (free, open source). One connection covers email and calendar. In the Claude app's settings file (Settings, Developer, Edit Config), under mcpServers, add on a Mac: \"outlook\": {\"command\": \"npx\", \"args\": [\"-y\", \"@softeria/ms-365-mcp-server\", \"--preset\", \"mail,calendar\", \"--read-only\"]} and on Windows: \"outlook\": {\"command\": \"cmd\", \"args\": [\"/c\", \"npx\", \"-y\", \"@softeria/ms-365-mcp-server\", \"--preset\", \"mail,calendar\", \"--read-only\"]} Show the person first and keep the rest of the file as it is. Keep --read-only. Never ask for the password or code in the chat."
       - app: "any"
         type: "cli"
         clicks:
@@ -308,7 +308,7 @@ sources:
         proof_read: "Check the calendar file is listed when you run kit/check_setup.py on the brain."
         technical_only: false
         checked_on: "2026-10-19"
-        notes: "The only route for personal Outlook.com or Hotmail. Anyone with the link can see the calendar while it is published, so unpublish straight after. Help: support.microsoft.com, Share your calendar in Outlook.com."
+        notes: "A fallback for a personal Outlook.com or Hotmail calendar, if the kit's own route does not work. Anyone with the link can see the calendar while it is published, so unpublish straight after. Help: support.microsoft.com, Share your calendar in Outlook.com."
       - app: "any"
         type: "export"
         clicks:
@@ -336,7 +336,7 @@ sources:
         proof_read: "Show the subject lines of my 3 newest emails. Do not open, send or change anything."
         technical_only: false
         checked_on: "2026-10-19"
-        notes: "Work or school accounts only. A personal Outlook.com or Hotmail account cannot connect here: use the next route (a connection on your computer), or the export. Your IT admin must approve Claude once for the whole organisation. Read-only unless you add more. Help: support.claude.com/en/articles/12542951."
+        notes: "Work or school accounts only. Claude's own Microsoft button needs a work account, so a personal Outlook.com or Hotmail account connects through the kit's own route instead (the next one). Your IT admin must approve Claude once for the whole organisation. Read-only unless you add more. Help: support.claude.com/en/articles/12542951."
       - app: "chatgpt"
         type: "builtin"
         clicks:
@@ -378,8 +378,8 @@ sources:
           - "Say done."
         proof_read: "Show the subject lines of my 3 newest emails. Do not open, send or change anything."
         technical_only: false
-        checked_on: null
-        notes: "Not yet tried. The one worked example of adding your own connection (SETUP.md, \"Adding a custom connection\"). For the AI: github.com/softeria/ms-365-mcp-server (free, open source; personal accounts work). One connection covers email and calendar. In the Claude app's settings file (Settings, Developer, Edit Config), under mcpServers, add \"outlook\": {\"command\": \"npx\", \"args\": [\"-y\", \"@softeria/ms-365-mcp-server\", \"--preset\", \"mail,calendar\", \"--read-only\"]} (on Windows: \"command\": \"cmd\", with \"/c\", \"npx\" first in args). Show the person first. Keep --read-only. Sign-in is on Microsoft's page with a one-time code: never ask for the password or code in the chat."
+        checked_on: "2026-10-19"
+        notes: "The kit's own route for a personal Outlook.com or Hotmail account, and the one worked example of adding your own connection (SETUP.md, \"Adding a custom connection\"). Checked on 19 Oct 2026 on a Mac and on Windows: these exact settings start the connection, it offers only reading tools (no sending or changing), and it opens Microsoft's sign-in page with a one-time code. Not yet checked: the last step, signing in with a real Hotmail account. For the AI: github.com/softeria/ms-365-mcp-server (free, open source). One connection covers email and calendar. In the Claude app's settings file (Settings, Developer, Edit Config), under mcpServers, add on a Mac: \"outlook\": {\"command\": \"npx\", \"args\": [\"-y\", \"@softeria/ms-365-mcp-server\", \"--preset\", \"mail,calendar\", \"--read-only\"]} and on Windows: \"outlook\": {\"command\": \"cmd\", \"args\": [\"/c\", \"npx\", \"-y\", \"@softeria/ms-365-mcp-server\", \"--preset\", \"mail,calendar\", \"--read-only\"]} Show the person first and keep the rest of the file as it is. Keep --read-only. Never ask for the password or code in the chat."
       - app: "any"
         type: "cli"
         clicks:
@@ -401,7 +401,7 @@ sources:
         proof_read: "Check the PDFs are listed when you run kit/check_setup.py on the brain."
         technical_only: false
         checked_on: null
-        notes: "The route for personal Outlook.com or Hotmail. There is no email importer: the AI reads these PDFs when you ask."
+        notes: "A fallback for personal Outlook.com or Hotmail email, if the kit's own route does not work. There is no email importer: the AI reads these PDFs when you ask."
 
   onedrive:
     name: "OneDrive"

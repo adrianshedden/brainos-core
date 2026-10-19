@@ -224,7 +224,7 @@ class ConnectionsYaml(unittest.TestCase):
     def test_personal_outlook_has_a_custom_connection_on_the_computer(self):
         # Rian, sheet v10 (19 Oct 2026): personal Hotmail or Outlook needs a connection on the computer, the one worked
         # example of adding your own connection (not a full integration: the kit does not cover every tool).
-        # Read-only, and marked not yet tried.
+        # Read-only. Rian: "the connectors need to be capable of connecting", so never "cannot connect".
         for sid in ("outlook-calendar", "outlook-mail"):
             local = [r for r in DATA["sources"][sid]["routes"] if r["type"] == "local"]
             self.assertEqual([r["app"] for r in local], ["claude"], "one short worked example, not a full integration")
@@ -232,9 +232,20 @@ class ConnectionsYaml(unittest.TestCase):
                 self.assertIn("personal Outlook.com or Hotmail", r["clicks"][0], sid)
                 self.assertIn("softeria/ms-365-mcp-server", r["notes"], sid)
                 self.assertIn("--read-only", r["notes"], sid)
-                self.assertIn("Not yet tried", r["notes"], sid)
-                self.assertIsNone(r["checked_on"], sid)
-                self.assertIn("never ask for the password", r["notes"], sid)
+                # Checked on a Mac and on Windows by .github/outlook_probe.py, which starts these exact settings.
+                # Only the last step, a real Hotmail sign-in, is not checked, and the notes say so.
+                self.assertTrue(is_real_date(r["checked_on"]), sid)
+                self.assertIn("Not yet checked: the last step, signing in with a real Hotmail account", r["notes"], sid)
+                self.assertNotIn("Not yet tried", r["notes"], sid)
+                self.assertIn("Never ask for the password", r["notes"], sid)
+                for system in ("Mac", "Windows"):
+                    at = r["notes"].index(f'{system}: "outlook": ') + len(f'{system}: "outlook": ')
+                    block = json.JSONDecoder().raw_decode(r["notes"][at:])[0]
+                    self.assertIn("@softeria/ms-365-mcp-server", block["args"], system)
+                    self.assertIn("--read-only", block["args"], system)
+            builtin = next(r for r in DATA["sources"][sid]["routes"] if r["app"] == "claude" and r["type"] == "builtin")
+            self.assertIn("Claude's own Microsoft button needs a work account", builtin["notes"], sid)
+            self.assertNotIn("cannot connect", builtin["notes"], sid)
 
     def test_checked_on_is_a_real_date_or_null(self):
         checked = 0

@@ -3,6 +3,8 @@
 #   1. every test: bash tests/run_all.sh
 #   2. the terminal line for real, in a temporary folder, up to where the AI takes over: Python found,
 #      the kit downloaded from GitHub (this branch), the brain folder made, and check_setup.py happy.
+#   3. the personal Outlook connection started with the exact settings in connections.yaml, up to
+#      Microsoft's sign-in page (nobody signs in).
 name: kit
 on:
   push:
@@ -22,6 +24,9 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
 
       - name: Every test
         shell: bash
@@ -61,3 +66,8 @@ jobs:
           if ($check -notmatch 'Python: .* Good\.') { throw "check_setup: Python" }
           if ($check -notmatch 'Kit: all the files it needs are here') { throw "check_setup: kit files" }
           if ($check -notmatch 'is empty and ready for create_brain.py') { throw "check_setup: brain folder" }
+
+      - name: The personal Outlook connection, as connections.yaml sets it up
+        if: success() || failure()
+        shell: bash
+        run: python .github/outlook_probe.py
