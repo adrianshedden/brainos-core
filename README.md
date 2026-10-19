@@ -1,6 +1,6 @@
 # BrainOS core — the free edition
 
-Your own second brain: a folder of plain Markdown and YAML on your own computer, readable by any AI.
+Your own second brain: a folder of plain text files on your own computer, readable by any AI.
 Plain Python 3, nothing to install, no account. The kit's scripts never use the internet, except the
 backup to a private GitHub repo of your own, if you choose to make one (step 7).
 
@@ -27,11 +27,13 @@ Your brain is stored as plain files on your laptop. When you use a cloud AI prov
 
 ## Set up with your AI (no commands)
 
+Using the Claude app? Install it from claude.com/download, open it, and sign in inside the Claude app window. Signing in on the website does not sign in the app.
+
 Paste this one line into the Claude app, the ChatGPT app (with Codex), Cursor, OpenCode or Orca on your computer:
 
 > Set up my brain from the BrainOS kit at github.com/adrianshedden/brainos-core (read its SETUP.md first and follow it). Ask me before you change anything, work only in my brain folder, and never send my files anywhere.
 
-Your AI follows `SETUP.md`, in nine steps: it finds or makes your brain (a folder called brain in your Documents, unless you choose another place), shows what it can connect, gives you the exact clicks for each one, fills your brain, suggests the areas it should keep, learns what matters to you, sets up skills and scheduled jobs, and answers a first real question. Progress is saved after every step: stop any time, paste the same line again, and it carries on, in the same app or another.
+Your AI follows `SETUP.md`, in nine steps: it finds or makes your brain (a folder called brain in your Documents, unless you choose another place), shows what it can connect (your calendar, email, documents, Notion, Slack and your existing notes, such as an Obsidian folder; WhatsApp chats you export; LinkedIn, if you like, now or later), gives you the exact clicks for each one, fills your brain, suggests the areas it should keep, learns what matters to you, sets up skills and scheduled jobs, and answers a first real question. Progress is saved after every step: stop any time, paste the same line again, and it carries on, in the same app or another.
 
 Prefer a terminal? One line does the download and starts your AI if it finds one:
 

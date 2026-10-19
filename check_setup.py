@@ -47,6 +47,10 @@ KINDS = {
     "contacts": ("an Apple Contacts export", "importers/apple_contacts.py"),
     "connector": ("what your AI read through a connector", "importers/from_connector.py"),
 }
+# Notes the person already keeps (an Obsidian folder, a Notion export): nothing imports them; the AI reads them
+# in setup step 6 (mine-my-context).
+NOTES = "your existing notes (for example an Obsidian folder or a Notion export)"
+NOTE_SUFFIXES = (".md", ".markdown")
 
 
 def _is_whatsapp_text(head):
@@ -87,6 +91,8 @@ def kind_of(path):
             kind = kind_of_members(names, lambda n: _head(path / n))
             if kind is None and any(p.suffix.lower() in (".vcf", ".vcard") for p in files):
                 kind = "contacts"
+            if kind is None and any(p.suffix.lower() in NOTE_SUFFIXES for p in files):
+                kind = "notes"
             return kind, ""
         if zipfile.is_zipfile(path):
             with zipfile.ZipFile(path) as zf:
@@ -98,6 +104,8 @@ def kind_of(path):
                 kind = kind_of_members(names, read)
                 if kind is None and any(n.lower().endswith((".vcf", ".vcard")) for n in names):
                     return None, "a .zip of contact cards: unzip it first, then check again"
+                if kind is None and any(n.lower().endswith(NOTE_SUFFIXES) for n in names):
+                    kind = "notes"
                 return kind, ""
         head = _head(path).decode("utf-8-sig", errors="replace")
     except (OSError, zipfile.BadZipFile) as e:
@@ -110,6 +118,8 @@ def kind_of(path):
         return "calendar", ""
     if suffix == ".txt" and _is_whatsapp_text(head):
         return "whatsapp", ""
+    if suffix in NOTE_SUFFIXES:
+        return "notes", ""
     if path.name.lower() in linkedin.FILES:
         return None, "one file from a LinkedIn archive: put the whole .zip here instead"
     return None, ""
@@ -201,7 +211,7 @@ def report(folder):
     }[state])
 
     exports = folder / "exports"
-    found, unknown = [], []
+    found, unknown, notes = [], [], []
     if exports.is_dir():
         items = sorted((p for p in exports.iterdir() if p.name.lower() not in OURS and not p.name.startswith(".")),
                        key=lambda p: p.name.lower())
@@ -210,7 +220,11 @@ def report(folder):
             out.append("- None yet.")
         for p in items:
             kind, note = kind_of(p)
-            if kind and not (KIT / KINDS[kind][1]).is_file():
+            if kind == "notes":
+                notes.append(p)
+                out.append(f"- {p.name}: looks like {NOTES}. Nothing to import: your AI reads them when it gets to "
+                           "know you (skills/mine-my-context/SKILL.md).")
+            elif kind and not (KIT / KINDS[kind][1]).is_file():
                 unknown.append(p)
                 out.append(f"- {p.name}: looks like {KINDS[kind][0]}, but this kit has no {KINDS[kind][1]}. "
                            "Get the newest kit (SETUP.md, step 1), then run this check again.")
@@ -244,6 +258,9 @@ def report(folder):
     elif found:
         step = ("Run the import lines above, one at a time. Then ask your AI to use the mine-my-context skill "
                 "(skills/mine-my-context/SKILL.md), then try the first skills.")
+    elif notes:
+        step = ("Your notes are in. Ask your AI to use the mine-my-context skill (skills/mine-my-context/SKILL.md), "
+                "then try the first skills.")
     elif unknown:
         step = ("None of the files in exports is one BrainOS can read. Add a LinkedIn, WhatsApp, calendar, "
                 "Apple Contacts or X export, then run this check again.")

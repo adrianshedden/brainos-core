@@ -137,6 +137,26 @@ class CheckSetup(unittest.TestCase):
             self.assertIn("- None yet.", lines)
             self.assertIn(str((brain / "exports").resolve()), lines[-1])
 
+    def test_existing_notes_are_named_and_need_no_import(self):
+        # Drummond call, 19 Oct 2026: an Obsidian folder or a Notion export is one more source. Nothing imports
+        # it; the AI reads it when it gets to know the person.
+        with tempfile.TemporaryDirectory() as tmp:
+            brain = create_brain(Path(tmp) / "b")
+            vault = brain / "exports" / "My Vault"
+            (vault / "Projects").mkdir(parents=True)
+            (vault / "Projects" / "Launch plan.md").write_text("# Launch plan\n", encoding="utf-8")
+            (vault / ".obsidian").mkdir()
+            zip_of(brain / "exports" / "Export-notion.zip", [vault / "Projects" / "Launch plan.md"])
+            before = snapshot(brain)
+            lines = said(brain)
+            self.assertEqual(snapshot(brain), before, "the check changed something")
+            for name in ("My Vault", "Export-notion.zip"):
+                line = next(l for l in lines if l.startswith(f"- {name}:"))
+                self.assertIn("your existing notes", line)
+                self.assertIn("Nothing to import", line)
+            self.assertNotIn("Import it with:", "\n".join(lines))
+            self.assertIn("Your notes are in.", lines[-1])
+
     def test_a_folder_holding_only_the_kit_and_saved_progress_is_ready_for_a_brain(self):
         """The terminal line leaves a folder with only kit/ in it, and setup.yaml may be there too: the same
         things create_brain.py accepts. Anything else still makes it "not a brain"."""

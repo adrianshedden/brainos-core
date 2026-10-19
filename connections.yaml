@@ -455,7 +455,7 @@ sources:
         clicks:
           - "Install Beeper from beeper.com/download and open it. Make a free account with your email."
           - "In Beeper, add WhatsApp. On your phone, open WhatsApp, then Settings (iPhone) or the three dots (Android), then Linked devices, then Link a device. Scan the code on the screen. Keep the phone close while chats load."
-          - "In Beeper, open Settings, then Integrations, and check the Desktop API is on."
+          - "In Beeper, open Settings, then Integrations, and check the Desktop API (the switch that lets apps read Beeper) is on."
           - "Go to developers.beeper.com/desktop-api/mcp and click Claude Desktop. Open the file that downloads. If nothing happens: in Claude, open Settings, then Extensions, then Advanced settings, then Install Extension, and choose that file."
           - "When Beeper asks you to approve Claude, click Approve. Pick read-only if it is offered."
           - "Quit Claude fully, open it again, and start a new chat."
@@ -464,20 +464,20 @@ sources:
         proof_read: "List the names of my 3 most recent WhatsApp chats. Do not open, send or mark anything."
         technical_only: false
         checked_on: null
-        notes: "Opt-in. Beeper is not made by WhatsApp, so there is a small risk to the account. Use the export instead on a work laptop, if your Claude admin blocks extensions, or if your number runs your business. Leave out client, medical and children's groups. Beeper must stay open. Undo: on the phone, WhatsApp, Linked devices, log out Beeper. Claude's extension steps were checked on 19 Oct 2026 (support.claude.com/en/articles/10949351); Beeper's own screens were not."
+        notes: "For the AI: not during setup. Setup offers only the WhatsApp export. Offer this only when the person asks for a live link afterwards (at the bootcamp: in the afternoon with Rian). Opt-in. Beeper is not made by WhatsApp, so there is a small risk to the account. Use the export instead on a work laptop, if your Claude admin blocks extensions, or if your number runs your business. Leave out client, medical and children's groups. Beeper must stay open. Undo: on the phone, WhatsApp, Linked devices, log out Beeper. Claude's extension steps were checked on 19 Oct 2026 (support.claude.com/en/articles/10949351); Beeper's own screens were not."
       - app: "chatgpt"
         type: "local"
         clicks:
           - "Install Beeper from beeper.com/download, link WhatsApp by scanning the code from your phone's Linked devices screen, and check Beeper's Settings, Integrations has the Desktop API on."
-          - "In the ChatGPT app, open Settings, then MCP servers, then Add server."
-          - "Name it beeper, choose Streamable HTTP, and paste: http://localhost:23373/v0/mcp. Click Save, then Restart."
+          - "In the ChatGPT app, open Settings, then MCP servers (the list of extra connections), then Add server."
+          - "Name it beeper, choose Streamable HTTP (the web kind), and paste: http://localhost:23373/v0/mcp. Click Save, then Restart."
           - "If it shows Authenticate, click it and approve in Beeper. Pick read-only if it is offered."
           - "Allow the search and read tools only. Always deny sending."
           - "Say done."
         proof_read: "List the names of my 3 most recent WhatsApp chats. Do not open, send or mark anything."
         technical_only: false
         checked_on: null
-        notes: "Opt-in, with the same cautions as the claude route. The Codex settings steps (learn.chatgpt.com/docs/extend/mcp) and Beeper's address (developers.beeper.com/desktop-api/mcp) were checked on 19 Oct 2026; Beeper's own screens were not."
+        notes: "For the AI: not during setup, as in the claude route. Opt-in, with the same cautions as the claude route. The Codex settings steps (learn.chatgpt.com/docs/extend/mcp) and Beeper's address (developers.beeper.com/desktop-api/mcp) were checked on 19 Oct 2026; Beeper's own screens were not."
       - app: "cursor"
         type: "local"
         clicks:
@@ -489,7 +489,7 @@ sources:
         proof_read: "List the names of my 3 most recent WhatsApp chats. Do not open, send or mark anything."
         technical_only: false
         checked_on: null
-        notes: "Opt-in, with the same cautions as the claude route. For the AI: if Beeper uses another port, ask before changing ~/.cursor/mcp.json (Cursor's own settings, outside the brain) and set the address to http://localhost:23373/v0/mcp."
+        notes: "For the AI: not during setup, as in the claude route. Opt-in, with the same cautions as the claude route. For the AI: if Beeper uses another port, ask before changing ~/.cursor/mcp.json (Cursor's own settings, outside the brain) and set the address to http://localhost:23373/v0/mcp."
       - app: "opencode"
         type: "local"
         clicks:
@@ -501,7 +501,7 @@ sources:
         proof_read: "List the names of my 3 most recent WhatsApp chats. Do not open, send or mark anything."
         technical_only: false
         checked_on: null
-        notes: "Opt-in, with the same cautions as the claude route. For the AI: in ~/.config/opencode/opencode.json add \"mcp\": {\"beeper\": {\"type\": \"remote\", \"url\": \"http://localhost:23373/v0/mcp\"}}. If it asks to sign in, run: opencode mcp auth beeper."
+        notes: "For the AI: not during setup, as in the claude route. Opt-in, with the same cautions as the claude route. For the AI: in ~/.config/opencode/opencode.json add \"mcp\": {\"beeper\": {\"type\": \"remote\", \"url\": \"http://localhost:23373/v0/mcp\"}}. If it asks to sign in, run: opencode mcp auth beeper."
       - app: "orca"
         type: "local"
         clicks:
@@ -513,7 +513,7 @@ sources:
         proof_read: "List the names of my 3 most recent WhatsApp chats. Do not open, send or mark anything."
         technical_only: false
         checked_on: null
-        notes: "Opt-in, with the same cautions as the claude route. For the AI: Claude Code: claude mcp add --transport http --scope user beeper http://localhost:23373/v0/mcp, then /mcp. Codex: codex mcp add beeper --url http://localhost:23373/v0/mcp. OpenCode: as in the opencode route."
+        notes: "For the AI: not during setup, as in the claude route. Opt-in, with the same cautions as the claude route. For the AI: Claude Code: claude mcp add --transport http --scope user beeper http://localhost:23373/v0/mcp, then /mcp. Codex: codex mcp add beeper --url http://localhost:23373/v0/mcp. OpenCode: as in the opencode route."
       - app: "terminal"
         type: "local"
         clicks:
@@ -525,7 +525,7 @@ sources:
         proof_read: "List the names of my 3 most recent WhatsApp chats. Do not open, send or mark anything."
         technical_only: false
         checked_on: null
-        notes: "Opt-in, with the same cautions as the claude route. For the AI: Claude Code: claude mcp add --transport http --scope user beeper http://localhost:23373/v0/mcp, then /mcp. Codex: codex mcp add beeper --url http://localhost:23373/v0/mcp. OpenCode: as in the opencode route."
+        notes: "For the AI: not during setup, as in the claude route. Opt-in, with the same cautions as the claude route. For the AI: Claude Code: claude mcp add --transport http --scope user beeper http://localhost:23373/v0/mcp, then /mcp. Codex: codex mcp add beeper --url http://localhost:23373/v0/mcp. OpenCode: as in the opencode route."
       - app: "any"
         type: "cli"
         clicks:
@@ -536,7 +536,7 @@ sources:
         proof_read: "List my 3 most recent chats with wacli, using --read-only."
         technical_only: true
         checked_on: "2026-10-19"
-        notes: "Same small account risk as Beeper. Not in the Claude app's Chat tab. Help: github.com/openclaw/wacli."
+        notes: "For the AI: not during setup, as in the claude route. Opt-in. Same small account risk as Beeper. Not in the Claude app's Chat tab. Help: github.com/openclaw/wacli."
       - app: "any"
         type: "export"
         clicks:
@@ -627,8 +627,8 @@ sources:
       - app: "chatgpt"
         type: "custom"
         clicks:
-          - "In the ChatGPT app, open Settings, then MCP servers, then Add server."
-          - "Name it notion, choose Streamable HTTP, and paste: https://mcp.notion.com/mcp. Click Save, then Restart."
+          - "In the ChatGPT app, open Settings, then MCP servers (the list of extra connections), then Add server."
+          - "Name it notion, choose Streamable HTTP (the web kind), and paste: https://mcp.notion.com/mcp. Click Save, then Restart."
           - "Click Authenticate, sign in to Notion, and click Allow."
           - "Say done."
         proof_read: "List the titles of 3 Notion pages I can see."
@@ -680,7 +680,7 @@ sources:
         type: "export"
         clicks:
           - "In Notion, open the 3 to 5 pages that matter most, one at a time."
-          - "Click the three dots at the top right, then Export. Choose Markdown, then Export."
+          - "Click the three dots at the top right, then Export. Choose Markdown (plain text files), then Export."
           - "Move the files into your brain's exports folder."
           - "Say done."
         proof_read: "Check the files are listed when you run kit/check_setup.py on the brain."
@@ -745,6 +745,32 @@ sources:
         technical_only: false
         checked_on: null
         notes: "A full Slack export needs a workspace admin. The AI reads these files when you ask; there is no importer for them."
+
+  existing-notes:
+    name: "Your existing notes (an Obsidian folder, Notion)"
+    kind: "export"
+    routes:
+      - app: "any"
+        type: "export"
+        clicks:
+          - "Find the folder that holds your notes, in Finder (Mac) or File Explorer (Windows). For Obsidian, it is the folder you chose as your vault (your Obsidian notes folder)."
+          - "Copy it into your brain's exports folder. On a Mac, hold Option while you drag it. On Windows, hold Ctrl while you drag it. Your notes stay where they are as well."
+          - "Say done."
+        proof_read: "Check the notes folder is listed when you run kit/check_setup.py on the brain."
+        technical_only: false
+        checked_on: null
+        notes: "For the AI: no importer reads notes, and nothing from them goes in the people list. In step 6 (mine-my-context), read the note titles and a few of the newest notes to learn what the person works on, and name them as a source. Never change the person's own notes folder outside the brain. The exports folder is never backed up."
+      - app: "any"
+        type: "export"
+        clicks:
+          - "In Notion, open the page that holds your notes."
+          - "Click the three dots at the top right, then Export. Choose Markdown & CSV (plain text files), switch on Include subpages, then Export. A zip file downloads."
+          - "Move the zip into your brain's exports folder. Keep it zipped."
+          - "Say done."
+        proof_read: "Check the zip is listed when you run kit/check_setup.py on the brain."
+        technical_only: false
+        checked_on: null
+        notes: "For the AI: to connect Notion live instead, use the notion source. Read these notes in step 6, the same way as an Obsidian folder."
 
   apple-contacts:
     name: "Apple Contacts"
@@ -835,8 +861,8 @@ sources:
         type: "custom"
         clicks:
           - "Find the tool's connection address on its own help pages. The AI can help you look."
-          - "In the ChatGPT app, open Settings, then MCP servers, then Add server."
-          - "Type a name, choose Streamable HTTP, paste the address, and click Save, then Restart."
+          - "In the ChatGPT app, open Settings, then MCP servers (the list of extra connections), then Add server."
+          - "Type a name, choose Streamable HTTP (the web kind), paste the address, and click Save, then Restart."
           - "If it shows Authenticate, click it, sign in, and click Allow."
           - "Say done."
         proof_read: "List 3 items I own in that tool, names only."

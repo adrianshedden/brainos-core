@@ -19,7 +19,7 @@ TEMPLATE = CORE / "template"
 OWNER = "Alex Example"  # the made-up person the sample brain belongs to (in every one of their chats)
 
 QUESTIONS = {
-    "whats-on-my-plate": "What is on my plate this week?",
+    "whats-on-my-plate": "What is on my plate for the next seven days?",
     "who-to-reply-to-first": "Who should I reply to first?",
     "who-do-i-know-at": "Who do I know at <an organisation I name>?",
     "draft-in-my-voice": "Draft a message in my voice.",
