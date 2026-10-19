@@ -13,6 +13,7 @@ Three stages, in this order. Do not skip ahead: nothing is written until the per
 ## 1. Gather (read, write nothing)
 
 - Read what the imports produced: `memory/profile/` (what LinkedIn and X say about me), `{{PEOPLE}}people.jsonl` and `{{PEOPLE}}interactions.jsonl`, `memory/calendar/events.yaml`, and a sample of `memory/conversations/` (the most recent chats first, my own messages above all).
+- If `exports/` holds my existing notes (an Obsidian folder, or a Notion export), read their titles and a few of the newest notes: they show what I work on and care about. Copy nothing from them into the brain except what I confirm in stage 3.
 - For large files, count and sample rather than reading every line. Note which files you read and how many lines each had.
 - If a file is missing, say which export would fill it. Do not stop.
 

@@ -200,5 +200,6 @@
         }
     }
     Open-Folder $Brain
+    Say 'Using the Claude app? Sign in inside the Claude app window. Signing in on the website does not sign in the app.'
     Show-Line "Next, open your AI app (for example the Claude app), choose the folder $Brain, and paste this line:"
 }

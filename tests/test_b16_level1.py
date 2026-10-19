@@ -122,16 +122,18 @@ class KitInsideTheBrain(unittest.TestCase):
         # The nine headings, in order, are checked in test_flow_setup_guide.py.
         for must in ("Desktop, Documents, or somewhere else", "I'll create it once you say", "Never delete",
                      "Never send, upload or post", "Give steps only for what they picked",
-                     "LinkedIn, WhatsApp, then the rest", "add my LinkedIn", "kit/create_brain.py",
+                     "WhatsApp, then the rest", "add my LinkedIn", "kit/create_brain.py",
                      "scripts/level1.py check"):
             self.assertIn(must, setup)
-        # the fallback connect list (no connections.yaml): most popular first, each with one line on why it fills the brain
+        # the fallback connect list (no connections.yaml): most popular first, each with one line on why it fills the brain.
+        # Drummond call, 19 Oct 2026: calendar first (connected, not exported), notes as a source, LinkedIn optional and last.
         menu = setup.split("## 2. Choose what to connect", 1)[1].split("\n## ", 1)[0]
         menu = menu.split("use this list instead", 1)[1]
-        names = ["Email", "Calendar", "LinkedIn", "WhatsApp", "Google Drive", "Something else"]
+        names = ["Calendar", "Email", "Documents", "Notion or Slack", "Your existing notes", "WhatsApp", "LinkedIn (optional",
+                 "Something else"]
         at = [menu.index(f"**{n}") for n in names]
         self.assertEqual(at, sorted(at))
-        for line in [l for l in menu.splitlines() if l[:2] in {f"{i}." for i in range(1, 7)}]:
+        for line in [l for l in menu.splitlines() if l[:2] in {f"{i}." for i in range(1, 10)}]:
             self.assertRegex(line, r"\*\*: .{20,}", line)
 
 if __name__ == "__main__":

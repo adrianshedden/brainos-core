@@ -53,7 +53,7 @@ Read level 1 first: it is the block above (the same words as `CLAUDE.md` and `GE
 |---|---|
 | Anything about one domain | Read that folder's `{DOMAIN}.md` first, then work |
 | Get to know me, set up my context, mine my context, "who am I to you?" | Follow `skills/mine-my-context/SKILL.md` |
-| What is on my plate this week? | Follow `skills/whats-on-my-plate/SKILL.md` |
+| What is on my plate for the next seven days? | Follow `skills/whats-on-my-plate/SKILL.md` |
 | Who should I reply to first? | Follow `skills/who-to-reply-to-first/SKILL.md` |
 | Who do I know at an organisation? | Follow `skills/who-do-i-know-at/SKILL.md` |
 | Draft a message in my voice | Follow `skills/draft-in-my-voice/SKILL.md` |

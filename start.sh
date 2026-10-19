@@ -254,6 +254,7 @@ main() {
     return 0
   fi
   open_folder
+  say "Using the Claude app? Sign in inside the Claude app window. Signing in on the website does not sign in the app."
   print_line "Next, open your AI app (for example the Claude app), choose the folder $BRAIN, and paste this line:"
 }
 

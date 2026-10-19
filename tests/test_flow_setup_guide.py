@@ -122,7 +122,10 @@ class NineSteps(unittest.TestCase):
         self.assertIn("never sends", body[8].lower())
         self.assertIn("skills/show-it-visually/SKILL.md", body[9])
         self.assertIn("name the file behind each point", body[9])
-        self.assertIn("tomorrow", body[9])
+        self.assertIn("Each morning", body[9])
+        # Examples may be read on another day: no "today", "this week" or "tomorrow" in them.
+        for word in ("this week", "Tomorrow", "today?"):
+            self.assertNotIn(word, body[9])
 
     def test_the_rules_for_a_non_technical_person_are_stated(self):
         rules = flat(self.setup.split("## 1.", 1)[0])

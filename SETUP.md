@@ -12,6 +12,7 @@ The person is not technical. Speak to them that way, every message:
 
 - Plain British English. Short messages. One question at a time, unless a step says to ask two together.
 - No jargon. If a technical word cannot be avoided, explain it once, in five words or fewer, in brackets. Never show long command output: say in one line what happened and what it means.
+- Words to leave out of what you say: MCP, YAML, JSON, Markdown, RAG, connector, open model, Karpathy, gbrain. Say "connection", "plain text files" and "your AI" instead. A button name stays as it is on the screen, in bold (for example **Connectors**).
 - Before a command, say in one line what it does. Their app may ask them to approve it: tell them that is normal ("You may see a box asking to allow this. Click Allow.").
 - One step at a time. Give exact button names, in bold, from `connections.yaml`. Wait for "done" or "skip" before you go on.
 
@@ -70,7 +71,8 @@ Two lines: where the brain is, and that it is a plain folder of text files they 
 
 1. Read `kit/connections.yaml`. Each source (for example `google-calendar`, `gmail`, `whatsapp`) has routes, each for one app (`app`) and of one type (`type`), already in the right order: the app's own connector (`builtin`), then a custom connector (`custom`), then a connector on the computer (`local`), then a command-line tool (`cli`), then an export file (`export`).
 2. For each source, keep only the routes that work here: `app` is the name you saved in step 1, or `any`. Drop `technical_only: true` routes unless the person has said they are technical. Leave out any source with no route left.
-3. Make a short list from what is left, most useful first: calendar, email, LinkedIn, WhatsApp, documents, then the rest. Put the same kind together so the list stays short ("Calendar: Google or Outlook"). After each, one line on why it fills the brain, and say plainly when the only route is a file they download ("a file you download from LinkedIn; it takes up to a day").
+   - WhatsApp: keep only its export routes, for everyone, even technical people. Setup never links WhatsApp live. If they ask about a live link, say: "That's possible later, once your brain is set up. At the bootcamp, Rian shows it in the afternoon."
+3. Make a short list from what is left, most useful first: calendar, email, documents (Google Drive, OneDrive), Notion, Slack, their existing notes, WhatsApp, LinkedIn, then the rest. Put the same kind together so the list stays short ("Calendar: Google or Outlook"). After each, one line on why it fills the brain, and say plainly when the only route is a file they download ("a few chats you export from your phone"). Say LinkedIn is optional: "It takes up to a day, so you can add it later." Never ask them to export their calendar: connect it. A calendar file is only the fallback when it will not connect (for example a personal Outlook.com or Hotmail calendar).
 
 **What you ask**
 
@@ -80,12 +82,14 @@ Send the list and ask them to pick any (numbers are fine), or "none for now". Fo
 
 **If something fails:** if `kit/connections.yaml` is missing or you cannot read it, use this list instead, and the steps in "Export steps" at the end:
 
-1. **Email (Gmail or Outlook)**: who you write to, and who is waiting on you.
-2. **Calendar (Google, Outlook or Apple)**: who you meet and how often, which shows your real priorities.
-3. **LinkedIn**: everyone you know at work, and your career story. LinkedIn takes up to a day to send it, so start it first.
-4. **WhatsApp**: where a lot of real work talk happens, and how you sound when you write.
-5. **Google Drive**: what you are working on, in your own documents.
-6. **Something else**: for example your contacts, X (Twitter) or Notion. Name it and I'll say how.
+1. **Calendar (Google or Outlook)**: who you meet and how often, which shows your real priorities. One sign-in in your AI app.
+2. **Email (Gmail or Outlook)**: who you write to, and who is waiting on you.
+3. **Documents (Google Drive or OneDrive)**: what you are working on, in your own documents.
+4. **Notion or Slack**: where your notes or team chat live.
+5. **Your existing notes (an Obsidian folder, Notion)**: what you have already written down. You copy the folder into your brain.
+6. **WhatsApp**: where a lot of real work talk happens, and how you sound when you write. You export a few chats from your phone.
+7. **LinkedIn (optional, you can add it later)**: everyone you know at work, and your career story. LinkedIn takes up to a day to send it.
+8. **Something else**: for example your contacts or X (Twitter). Name it and I'll say how.
 
 ## 3. Connect them (connect)
 
@@ -93,7 +97,7 @@ Give steps only for what they picked. Never list steps for the others.
 
 **What you do**
 
-1. Start the slow ones first, so they arrive while you do the rest: LinkedIn, WhatsApp, then the rest. Anything that comes as an export file goes in the brain's `exports` folder.
+1. Start the slow ones first, so they arrive while you do the rest: LinkedIn (if they picked it), WhatsApp, then the rest. Anything that comes as an export file goes in the brain's `exports` folder.
 2. For each pick, take its first route that works here (step 2) and give its `clicks`, one step at a time, with the button names in bold. Pick read-only wherever it is offered. If the route's `checked_on` is empty, add: "These steps haven't been checked yet. If a button looks different, tell me what you see." Pass on anything in its `notes` that matters (for example that a work account may need the IT team to allow it). If the route has you add the connection in the AI app's own settings (Cursor, OpenCode, Codex or Claude Code), say in one line what you will add and where, and add it only after their yes. Wait for "done" or "skip".
 3. Do all the clicking first, then check them all. If a route says to restart the app or open a new chat, keep that for last, after all the other clicking. For each connected source, run its `proof_read`: one harmless read, such as listing tomorrow's events. Tell them in one line what you saw ("I can see your calendar: 4 events tomorrow.").
 4. When a proof read works:
@@ -122,6 +126,7 @@ Give steps only for what they picked. Never list steps for the others.
    - Email: who and when only, for the last 90 days, sent mail first. Never the message text, and never whole mailboxes.
    - Messages (WhatsApp, Slack and similar): who and when, one entry for each day you talked, for the last 90 days. Never copy what was written.
    - Documents (Google Drive, OneDrive, Notion): the names and dates of recent files only, to use in step 6. Save nothing from them.
+   - Their existing notes (an Obsidian folder or a Notion export in `exports`): nothing to import. Step 6 reads them.
 4. Save what you read from each live connection as one file in `exports`, named `from-<source id>-<YYYY-MM-DD>.json`, in this shape: `{"people": [{"name": ..., "email": ..., "phone": ..., "source": ...}], "interactions": [{"when": ..., "with": ..., "channel": ..., "summary": ..., "source": ...}]}`. `email`, `phone` and `summary` are optional. `when` is a date (YYYY-MM-DD); `with` is the other person's name or email (one entry per person: a meeting with three people is three entries); `channel` is, for example, calendar, email or whatsapp; `source` is the source id from `connections.yaml` (never the name of an app or tool in between) and today's date, for example "google-calendar, 2026-10-21". Then bring it in: `python3 kit/importers/from_connector.py . exports/from-<source id>-<YYYY-MM-DD>.json`.
 5. Tell the person what came in, in plain numbers: people, messages, meetings, and anything skipped.
 
@@ -191,9 +196,9 @@ A scheduled job only reads and drafts. It never sends, posts or replies by itsel
 
 **What you do**
 
-1. Ask what they would like to know first, or offer one: "What's on my plate this week?" Answer it with the matching skill, and name the file behind each point.
+1. Ask what they would like to know first, or offer one: "What's on my plate for the next seven days?" Answer it with the matching skill, and name the file behind each point.
 2. Offer: "Would you like that as a polished page?" With a yes, follow `skills/show-it-visually/SKILL.md`. (In the Claude app it appears as a page in the chat; elsewhere it is saved in the brain's `views` folder and opened.)
-3. Say what to try tomorrow, in one line, for example: "Tomorrow morning, open your brain and say: morning brief."
+3. Say what to try next, in one line, for example: "Each morning, open your brain and say: morning brief."
 4. Say, in a few lines, how to come back:
    - Next time: open the brain folder in your AI app. It reads level 1 by itself (`CLAUDE.md`, `GEMINI.md` or the top of `AGENTS.md`).
    - For each thing still on its way, the exact line to come back with, from `python3 kit/check_setup.py .`, for example: "When LinkedIn emails you, put the zip in your brain's exports folder, open the brain in your AI and say: add my LinkedIn."
@@ -211,7 +216,7 @@ When the person pastes the line again after setup is finished, `check_setup.py` 
 
 Use these when `connections.yaml` has no route for a source, or cannot be read. Files go in the brain's `exports` folder. If they land in Downloads, ask the person to drag them into `exports` (or, if your app asks to use Downloads, they can allow it once, for this chat).
 
-**LinkedIn** (up to a day)
+**LinkedIn** (optional, up to a day)
 - Open https://www.linkedin.com/mypreferences/d/download-my-data (signed in to LinkedIn). Choose the larger archive and press **Request archive**.
 - LinkedIn emails twice: a small file first, then the full one, usually within a day. Download the full zip when the second email comes (the link lasts 72 hours). Keep it zipped and put it in `exports`.
 - Do not wait for it: save it as pending and carry on.
@@ -220,13 +225,19 @@ Use these when `connections.yaml` has no route for a source, or cannot be read. 
 - Pick three to ten chats where real work happens, not only the biggest.
 - iPhone: open the chat, tap the name at the top, **Export Chat**, **Without Media**. Android: the three dots, **More**, **Export chat**, **Without media**.
 - Send each file to the computer (for example by email to yourself) and put it in `exports`.
-- If their phone blocks exports (some work phones do), skip it: calendar and LinkedIn are enough to start.
+- If their phone blocks exports (some work phones do), skip it: the calendar and email are enough to start.
+- A live WhatsApp link is not part of setup. It is possible later (at the bootcamp: in the afternoon with Rian).
 
-**Calendar**
+**Calendar** (only when it will not connect; connecting is better)
+- Personal Outlook.com or Hotmail (it cannot connect): at outlook.com, open Calendar, then **Settings**, **Calendar**, **Shared calendars**. Under **Publish a calendar**, pick the calendar and **Publish**. Open the ICS link in the browser: a calendar file downloads. Put it in `exports`, then click **Unpublish** straight away, so the link stops working.
 - Google: https://takeout.google.com, press **Deselect all**, tick **Calendar**, then **Next step** and **Create export**. Apple Calendar on a Mac: **File**, **Export**, **Export...**. Outlook on the desktop: **File**, **Save Calendar**. Put the file in `exports`.
 
 **Contacts and X**
 - Contacts on a Mac: in Contacts, select all, then **File**, **Export**, **Export vCard**, into `exports`.
 - X (Twitter): **Settings**, **Your account**, **Download an archive of your data**. It takes time: save it as pending and carry on.
 
-**Anything else** (for example Notion or Slack): if your app has a connector for it, it is one sign-in in the app. If not, say plainly that the kit cannot bring it in yet.
+**Your existing notes** (an Obsidian folder, or a Notion export)
+- Copy the notes folder into `exports` (on a Mac, hold Option while dragging; on Windows, hold Ctrl). The original stays where it is.
+- Notion: open the page that holds the notes, the three dots, **Export**, **Markdown & CSV**, with **Include subpages** on. Put the zip in `exports`.
+
+**Anything else** (for example Slack): if your app can connect to it, it is one sign-in in the app. If not, say plainly that the kit cannot bring it in yet.

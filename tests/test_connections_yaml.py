@@ -1,6 +1,6 @@
 """connections.yaml: every source the setup can connect, in every AI app, with the exact clicks (kit 2.0).
 
-Checks the file against the sprint contract's schema: the twelve source ids, the route fields, Rian's
+Checks the file against the sprint contract's schema: the thirteen source ids, the route fields, Rian's
 route order (builtin, custom, local, cli, export), a builtin or export route for every source, a way in
 from every app, command-line routes marked technical_only, checked_on a real date or null, a harmless
 proof read, and a scheduler for every app. Read with a small standard-library reader (the kit never
@@ -15,7 +15,7 @@ KIT = Path(__file__).resolve().parents[1]
 FILE = KIT / "connections.yaml"
 
 SOURCES = {"google-calendar", "gmail", "google-drive", "outlook-calendar", "outlook-mail", "onedrive", "whatsapp",
-           "linkedin", "notion", "slack", "apple-contacts", "other-custom"}
+           "linkedin", "notion", "slack", "existing-notes", "apple-contacts", "other-custom"}
 APPS = ["claude", "chatgpt", "cursor", "opencode", "orca", "terminal"]
 TYPES = ["builtin", "custom", "local", "cli", "export"]  # Rian's order
 ROUTE_FIELDS = {"app", "type", "clicks", "proof_read", "technical_only", "checked_on", "notes"}
@@ -133,7 +133,7 @@ class ConnectionsYaml(unittest.TestCase):
     def test_top_level_has_sources_and_schedulers_only(self):
         self.assertEqual(set(DATA), {"sources", "schedulers"})
 
-    def test_the_twelve_source_ids(self):
+    def test_the_thirteen_source_ids(self):
         self.assertEqual(set(DATA["sources"]), SOURCES)
         for sid, source in DATA["sources"].items():
             self.assertEqual(set(source), {"name", "kind", "routes"}, sid)
@@ -194,14 +194,25 @@ class ConnectionsYaml(unittest.TestCase):
             self.assertIn("@pnp/cli-microsoft365", clicks[sid])
         self.assertIn("wacli", clicks["whatsapp"])
 
-    def test_whatsapp_is_beeper_first_then_export(self):
+    def test_whatsapp_is_export_only_during_setup(self):
+        # Drummond call, 19 Oct 2026: the morning set-up exports a few chats; a live link (Beeper) is for
+        # later, in the afternoon with Rian. The Beeper routes stay, for that, but say so to the AI.
         wa = DATA["sources"]["whatsapp"]["routes"]
-        claude = next(r for r in wa if r["app"] == "claude")
-        self.assertEqual(claude["type"], "local")
-        self.assertIn("Beeper", " ".join(claude["clicks"]))
-        self.assertIn("deny send_message", " ".join(claude["clicks"]))
-        self.assertIn("Opt-in", claude["notes"])
         self.assertIn("export", [r["type"] for r in wa])
+        for r in wa:
+            if r["type"] != "export":
+                self.assertTrue(r["notes"].startswith("For the AI: not during setup"), r["app"])
+                self.assertIn("Opt-in", r["notes"], r["app"])
+        claude = next(r for r in wa if r["app"] == "claude")
+        self.assertIn("deny send_message", " ".join(claude["clicks"]))
+        self.assertIn("in the afternoon with Rian", claude["notes"])
+
+    def test_existing_notes_are_a_source(self):
+        notes = DATA["sources"]["existing-notes"]
+        self.assertIn("Obsidian", notes["name"])
+        self.assertIn("Notion", notes["name"])
+        self.assertEqual({r["type"] for r in notes["routes"]}, {"export"})
+        self.assertIn("exports folder", " ".join(" ".join(r["clicks"]) for r in notes["routes"]))
 
     def test_personal_outlook_falls_back_to_a_calendar_export(self):
         routes_ = DATA["sources"]["outlook-calendar"]["routes"]

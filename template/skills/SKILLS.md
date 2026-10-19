@@ -5,7 +5,7 @@ Things an AI can do for me. One folder per skill, each with a `SKILL.md`: what q
 Eleven skills ship with the brain:
 
 - `mine-my-context/`: get to know me from my imported files, ask me to confirm, then write it down. Do this first.
-- `whats-on-my-plate/`: what is on my plate this week?
+- `whats-on-my-plate/`: what is on my plate for the next seven days?
 - `who-to-reply-to-first/`: who should I reply to first?
 - `who-do-i-know-at/`: who do I know at a given organisation?
 - `draft-in-my-voice/`: draft a message in my voice.
