@@ -1,0 +1,954 @@
+# connections.yaml: every source the setup can connect, in every AI app, with the exact clicks.
+#
+# For the AI (setup step 3, "connect"):
+# - Work out which app you are in: claude (the Claude app), chatgpt (the ChatGPT app with Codex), cursor,
+#   opencode, orca or terminal. A route marked `any` works in every app.
+# - Routes are in this order: builtin, custom, local, cli, export. Offer the first route for the person's
+#   app that suits them. If its screens do not match, or it fails, go to the next one. The export is
+#   always the last resort, and it always works.
+# - Give the clicks one at a time, word for word. Wait for "done", then run the proof_read: one harmless
+#   read. Never send, change or delete anything to prove a connection.
+# - technical_only: true means offer it only to someone who says they are technical. Never push it.
+# - checked_on: the date the clicks were checked against the app's official help page. null means not
+#   checked yet: say so in one line, and if the screens differ, use the next route.
+# - "notes" starting "For the AI" are for you, not to read out.
+# - Connections live in the AI app or on the computer, never in the brain folder. Passwords and keys never
+#   go in the brain. A file outside the brain folder (an app's own settings) is changed only after a yes.
+# - After a connection works, record it with: progress.py <brain> connected <id> <how>
+# - To save what you read through a live connection, write it as JSON and run
+#   importers/from_connector.py <brain> <file>. It keeps who and when, never whole messages.
+
+sources:
+  google-calendar:
+    name: "Google Calendar"
+    kind: "both"
+    routes:
+      - app: "claude"
+        type: "builtin"
+        clicks:
+          - "In the Claude app, open Customize, then Connectors."
+          - "Click the + next to Connectors and choose Google Calendar."
+          - "Click Connect. Sign in to Google and click Allow. Tick only the boxes you are happy with."
+          - "Start a new chat. Click + under the message box, choose Connectors, and check Google Calendar is switched on."
+          - "Say done."
+        proof_read: "List tomorrow's events: times and titles only."
+        technical_only: false
+        checked_on: "2026-10-19"
+        notes: "Every Claude plan. On a Team or Enterprise plan the owner switches it on first (Organisation settings, Connectors). Claude asks before it changes anything. Help: support.claude.com/en/articles/11176164 and 10166901."
+      - app: "chatgpt"
+        type: "builtin"
+        clicks:
+          - "In the ChatGPT app, open Settings, then Plugins. (Older apps say Apps.)"
+          - "Find Google Calendar and select it. Click Install plugin if you see it, then Connect."
+          - "Sign in to Google and click Allow."
+          - "In Codex, open Sources, choose Use plugins, and pick Google Calendar."
+          - "Say done."
+        proof_read: "List tomorrow's events: times and titles only."
+        technical_only: false
+        checked_on: null
+        notes: "The Plugins steps were checked on 19 Oct 2026 (help.openai.com/en/articles/11487775 and 20001256), but no OpenAI page read that day names a Google Calendar app. It depends on your plan and country. If it is not listed, use the export."
+      - app: "orca"
+        type: "builtin"
+        clicks:
+          - "Connect Google Calendar in the Claude app or at claude.ai: Customize, then Connectors, then Connect. Use the same Claude account as Claude Code."
+          - "Say done."
+        proof_read: "List tomorrow's events: times and titles only."
+        technical_only: false
+        checked_on: "2026-10-19"
+        notes: "For the AI: only when the agent inside Orca is Claude Code, signed in with a Claude account (not a key). Connectors added at claude.ai show up in Claude Code by themselves; check with /mcp. With Codex or OpenCode, use the export. Help: code.claude.com/docs/en/mcp."
+      - app: "terminal"
+        type: "builtin"
+        clicks:
+          - "Connect Google Calendar in the Claude app or at claude.ai: Customize, then Connectors, then Connect. Use the same Claude account as Claude Code."
+          - "Say done."
+        proof_read: "List tomorrow's events: times and titles only."
+        technical_only: false
+        checked_on: "2026-10-19"
+        notes: "For the AI: only when the agent is Claude Code, signed in with a Claude account (not a key). Connectors added at claude.ai show up in Claude Code by themselves; check with /mcp. With Codex or OpenCode, use the export. Help: code.claude.com/docs/en/mcp."
+      - app: "any"
+        type: "cli"
+        clicks:
+          - "Only if you are happy using a terminal. Install the Google Workspace command-line tool: npm install -g @googleworkspace/cli (it needs Node.js)."
+          - "Run: gws auth setup. It walks you through a Google Cloud project and a sign-in (it needs Google's gcloud tool). Allow read access only."
+          - "Say done."
+        proof_read: "List tomorrow's events with: gws calendar +agenda"
+        technical_only: true
+        checked_on: "2026-10-19"
+        notes: "Takes 20 minutes or more and is easy to get wrong. Not an official Google product. Not in the Claude app's Chat tab, which runs in a sealed-off space. Help: github.com/googleworkspace/cli."
+      - app: "any"
+        type: "export"
+        clicks:
+          - "On a computer, go to calendar.google.com."
+          - "Click the gear at the top right, then Settings."
+          - "On the left, click Import & export. Under Export, click Export. A zip file downloads."
+          - "Move the zip into your brain's exports folder. Keep it zipped."
+          - "Say done."
+        proof_read: "Check the zip is listed when you run kit/check_setup.py on the brain."
+        technical_only: false
+        checked_on: "2026-10-19"
+        notes: "Exports every calendar you own. For one calendar: hover over it under My calendars, click the three dots, Settings and sharing, Export calendar. Help: support.google.com/calendar/answer/37111."
+
+  gmail:
+    name: "Gmail"
+    kind: "both"
+    routes:
+      - app: "claude"
+        type: "builtin"
+        clicks:
+          - "In the Claude app, open Customize, then Connectors."
+          - "Click the + next to Connectors and choose Gmail."
+          - "Click Connect. Sign in to Google and click Allow. Tick only the boxes you are happy with."
+          - "Start a new chat. Click + under the message box, choose Connectors, and check Gmail is switched on."
+          - "Say done."
+        proof_read: "Show the subject lines of my 3 newest emails. Do not open, send or change anything."
+        technical_only: false
+        checked_on: "2026-10-19"
+        notes: "Every Claude plan. Team or Enterprise: the owner switches it on first. Claude asks before it sends, replies or forwards. It reads details, not attachments. If Google says Access blocked, a Google Workspace admin must trust Claude. Help: support.claude.com/en/articles/10166901."
+      - app: "chatgpt"
+        type: "builtin"
+        clicks:
+          - "In the ChatGPT app, open Settings, then Plugins. (Older apps say Apps.)"
+          - "Find Gmail and select it. Click Install plugin if you see it, then Connect."
+          - "Sign in to Google and click Allow."
+          - "In Codex, open Sources, choose Use plugins, and pick Gmail."
+          - "Say done."
+        proof_read: "Show the subject lines of my 3 newest emails. Do not open, send or change anything."
+        technical_only: false
+        checked_on: "2026-10-19"
+        notes: "Depends on your plan, country and workspace. If it is not listed, skip email. Help: help.openai.com/en/articles/11487775, 20001256 and 10291617."
+      - app: "orca"
+        type: "builtin"
+        clicks:
+          - "Connect Gmail in the Claude app or at claude.ai: Customize, then Connectors, then Connect. Use the same Claude account as Claude Code."
+          - "Say done."
+        proof_read: "Show the subject lines of my 3 newest emails. Do not open, send or change anything."
+        technical_only: false
+        checked_on: "2026-10-19"
+        notes: "For the AI: only when the agent inside Orca is Claude Code, signed in with a Claude account. Check with /mcp. Help: code.claude.com/docs/en/mcp."
+      - app: "terminal"
+        type: "builtin"
+        clicks:
+          - "Connect Gmail in the Claude app or at claude.ai: Customize, then Connectors, then Connect. Use the same Claude account as Claude Code."
+          - "Say done."
+        proof_read: "Show the subject lines of my 3 newest emails. Do not open, send or change anything."
+        technical_only: false
+        checked_on: "2026-10-19"
+        notes: "For the AI: only when the agent is Claude Code, signed in with a Claude account. Check with /mcp. Help: code.claude.com/docs/en/mcp."
+      - app: "any"
+        type: "cli"
+        clicks:
+          - "Only if you are happy using a terminal. Install the Google Workspace command-line tool: npm install -g @googleworkspace/cli (it needs Node.js)."
+          - "Run: gws auth setup. It walks you through a Google Cloud project and a sign-in (it needs Google's gcloud tool). Allow read access only."
+          - "Say done."
+        proof_read: "List the subject lines of my 3 newest emails with gws. Do not send or change anything."
+        technical_only: true
+        checked_on: "2026-10-19"
+        notes: "Takes 20 minutes or more. Not an official Google product. Not in the Claude app's Chat tab. Help: github.com/googleworkspace/cli."
+      - app: "any"
+        type: "export"
+        clicks:
+          - "Open 3 to 5 important email threads in Gmail, one at a time."
+          - "Click the printer button (Print all), then choose Save as PDF."
+          - "Save each PDF into your brain's exports folder."
+          - "Say done."
+        proof_read: "Check the PDFs are listed when you run kit/check_setup.py on the brain."
+        technical_only: false
+        checked_on: null
+        notes: "There is no email importer: the AI reads these PDFs when you ask. Never copy a whole mailbox."
+
+  google-drive:
+    name: "Google Drive"
+    kind: "both"
+    routes:
+      - app: "claude"
+        type: "builtin"
+        clicks:
+          - "In the Claude app, open Customize, then Connectors."
+          - "Click the + next to Connectors and choose Google Drive."
+          - "Click Connect. Sign in to Google and click Allow. Tick only the boxes you are happy with."
+          - "Start a new chat. Click + under the message box, choose Connectors, and check Google Drive is switched on."
+          - "Say done."
+        proof_read: "List the names of my 3 most recently changed files."
+        technical_only: false
+        checked_on: "2026-10-19"
+        notes: "Every Claude plan. Team or Enterprise: the owner switches it on first. It reads the text of files, not pictures. Claude asks before it shares, moves or bins a file. Help: support.claude.com/en/articles/10166901."
+      - app: "chatgpt"
+        type: "builtin"
+        clicks:
+          - "In the ChatGPT app, open Settings, then Plugins. (Older apps say Apps.)"
+          - "Find Google Drive and select it. Click Install plugin if you see it, then Connect."
+          - "Sign in to Google and click Allow."
+          - "In Codex, open Sources, choose Use plugins, and pick Google Drive."
+          - "Say done."
+        proof_read: "List the names of my 3 most recently changed files."
+        technical_only: false
+        checked_on: "2026-10-19"
+        notes: "Depends on your plan, country and workspace. Help: help.openai.com/en/articles/10929079."
+      - app: "orca"
+        type: "builtin"
+        clicks:
+          - "Connect Google Drive in the Claude app or at claude.ai: Customize, then Connectors, then Connect. Use the same Claude account as Claude Code."
+          - "Say done."
+        proof_read: "List the names of my 3 most recently changed files."
+        technical_only: false
+        checked_on: "2026-10-19"
+        notes: "For the AI: only when the agent inside Orca is Claude Code, signed in with a Claude account. Check with /mcp. Help: code.claude.com/docs/en/mcp."
+      - app: "terminal"
+        type: "builtin"
+        clicks:
+          - "Connect Google Drive in the Claude app or at claude.ai: Customize, then Connectors, then Connect. Use the same Claude account as Claude Code."
+          - "Say done."
+        proof_read: "List the names of my 3 most recently changed files."
+        technical_only: false
+        checked_on: "2026-10-19"
+        notes: "For the AI: only when the agent is Claude Code, signed in with a Claude account. Check with /mcp. Help: code.claude.com/docs/en/mcp."
+      - app: "any"
+        type: "cli"
+        clicks:
+          - "Only if you are happy using a terminal. Install the Google Workspace command-line tool: npm install -g @googleworkspace/cli (it needs Node.js)."
+          - "Run: gws auth setup. It walks you through a Google Cloud project and a sign-in (it needs Google's gcloud tool). Allow read access only."
+          - "Say done."
+        proof_read: "List 3 recent files with: gws drive files list"
+        technical_only: true
+        checked_on: "2026-10-19"
+        notes: "Takes 20 minutes or more. Not an official Google product. Not in the Claude app's Chat tab. Help: github.com/googleworkspace/cli."
+      - app: "any"
+        type: "export"
+        clicks:
+          - "Go to drive.google.com."
+          - "Click one important file. Hold Command (Mac) or Ctrl (Windows) and click up to 4 more."
+          - "Right-click one of them and click Download."
+          - "Move the files into your brain's exports folder."
+          - "Say done."
+        proof_read: "Check the files are listed when you run kit/check_setup.py on the brain."
+        technical_only: false
+        checked_on: "2026-10-19"
+        notes: "The AI reads these when you ask; there is no importer for them. Help: support.google.com/drive/answer/2423534."
+
+  outlook-calendar:
+    name: "Outlook Calendar"
+    kind: "both"
+    routes:
+      - app: "claude"
+        type: "builtin"
+        clicks:
+          - "In the Claude app, open Customize, then Connectors."
+          - "Find Microsoft 365 (click the + next to Connectors if it is not there) and click Connect."
+          - "Sign in with your work Microsoft account and approve."
+          - "Start a new chat. Click + under the message box, choose Connectors, and check Microsoft 365 is switched on."
+          - "Say done."
+        proof_read: "List tomorrow's events: times and titles only."
+        technical_only: false
+        checked_on: "2026-10-19"
+        notes: "Work or school accounts only. A personal Outlook.com or Hotmail account cannot connect: use the export. Your IT admin must approve Claude once for the whole organisation, so ask IT first. Read-only unless you add more. Help: support.claude.com/en/articles/12542951."
+      - app: "chatgpt"
+        type: "builtin"
+        clicks:
+          - "In the ChatGPT app, open Settings, then Plugins. (Older apps say Apps.)"
+          - "Find Outlook Calendar and select it. Click Install plugin if you see it, then Connect."
+          - "Sign in to Microsoft and approve."
+          - "In Codex, open Sources, choose Use plugins, and pick Outlook Calendar."
+          - "Say done."
+        proof_read: "List tomorrow's events: times and titles only."
+        technical_only: false
+        checked_on: "2026-10-19"
+        notes: "With a work account, your IT admin may need to approve it first. OpenAI's page does not say whether personal Outlook.com accounts work: if it fails, use the export. Help: help.openai.com/en/articles/12512241."
+      - app: "orca"
+        type: "builtin"
+        clicks:
+          - "Connect Microsoft 365 in the Claude app or at claude.ai: Customize, then Connectors, then Connect. Use the same Claude account as Claude Code."
+          - "Say done."
+        proof_read: "List tomorrow's events: times and titles only."
+        technical_only: false
+        checked_on: "2026-10-19"
+        notes: "For the AI: only when the agent inside Orca is Claude Code, signed in with a Claude account. Work accounts only, as in the claude route. Help: code.claude.com/docs/en/mcp."
+      - app: "terminal"
+        type: "builtin"
+        clicks:
+          - "Connect Microsoft 365 in the Claude app or at claude.ai: Customize, then Connectors, then Connect. Use the same Claude account as Claude Code."
+          - "Say done."
+        proof_read: "List tomorrow's events: times and titles only."
+        technical_only: false
+        checked_on: "2026-10-19"
+        notes: "For the AI: only when the agent is Claude Code, signed in with a Claude account. Work accounts only, as in the claude route. Help: code.claude.com/docs/en/mcp."
+      - app: "any"
+        type: "cli"
+        clicks:
+          - "Only if you are happy using a terminal. Install the Microsoft 365 command-line tool: npm i -g @pnp/cli-microsoft365 (it needs Node.js)."
+          - "Run: m365 setup. It needs an app registration in your organisation's Microsoft admin site: ask IT if you are not an admin."
+          - "Run: m365 login and sign in with your work account."
+          - "Say done."
+        proof_read: "List tomorrow's events with the m365 tool. Do not change anything."
+        technical_only: true
+        checked_on: null
+        notes: "Built for work Microsoft 365 accounts. Setup was checked on 19 Oct 2026 (pnp.github.io/cli-microsoft365), but the calendar read command was not."
+      - app: "any"
+        type: "export"
+        clicks:
+          - "Go to outlook.com and open Calendar."
+          - "Open Settings, then Calendar, then Shared calendars."
+          - "Under Publish a calendar, pick your calendar and the most detail, then click Publish."
+          - "Copy the ICS link, paste it into your web browser's address bar and press Enter. A calendar file downloads."
+          - "Move the file into your brain's exports folder."
+          - "Back in Shared calendars, stop publishing the calendar (Unpublish), so the link stops working."
+          - "Say done."
+        proof_read: "Check the calendar file is listed when you run kit/check_setup.py on the brain."
+        technical_only: false
+        checked_on: "2026-10-19"
+        notes: "The only route for personal Outlook.com or Hotmail. Anyone with the link can see the calendar while it is published, so unpublish straight after. Help: support.microsoft.com, Share your calendar in Outlook.com."
+      - app: "any"
+        type: "export"
+        clicks:
+          - "In the Outlook app on your computer (classic Outlook), open Calendar."
+          - "Click File, then Save Calendar. Pick a date range and full details, then Save."
+          - "Move the file into your brain's exports folder."
+          - "Say done."
+        proof_read: "Check the calendar file is listed when you run kit/check_setup.py on the brain."
+        technical_only: false
+        checked_on: null
+        notes: "Classic Outlook only. The new Outlook may not have Save Calendar: use the outlook.com route instead."
+
+  outlook-mail:
+    name: "Outlook email"
+    kind: "both"
+    routes:
+      - app: "claude"
+        type: "builtin"
+        clicks:
+          - "In the Claude app, open Customize, then Connectors."
+          - "Find Microsoft 365 (click the + next to Connectors if it is not there) and click Connect."
+          - "Sign in with your work Microsoft account and approve."
+          - "Start a new chat. Click + under the message box, choose Connectors, and check Microsoft 365 is switched on."
+          - "Say done."
+        proof_read: "Show the subject lines of my 3 newest emails. Do not open, send or change anything."
+        technical_only: false
+        checked_on: "2026-10-19"
+        notes: "Work or school accounts only. A personal Outlook.com or Hotmail account cannot connect: use the export. Your IT admin must approve Claude once for the whole organisation. Read-only unless you add more. Help: support.claude.com/en/articles/12542951."
+      - app: "chatgpt"
+        type: "builtin"
+        clicks:
+          - "In the ChatGPT app, open Settings, then Plugins. (Older apps say Apps.)"
+          - "Find Outlook Email and select it. Click Install plugin if you see it, then Connect."
+          - "Sign in to Microsoft and approve."
+          - "In Codex, open Sources, choose Use plugins, and pick Outlook Email."
+          - "Say done."
+        proof_read: "Show the subject lines of my 3 newest emails. Do not open, send or change anything."
+        technical_only: false
+        checked_on: "2026-10-19"
+        notes: "With a work account, your IT admin may need to approve it first. OpenAI's page does not say whether personal Outlook.com accounts work: if it fails, use the export. Help: help.openai.com/en/articles/12512241."
+      - app: "orca"
+        type: "builtin"
+        clicks:
+          - "Connect Microsoft 365 in the Claude app or at claude.ai: Customize, then Connectors, then Connect. Use the same Claude account as Claude Code."
+          - "Say done."
+        proof_read: "Show the subject lines of my 3 newest emails. Do not open, send or change anything."
+        technical_only: false
+        checked_on: "2026-10-19"
+        notes: "For the AI: only when the agent inside Orca is Claude Code, signed in with a Claude account. Work accounts only. Help: code.claude.com/docs/en/mcp."
+      - app: "terminal"
+        type: "builtin"
+        clicks:
+          - "Connect Microsoft 365 in the Claude app or at claude.ai: Customize, then Connectors, then Connect. Use the same Claude account as Claude Code."
+          - "Say done."
+        proof_read: "Show the subject lines of my 3 newest emails. Do not open, send or change anything."
+        technical_only: false
+        checked_on: "2026-10-19"
+        notes: "For the AI: only when the agent is Claude Code, signed in with a Claude account. Work accounts only. Help: code.claude.com/docs/en/mcp."
+      - app: "any"
+        type: "cli"
+        clicks:
+          - "Only if you are happy using a terminal. Install the Microsoft 365 command-line tool: npm i -g @pnp/cli-microsoft365 (it needs Node.js)."
+          - "Run: m365 setup. It needs an app registration in your organisation's Microsoft admin site: ask IT if you are not an admin."
+          - "Run: m365 login and sign in with your work account."
+          - "Say done."
+        proof_read: "List the subjects of my 3 newest emails with: m365 outlook message list --folderName inbox"
+        technical_only: true
+        checked_on: "2026-10-19"
+        notes: "Built for work Microsoft 365 accounts. Not in the Claude app's Chat tab. Help: pnp.github.io/cli-microsoft365."
+      - app: "any"
+        type: "export"
+        clicks:
+          - "Open 3 to 5 important email threads in Outlook, one at a time."
+          - "Choose Print, then Save as PDF (on Windows: Microsoft Print to PDF)."
+          - "Save each PDF into your brain's exports folder."
+          - "Say done."
+        proof_read: "Check the PDFs are listed when you run kit/check_setup.py on the brain."
+        technical_only: false
+        checked_on: null
+        notes: "The route for personal Outlook.com or Hotmail. There is no email importer: the AI reads these PDFs when you ask."
+
+  onedrive:
+    name: "OneDrive"
+    kind: "both"
+    routes:
+      - app: "claude"
+        type: "builtin"
+        clicks:
+          - "In the Claude app, open Customize, then Connectors."
+          - "Find Microsoft 365 (click the + next to Connectors if it is not there) and click Connect."
+          - "Sign in with your work Microsoft account and approve."
+          - "Start a new chat. Click + under the message box, choose Connectors, and check Microsoft 365 is switched on."
+          - "Say done."
+        proof_read: "List the names of my 3 most recently changed files."
+        technical_only: false
+        checked_on: "2026-10-19"
+        notes: "Work or school OneDrive and SharePoint only. Your IT admin must approve Claude once for the whole organisation. It reads Word, Excel, PowerPoint, PDF and text files, not OneNote. Help: support.claude.com/en/articles/12542951."
+      - app: "chatgpt"
+        type: "builtin"
+        clicks:
+          - "In the ChatGPT app, open Settings, then Plugins. (Older apps say Apps.)"
+          - "Find SharePoint (it covers work OneDrive) and select it. Click Install plugin if you see it, then Connect."
+          - "Sign in with your work Microsoft account and approve."
+          - "In Codex, open Sources, choose Use plugins, and pick it."
+          - "Say done."
+        proof_read: "List the names of my 3 most recently changed files."
+        technical_only: false
+        checked_on: null
+        notes: "Not checked: OpenAI lists a SharePoint app, but its page was not read on 19 Oct 2026. Work accounts only."
+      - app: "orca"
+        type: "builtin"
+        clicks:
+          - "Connect Microsoft 365 in the Claude app or at claude.ai: Customize, then Connectors, then Connect. Use the same Claude account as Claude Code."
+          - "Say done."
+        proof_read: "List the names of my 3 most recently changed files."
+        technical_only: false
+        checked_on: "2026-10-19"
+        notes: "For the AI: only when the agent inside Orca is Claude Code, signed in with a Claude account. Work accounts only. Help: code.claude.com/docs/en/mcp."
+      - app: "terminal"
+        type: "builtin"
+        clicks:
+          - "Connect Microsoft 365 in the Claude app or at claude.ai: Customize, then Connectors, then Connect. Use the same Claude account as Claude Code."
+          - "Say done."
+        proof_read: "List the names of my 3 most recently changed files."
+        technical_only: false
+        checked_on: "2026-10-19"
+        notes: "For the AI: only when the agent is Claude Code, signed in with a Claude account. Work accounts only. Help: code.claude.com/docs/en/mcp."
+      - app: "any"
+        type: "cli"
+        clicks:
+          - "Only if you are happy using a terminal. Install the Microsoft 365 command-line tool: npm i -g @pnp/cli-microsoft365 (it needs Node.js)."
+          - "Run: m365 setup. It needs an app registration in your organisation's Microsoft admin site: ask IT if you are not an admin."
+          - "Run: m365 login and sign in with your work account."
+          - "Say done."
+        proof_read: "List 3 recent files in my OneDrive with the m365 tool. Do not change anything."
+        technical_only: true
+        checked_on: null
+        notes: "Built for work Microsoft 365 accounts. The OneDrive read command was not checked."
+      - app: "any"
+        type: "export"
+        clicks:
+          - "Go to onedrive.com (or your work OneDrive) and sign in."
+          - "Tick 3 to 5 important files, then click Download."
+          - "Move the files into your brain's exports folder. Unzip them if they arrive as one zip."
+          - "Say done."
+        proof_read: "Check the files are listed when you run kit/check_setup.py on the brain."
+        technical_only: false
+        checked_on: null
+        notes: "The route for personal OneDrive. The AI reads these when you ask; there is no importer for them."
+
+  whatsapp:
+    name: "WhatsApp"
+    kind: "both"
+    routes:
+      - app: "claude"
+        type: "local"
+        clicks:
+          - "Install Beeper from beeper.com/download and open it. Make a free account with your email."
+          - "In Beeper, add WhatsApp. On your phone, open WhatsApp, then Settings (iPhone) or the three dots (Android), then Linked devices, then Link a device. Scan the code on the screen. Keep the phone close while chats load."
+          - "In Beeper, open Settings, then Integrations, and check the Desktop API is on."
+          - "Go to developers.beeper.com/desktop-api/mcp and click Claude Desktop. Open the file that downloads. If nothing happens: in Claude, open Settings, then Extensions, then Advanced settings, then Install Extension, and choose that file."
+          - "When Beeper asks you to approve Claude, click Approve. Pick read-only if it is offered."
+          - "Quit Claude fully, open it again, and start a new chat."
+          - "When Claude asks to use a Beeper tool, allow the search and read ones. Always deny send_message."
+          - "Say done."
+        proof_read: "List the names of my 3 most recent WhatsApp chats. Do not open, send or mark anything."
+        technical_only: false
+        checked_on: null
+        notes: "Opt-in. Beeper is not made by WhatsApp, so there is a small risk to the account. Use the export instead on a work laptop, if your Claude admin blocks extensions, or if your number runs your business. Leave out client, medical and children's groups. Beeper must stay open. Undo: on the phone, WhatsApp, Linked devices, log out Beeper. Claude's extension steps were checked on 19 Oct 2026 (support.claude.com/en/articles/10949351); Beeper's own screens were not."
+      - app: "chatgpt"
+        type: "local"
+        clicks:
+          - "Install Beeper from beeper.com/download, link WhatsApp by scanning the code from your phone's Linked devices screen, and check Beeper's Settings, Integrations has the Desktop API on."
+          - "In the ChatGPT app, open Settings, then MCP servers, then Add server."
+          - "Name it beeper, choose Streamable HTTP, and paste: http://localhost:23373/v0/mcp. Click Save, then Restart."
+          - "If it shows Authenticate, click it and approve in Beeper. Pick read-only if it is offered."
+          - "Allow the search and read tools only. Always deny sending."
+          - "Say done."
+        proof_read: "List the names of my 3 most recent WhatsApp chats. Do not open, send or mark anything."
+        technical_only: false
+        checked_on: null
+        notes: "Opt-in, with the same cautions as the claude route. The Codex settings steps (learn.chatgpt.com/docs/extend/mcp) and Beeper's address (developers.beeper.com/desktop-api/mcp) were checked on 19 Oct 2026; Beeper's own screens were not."
+      - app: "cursor"
+        type: "local"
+        clicks:
+          - "Install Beeper from beeper.com/download, link WhatsApp by scanning the code from your phone's Linked devices screen, and check Beeper's Settings, Integrations has the Desktop API on."
+          - "Go to developers.beeper.com/desktop-api/mcp and click Install MCP Server under Cursor. When Cursor opens, click Install."
+          - "Approve Cursor in Beeper when asked. Pick read-only if it is offered."
+          - "Allow the search and read tools only. Always deny sending."
+          - "Say done."
+        proof_read: "List the names of my 3 most recent WhatsApp chats. Do not open, send or mark anything."
+        technical_only: false
+        checked_on: null
+        notes: "Opt-in, with the same cautions as the claude route. For the AI: if Beeper uses another port, ask before changing ~/.cursor/mcp.json (Cursor's own settings, outside the brain) and set the address to http://localhost:23373/v0/mcp."
+      - app: "opencode"
+        type: "local"
+        clicks:
+          - "Install Beeper from beeper.com/download, link WhatsApp by scanning the code from your phone's Linked devices screen, and check Beeper's Settings, Integrations has the Desktop API on."
+          - "Say yes when the AI asks to add Beeper to OpenCode's own settings file (outside your brain folder)."
+          - "Restart OpenCode. If a browser window opens, approve OpenCode in Beeper. Pick read-only if it is offered."
+          - "Allow the search and read tools only. Always deny sending."
+          - "Say done."
+        proof_read: "List the names of my 3 most recent WhatsApp chats. Do not open, send or mark anything."
+        technical_only: false
+        checked_on: null
+        notes: "Opt-in, with the same cautions as the claude route. For the AI: in ~/.config/opencode/opencode.json add \"mcp\": {\"beeper\": {\"type\": \"remote\", \"url\": \"http://localhost:23373/v0/mcp\"}}. If it asks to sign in, run: opencode mcp auth beeper."
+      - app: "orca"
+        type: "local"
+        clicks:
+          - "Install Beeper from beeper.com/download, link WhatsApp by scanning the code from your phone's Linked devices screen, and check Beeper's Settings, Integrations has the Desktop API on."
+          - "Say yes when the AI asks to add Beeper to its own settings (outside your brain folder)."
+          - "If a browser window opens, approve it in Beeper. Pick read-only if it is offered."
+          - "Allow the search and read tools only. Always deny sending."
+          - "Say done."
+        proof_read: "List the names of my 3 most recent WhatsApp chats. Do not open, send or mark anything."
+        technical_only: false
+        checked_on: null
+        notes: "Opt-in, with the same cautions as the claude route. For the AI: Claude Code: claude mcp add --transport http --scope user beeper http://localhost:23373/v0/mcp, then /mcp. Codex: codex mcp add beeper --url http://localhost:23373/v0/mcp. OpenCode: as in the opencode route."
+      - app: "terminal"
+        type: "local"
+        clicks:
+          - "Install Beeper from beeper.com/download, link WhatsApp by scanning the code from your phone's Linked devices screen, and check Beeper's Settings, Integrations has the Desktop API on."
+          - "Say yes when the AI asks to add Beeper to its own settings (outside your brain folder)."
+          - "If a browser window opens, approve it in Beeper. Pick read-only if it is offered."
+          - "Allow the search and read tools only. Always deny sending."
+          - "Say done."
+        proof_read: "List the names of my 3 most recent WhatsApp chats. Do not open, send or mark anything."
+        technical_only: false
+        checked_on: null
+        notes: "Opt-in, with the same cautions as the claude route. For the AI: Claude Code: claude mcp add --transport http --scope user beeper http://localhost:23373/v0/mcp, then /mcp. Codex: codex mcp add beeper --url http://localhost:23373/v0/mcp. OpenCode: as in the opencode route."
+      - app: "any"
+        type: "cli"
+        clicks:
+          - "Only if you are happy using a terminal. Install wacli: brew install openclaw/tap/wacli (a Mac needs macOS 15 or newer), or download it from github.com/openclaw/wacli."
+          - "Run: wacli auth. On your phone, open WhatsApp, then Linked devices, then Link a device, and scan the code in the terminal."
+          - "Let the AI use it only with --read-only."
+          - "Say done."
+        proof_read: "List my 3 most recent chats with wacli, using --read-only."
+        technical_only: true
+        checked_on: "2026-10-19"
+        notes: "Same small account risk as Beeper. Not in the Claude app's Chat tab. Help: github.com/openclaw/wacli."
+      - app: "any"
+        type: "export"
+        clicks:
+          - "Pick 3 to 10 chats where real work happens."
+          - "iPhone: open the chat, tap the name at the top, then Export chat, then Without media. Save it to Files or send it to yourself."
+          - "Android: open the chat, tap the three dots, then More, then Export chat, then Without media. Send it to yourself."
+          - "Move each file into your brain's exports folder."
+          - "Say done."
+        proof_read: "Check the chats are listed when you run kit/check_setup.py on the brain."
+        technical_only: false
+        checked_on: "2026-10-19"
+        notes: "No risk to the account. Some work phones block exports: then skip WhatsApp. Help: faq.whatsapp.com/1180414079177245."
+      - app: "any"
+        type: "export"
+        clicks:
+          - "In WhatsApp on your computer (or web.whatsapp.com), open a chat where real work happens."
+          - "Open the chat's menu, then Export chat. Choose All messages, then Export. A zip file downloads."
+          - "Move the zip into your brain's exports folder. Repeat for up to 10 chats."
+          - "Say done."
+        proof_read: "Check the chats are listed when you run kit/check_setup.py on the brain."
+        technical_only: false
+        checked_on: "2026-10-19"
+        notes: "No phone needed. For the AI: a computer export has not yet been tried with importers/whatsapp.py; if it reports no messages, use the phone export instead. Help: faq.whatsapp.com/1180414079177245."
+
+  linkedin:
+    name: "LinkedIn"
+    kind: "export"
+    routes:
+      - app: "any"
+        type: "export"
+        clicks:
+          - "On a computer, signed in to LinkedIn, open linkedin.com/mypreferences/d/download-my-data. (Or: Me, then Settings & Privacy, then Data Privacy, then Download your data.)"
+          - "Choose the larger download, then click Request archive."
+          - "LinkedIn emails you twice: a small file first, then the full one within 24 hours. Download the full zip from the second email within 72 hours."
+          - "Move the zip into your brain's exports folder. Keep it zipped."
+          - "Say done when it is in. Until then, carry on with the rest."
+        proof_read: "Check the zip is listed when you run kit/check_setup.py on the brain."
+        technical_only: false
+        checked_on: "2026-10-19"
+        notes: "Start it first: it is the slowest. In a hurry, tick only Connections, Profile and Positions: that comes within about 10 minutes. There is no live connection for LinkedIn. For the AI: record it with progress.py pending. Help: linkedin.com/help/linkedin/answer/a1339364."
+
+  notion:
+    name: "Notion"
+    kind: "both"
+    routes:
+      - app: "claude"
+        type: "builtin"
+        clicks:
+          - "In the Claude app, open Customize, then Connectors."
+          - "Click the + next to Connectors and choose Notion."
+          - "Click Connect. Sign in to Notion, pick your workspace, and click Allow."
+          - "Start a new chat. Click + under the message box, choose Connectors, and check Notion is switched on."
+          - "Say done."
+        proof_read: "List the titles of 3 Notion pages I can see."
+        technical_only: false
+        checked_on: "2026-10-19"
+        notes: "Team or Enterprise: the owner switches it on first. Help: support.claude.com/en/articles/11176164."
+      - app: "chatgpt"
+        type: "builtin"
+        clicks:
+          - "In the ChatGPT app, open Settings, then Plugins. (Older apps say Apps.)"
+          - "Find Notion and select it. Click Install plugin if you see it, then Connect."
+          - "Sign in to Notion and click Allow."
+          - "In Codex, open Sources, choose Use plugins, and pick Notion."
+          - "Say done."
+        proof_read: "List the titles of 3 Notion pages I can see."
+        technical_only: false
+        checked_on: "2026-10-19"
+        notes: "Depends on your plan, country and workspace. Help: help.openai.com/en/articles/11487775 and 12532955."
+      - app: "orca"
+        type: "builtin"
+        clicks:
+          - "Connect Notion in the Claude app or at claude.ai: Customize, then Connectors, then Connect. Use the same Claude account as Claude Code."
+          - "Say done."
+        proof_read: "List the titles of 3 Notion pages I can see."
+        technical_only: false
+        checked_on: "2026-10-19"
+        notes: "For the AI: only when the agent inside Orca is Claude Code, signed in with a Claude account. Otherwise use the custom route. Help: code.claude.com/docs/en/mcp."
+      - app: "terminal"
+        type: "builtin"
+        clicks:
+          - "Connect Notion in the Claude app or at claude.ai: Customize, then Connectors, then Connect. Use the same Claude account as Claude Code."
+          - "Say done."
+        proof_read: "List the titles of 3 Notion pages I can see."
+        technical_only: false
+        checked_on: "2026-10-19"
+        notes: "For the AI: only when the agent is Claude Code, signed in with a Claude account. Otherwise use the custom route. Help: code.claude.com/docs/en/mcp."
+      - app: "chatgpt"
+        type: "custom"
+        clicks:
+          - "In the ChatGPT app, open Settings, then MCP servers, then Add server."
+          - "Name it notion, choose Streamable HTTP, and paste: https://mcp.notion.com/mcp. Click Save, then Restart."
+          - "Click Authenticate, sign in to Notion, and click Allow."
+          - "Say done."
+        proof_read: "List the titles of 3 Notion pages I can see."
+        technical_only: false
+        checked_on: "2026-10-19"
+        notes: "Use this if Notion is not in Plugins. Notion's connection works on every Notion plan. Help: learn.chatgpt.com/docs/extend/mcp and developers.notion.com/docs/get-started-with-mcp."
+      - app: "cursor"
+        type: "custom"
+        clicks:
+          - "Say yes when the AI asks to add Notion to Cursor's own settings file (outside your brain folder)."
+          - "In Cursor, open Customize in the sidebar and switch Notion on."
+          - "Sign in to Notion when asked, pick your workspace, and click Allow."
+          - "Say done."
+        proof_read: "List the titles of 3 Notion pages I can see."
+        technical_only: false
+        checked_on: "2026-10-19"
+        notes: "For the AI: in ~/.cursor/mcp.json add \"mcpServers\": {\"notion\": {\"url\": \"https://mcp.notion.com/mcp\"}}. Never put it in the brain folder. Help: developers.notion.com/docs/get-started-with-mcp."
+      - app: "opencode"
+        type: "custom"
+        clicks:
+          - "Say yes when the AI asks to add Notion to OpenCode's own settings file (outside your brain folder)."
+          - "When a browser window opens, sign in to Notion, pick your workspace, and click Allow."
+          - "Say done."
+        proof_read: "List the titles of 3 Notion pages I can see."
+        technical_only: false
+        checked_on: "2026-10-19"
+        notes: "For the AI: in ~/.config/opencode/opencode.json add \"mcp\": {\"notion\": {\"type\": \"remote\", \"url\": \"https://mcp.notion.com/mcp\"}}, then run: opencode mcp auth notion. Help: opencode.ai/docs/mcp-servers."
+      - app: "orca"
+        type: "custom"
+        clicks:
+          - "Say yes when the AI asks to add Notion to its own settings (outside your brain folder)."
+          - "When a browser window opens, sign in to Notion, pick your workspace, and click Allow."
+          - "Say done."
+        proof_read: "List the titles of 3 Notion pages I can see."
+        technical_only: false
+        checked_on: "2026-10-19"
+        notes: "For the AI: Claude Code: claude mcp add --transport http --scope user notion https://mcp.notion.com/mcp, then /mcp. Codex: add [mcp_servers.notion] with url = \"https://mcp.notion.com/mcp\" to ~/.codex/config.toml, then codex mcp login notion. OpenCode: as in the opencode route."
+      - app: "terminal"
+        type: "custom"
+        clicks:
+          - "Say yes when the AI asks to add Notion to its own settings (outside your brain folder)."
+          - "When a browser window opens, sign in to Notion, pick your workspace, and click Allow."
+          - "Say done."
+        proof_read: "List the titles of 3 Notion pages I can see."
+        technical_only: false
+        checked_on: "2026-10-19"
+        notes: "For the AI: Claude Code: claude mcp add --transport http --scope user notion https://mcp.notion.com/mcp, then /mcp. Codex: add [mcp_servers.notion] with url = \"https://mcp.notion.com/mcp\" to ~/.codex/config.toml, then codex mcp login notion. OpenCode: as in the opencode route."
+      - app: "any"
+        type: "export"
+        clicks:
+          - "In Notion, open the 3 to 5 pages that matter most, one at a time."
+          - "Click the three dots at the top right, then Export. Choose Markdown, then Export."
+          - "Move the files into your brain's exports folder."
+          - "Say done."
+        proof_read: "Check the files are listed when you run kit/check_setup.py on the brain."
+        technical_only: false
+        checked_on: null
+        notes: "The AI reads these when you ask; there is no importer for them."
+
+  slack:
+    name: "Slack"
+    kind: "both"
+    routes:
+      - app: "claude"
+        type: "builtin"
+        clicks:
+          - "Check your Slack has the Claude app: a Slack admin adds it from the Slack Marketplace."
+          - "In the Claude app, open Customize, then Connectors."
+          - "Find Slack (click the + next to Connectors if it is not there) and click Connect."
+          - "Sign in to Slack and click Allow."
+          - "Start a new chat. Click + under the message box, choose Connectors, and check Slack is switched on."
+          - "Say done."
+        proof_read: "List the names of 3 Slack channels I am in."
+        technical_only: false
+        checked_on: "2026-10-19"
+        notes: "Anthropic's page says Team and Enterprise plans; on those, the Claude owner switches it on first. If it is missing on Pro or Max, use the export. It can search channels, direct messages and files. Help: claude.com/docs/connectors/slack."
+      - app: "chatgpt"
+        type: "builtin"
+        clicks:
+          - "In the ChatGPT app, open Settings, then Plugins. (Older apps say Apps.)"
+          - "Find Slack and select it. Click Install plugin if you see it, then Connect."
+          - "Sign in to Slack and click Allow."
+          - "In Codex, open Sources, choose Use plugins, and pick Slack."
+          - "Say done."
+        proof_read: "List the names of 3 Slack channels I am in."
+        technical_only: false
+        checked_on: "2026-10-19"
+        notes: "Depends on your plan, country and workspace. Your Slack admin may need to approve it. Help: help.openai.com/en/articles/11487775 and 12525822."
+      - app: "orca"
+        type: "builtin"
+        clicks:
+          - "Connect Slack in the Claude app or at claude.ai: Customize, then Connectors, then Connect. Use the same Claude account as Claude Code."
+          - "Say done."
+        proof_read: "List the names of 3 Slack channels I am in."
+        technical_only: false
+        checked_on: "2026-10-19"
+        notes: "For the AI: only when the agent inside Orca is Claude Code, signed in with a Claude account, on a plan that has the Slack connector. Help: code.claude.com/docs/en/mcp."
+      - app: "terminal"
+        type: "builtin"
+        clicks:
+          - "Connect Slack in the Claude app or at claude.ai: Customize, then Connectors, then Connect. Use the same Claude account as Claude Code."
+          - "Say done."
+        proof_read: "List the names of 3 Slack channels I am in."
+        technical_only: false
+        checked_on: "2026-10-19"
+        notes: "For the AI: only when the agent is Claude Code, signed in with a Claude account, on a plan that has the Slack connector. Help: code.claude.com/docs/en/mcp."
+      - app: "any"
+        type: "export"
+        clicks:
+          - "In Slack, open the 3 to 5 threads that matter most."
+          - "Copy each one into a plain text file and save it in your brain's exports folder."
+          - "Say done."
+        proof_read: "Check the files are listed when you run kit/check_setup.py on the brain."
+        technical_only: false
+        checked_on: null
+        notes: "A full Slack export needs a workspace admin. The AI reads these files when you ask; there is no importer for them."
+
+  apple-contacts:
+    name: "Apple Contacts"
+    kind: "export"
+    routes:
+      - app: "any"
+        type: "export"
+        clicks:
+          - "On a Mac, open Contacts."
+          - "Click any contact, then press Command and A to select them all."
+          - "Choose File, then Export, then Export vCard. Save the file."
+          - "Move the file into your brain's exports folder."
+          - "Say done."
+        proof_read: "Check the contacts file is listed when you run kit/check_setup.py on the brain."
+        technical_only: false
+        checked_on: "2026-10-19"
+        notes: "Use Export vCard, not Contacts Archive. Help: support.apple.com/guide/contacts/export-or-archive-contacts-adrbdcfd32e6/mac."
+      - app: "any"
+        type: "export"
+        clicks:
+          - "Without a Mac: go to icloud.com and open Contacts."
+          - "Select all your contacts, then choose Export vCard."
+          - "Move the file into your brain's exports folder."
+          - "Say done."
+        proof_read: "Check the contacts file is listed when you run kit/check_setup.py on the brain."
+        technical_only: false
+        checked_on: null
+        notes: "For iPhone contacts on Windows. Not checked against Apple's help."
+
+  other-custom:
+    name: "Something else"
+    kind: "both"
+    routes:
+      - app: "claude"
+        type: "builtin"
+        clicks:
+          - "In the Claude app, open Customize, then Connectors."
+          - "Click the + next to Connectors and search for the tool by name."
+          - "If it is there, click Connect, sign in, and click Allow."
+          - "Start a new chat. Click + under the message box, choose Connectors, and check it is switched on."
+          - "Say done."
+        proof_read: "List 3 items I own in that tool, names only."
+        technical_only: false
+        checked_on: "2026-10-19"
+        notes: "Team or Enterprise: the owner adds it first. Help: support.claude.com/en/articles/11176164."
+      - app: "chatgpt"
+        type: "builtin"
+        clicks:
+          - "In the ChatGPT app, open Settings, then Plugins, and search for the tool by name."
+          - "If it is there, select it. Click Install plugin if you see it, then Connect. Sign in and click Allow."
+          - "In Codex, open Sources, choose Use plugins, and pick it."
+          - "Say done."
+        proof_read: "List 3 items I own in that tool, names only."
+        technical_only: false
+        checked_on: "2026-10-19"
+        notes: "Help: help.openai.com/en/articles/11487775 and 20001256."
+      - app: "orca"
+        type: "builtin"
+        clicks:
+          - "Connect it in the Claude app or at claude.ai: Customize, then Connectors, then Connect. Use the same Claude account as Claude Code."
+          - "Say done."
+        proof_read: "List 3 items I own in that tool, names only."
+        technical_only: false
+        checked_on: "2026-10-19"
+        notes: "For the AI: only when the agent inside Orca is Claude Code, signed in with a Claude account. Help: code.claude.com/docs/en/mcp."
+      - app: "terminal"
+        type: "builtin"
+        clicks:
+          - "Connect it in the Claude app or at claude.ai: Customize, then Connectors, then Connect. Use the same Claude account as Claude Code."
+          - "Say done."
+        proof_read: "List 3 items I own in that tool, names only."
+        technical_only: false
+        checked_on: "2026-10-19"
+        notes: "For the AI: only when the agent is Claude Code, signed in with a Claude account. Help: code.claude.com/docs/en/mcp."
+      - app: "claude"
+        type: "custom"
+        clicks:
+          - "Find the tool's connection address on its own help pages (search for its name and Claude connector). The AI can help you look."
+          - "In the Claude app, open Customize, then Connectors. Click +, then Add custom connector."
+          - "Type a name, paste the address, and click Continue. Leave the sign-in settings as they are and click Add."
+          - "Click Connect next to it, sign in, and click Allow."
+          - "Say done."
+        proof_read: "List 3 items I own in that tool, names only."
+        technical_only: false
+        checked_on: "2026-10-19"
+        notes: "Only use an address from the tool's own website. The free plan allows one custom connector. On Team or Enterprise the owner adds it. Never paste a password or key into the brain. Help: support.claude.com/en/articles/11175166."
+      - app: "chatgpt"
+        type: "custom"
+        clicks:
+          - "Find the tool's connection address on its own help pages. The AI can help you look."
+          - "In the ChatGPT app, open Settings, then MCP servers, then Add server."
+          - "Type a name, choose Streamable HTTP, paste the address, and click Save, then Restart."
+          - "If it shows Authenticate, click it, sign in, and click Allow."
+          - "Say done."
+        proof_read: "List 3 items I own in that tool, names only."
+        technical_only: false
+        checked_on: "2026-10-19"
+        notes: "These are Codex's own settings, so the connection works in Codex. ChatGPT chat can add custom connections only on Business and Enterprise (Pro: read-only). Help: learn.chatgpt.com/docs/extend/mcp and help.openai.com/en/articles/12584461."
+      - app: "cursor"
+        type: "custom"
+        clicks:
+          - "In Cursor, open Customize in the sidebar and search the Marketplace for the tool."
+          - "If it is there, click Add to Cursor, sign in, and click Allow."
+          - "If it is not, find its connection address on its own help pages, and say yes when the AI asks to add it to Cursor's own settings file (outside your brain folder). Then switch it on in Customize and sign in."
+          - "Say done."
+        proof_read: "List 3 items I own in that tool, names only."
+        technical_only: false
+        checked_on: "2026-10-19"
+        notes: "For the AI: the settings file is ~/.cursor/mcp.json, with the server under mcpServers. Never in the brain folder. Help: cursor.com/docs/context/mcp."
+      - app: "opencode"
+        type: "custom"
+        clicks:
+          - "Find the tool's connection address on its own help pages. The AI can help you look."
+          - "Say yes when the AI asks to add it to OpenCode's own settings file (outside your brain folder)."
+          - "When a browser window opens, sign in and click Allow."
+          - "Say done."
+        proof_read: "List 3 items I own in that tool, names only."
+        technical_only: false
+        checked_on: "2026-10-19"
+        notes: "For the AI: in ~/.config/opencode/opencode.json add it under mcp with type remote and its url, then run: opencode mcp auth <name>. Help: opencode.ai/docs/mcp-servers."
+      - app: "orca"
+        type: "custom"
+        clicks:
+          - "Find the tool's connection address on its own help pages. The AI can help you look."
+          - "Say yes when the AI asks to add it to its own settings (outside your brain folder)."
+          - "When a browser window opens, sign in and click Allow."
+          - "Say done."
+        proof_read: "List 3 items I own in that tool, names only."
+        technical_only: false
+        checked_on: "2026-10-19"
+        notes: "For the AI: Claude Code: claude mcp add --transport http --scope user <name> <address>, then /mcp. Codex: codex mcp add, or [mcp_servers.<name>] in ~/.codex/config.toml, then codex mcp login <name>. OpenCode: as in the opencode route."
+      - app: "terminal"
+        type: "custom"
+        clicks:
+          - "Find the tool's connection address on its own help pages. The AI can help you look."
+          - "Say yes when the AI asks to add it to its own settings (outside your brain folder)."
+          - "When a browser window opens, sign in and click Allow."
+          - "Say done."
+        proof_read: "List 3 items I own in that tool, names only."
+        technical_only: false
+        checked_on: "2026-10-19"
+        notes: "For the AI: Claude Code: claude mcp add --transport http --scope user <name> <address>, then /mcp. Codex: codex mcp add, or [mcp_servers.<name>] in ~/.codex/config.toml, then codex mcp login <name>. OpenCode: as in the opencode route."
+      - app: "claude"
+        type: "local"
+        clicks:
+          - "Download the tool's Claude extension file from its own website."
+          - "In the Claude app, open Settings, then Extensions, then Advanced settings, then Install Extension. Choose the file and follow the steps."
+          - "Quit Claude fully, open it again, and start a new chat."
+          - "Say done."
+        proof_read: "List 3 items I own in that tool, names only."
+        technical_only: false
+        checked_on: "2026-10-19"
+        notes: "Only from the tool's own website. On Team or Enterprise, the owner may need to allow extensions. Help: support.claude.com/en/articles/10949351."
+      - app: "any"
+        type: "export"
+        clicks:
+          - "In the tool, look for Export or Download (often under Settings or the three dots)."
+          - "Choose a plain format if offered: CSV, text or PDF."
+          - "Move the file into your brain's exports folder."
+          - "Say done."
+        proof_read: "Check the file is listed when you run kit/check_setup.py on the brain."
+        technical_only: false
+        checked_on: null
+        notes: "For example, Apple Calendar on a Mac: File, then Export, then Export. X (Twitter): Settings, Your account, Download an archive of your data. The AI reads other files when you ask."
+
+schedulers:
+  claude:
+    how: "The Claude app's Scheduled tasks. Your brain is on your computer, so keep the computer on and the app open when a job is due."
+    clicks:
+      - "Newer app (no Chat and Cowork switch under the message box): in any chat, say what the job is and when, for example: every Monday at 8am, run my weekly review from my brain folder. Check the name, time and instruction, then click Schedule."
+      - "Older app (with a Chat and Cowork switch): click Scheduled in the left sidebar, then New task, then Create with Claude. Answer its questions, then click Schedule."
+      - "Pick your brain folder if it asks."
+    checked_on: "2026-10-19"
+  chatgpt:
+    how: "Scheduled tasks in the ChatGPT desktop app, made from a Codex chat. Keep the computer on and the app running when a job is due. ChatGPT on the web cannot reach your brain folder."
+    clicks:
+      - "In a Codex chat on your brain folder, say what the job is and when, for example: every Monday at 8am, run my weekly review."
+      - "Check what it proposes, then confirm."
+      - "To see or pause jobs later, open Scheduled in the app's sidebar."
+    checked_on: "2026-10-19"
+  cursor:
+    how: "No scheduler that can reach your brain folder: Cursor's Automations run in the cloud. Run the job by hand when a calendar reminder pops up."
+    clicks:
+      - "Add a repeating event to your own calendar, for example Monday 8:00, Brain: weekly review."
+      - "When it pops up, open your brain folder in Cursor and say: run my weekly review."
+      - "Technical people can use the computer's own scheduler instead (cron or launchd on a Mac, Task Scheduler on Windows)."
+    checked_on: "2026-10-19"
+  opencode:
+    how: "OpenCode's help pages show no scheduler. Run the job by hand when a calendar reminder pops up."
+    clicks:
+      - "Add a repeating event to your own calendar, for example Monday 8:00, Brain: weekly review."
+      - "When it pops up, open your brain folder in OpenCode and say: run my weekly review."
+      - "Technical people can use the computer's own scheduler instead (cron or launchd on a Mac, Task Scheduler on Windows)."
+    checked_on: "2026-10-19"
+  orca:
+    how: "Orca runs Claude Code, Codex or OpenCode. Use that agent's own scheduler (see terminal); otherwise run the job by hand when a calendar reminder pops up."
+    clicks:
+      - "Add a repeating event to your own calendar, for example Monday 8:00, Brain: weekly review."
+      - "When it pops up, open your brain in Orca and say: run my weekly review."
+    checked_on: null
+  terminal:
+    how: "Use the scheduler of the agent you started. Claude Code: a local routine in the Claude app. Codex: Scheduled in the ChatGPT desktop app. OpenCode has none, so run it by hand. Keep the computer on and the app open when a job is due."
+    clicks:
+      - "Claude Code: in the Claude app, open the Code tab, click Routines, then New routine, then Local. Give it a name, the instruction (for example: run my weekly review), your brain folder and a time. Save it."
+      - "Codex: in a Codex chat on your brain folder, say what the job is and when, then confirm."
+      - "OpenCode: add a repeating event to your own calendar and run the job by hand when it pops up."
+    checked_on: "2026-10-19"
