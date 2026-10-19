@@ -4,7 +4,7 @@
 #   curl -fsSL https://raw.githubusercontent.com/adrianshedden/brainos-core/main/start.sh | sh
 #
 # What it does, and nothing more:
-#   1. Downloads the BrainOS kit from GitHub as one zip file (no git needed).
+#   1. Downloads BrainOS from GitHub as one zip file (no git needed).
 #   2. Makes your brain folder: Documents/brain, or ~/brain when Documents is copied online
 #      (iCloud, OneDrive and the like), so your brain stays on this computer. A brain made
 #      earlier is found and used again.
