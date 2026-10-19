@@ -100,6 +100,13 @@ class NineSteps(unittest.TestCase):
             self.assertIn(must, three)
         self.assertIn("progress.py . pick", two)
 
+    def test_step_two_uses_tick_boxes_when_the_app_has_them(self):
+        # Rian's Mac test, 19 Oct 2026 (card UT): "for selecting the connectors it would be tick boxes".
+        two = flat(sections(self.setup)[2])
+        for must in ("tick boxes", "one tick box per source", "at most four tick boxes per question",
+                     '"Your accounts"', '"Files you bring"', "Otherwise, send the list as short numbered lines"):
+            self.assertIn(must, two)
+
     def test_step_four_says_where_the_data_goes_before_anything_is_brought_in(self):
         four = flat(sections(self.setup)[4])
         said = four.index("Your brain's files stay in your folder.")
