@@ -50,13 +50,13 @@ def check(brain):
         if p.relative_to(brain).parts[0] in NOT_BRAIN[1:]:
             continue
         if "{{" in p.read_text(encoding="utf-8", errors="replace"):
-            problems.append(f"unfilled placeholder in {p.relative_to(brain)}")
+            problems.append(f"unfilled placeholder in {p.relative_to(brain).as_posix()}")
     for p in sorted(brain.rglob("*")):
         if p.is_file() and p.relative_to(brain).parts[0] not in NOT_BRAIN[1:]:
             text = p.read_bytes().decode("utf-8", errors="replace").lower()
             for pat in PERSONAL:
                 if re.search(pat, text) or re.search(pat, str(p.relative_to(brain)).lower()):
-                    problems.append(f"personal identifier /{pat}/ found in {p.relative_to(brain)}")
+                    problems.append(f"personal identifier /{pat}/ found in {p.relative_to(brain).as_posix()}")
     return problems
 
 

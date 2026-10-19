@@ -28,7 +28,7 @@ jobs:
         run: bash tests/run_all.sh
 
       - name: The Mac line for real (start.sh)
-        if: runner.os == 'macOS'
+        if: (success() || failure()) && runner.os == 'macOS'
         shell: bash
         env:
           BRAINOS_DIR: ${{ runner.temp }}/brain
@@ -45,7 +45,7 @@ jobs:
           grep -q "is empty and ready for create_brain.py" "$RUNNER_TEMP/check.txt"
 
       - name: The Windows line for real (start.ps1)
-        if: runner.os == 'Windows'
+        if: (success() || failure()) && runner.os == 'Windows'
         shell: powershell
         env:
           BRAINOS_DIR: ${{ runner.temp }}\brain

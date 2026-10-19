@@ -106,7 +106,7 @@ class CheckSetup(unittest.TestCase):
                 for name, script in EXPECTED.items():
                     if line.startswith(f"- {name}: looks like"):
                         commands[name] = lines[i + 1].strip()
-                        self.assertIn(f"importers/{script}", commands[name], name)
+                        self.assertIn(f"importers/{script}", commands[name].replace("\\", "/"), name)
             self.assertEqual(set(commands), set(EXPECTED), "\n".join(lines))
             self.assertTrue(any(l.startswith("- holiday-photo.jpg: not recognised") for l in lines))
             self.assertFalse(any("README.md" in l for l in lines))

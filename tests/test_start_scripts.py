@@ -77,6 +77,10 @@ class Sandbox(unittest.TestCase):
         cls.zips.cleanup()
 
     def setUp(self):
+        if os.name == "nt":
+            # The stand-ins are shell scripts on a Unix-style PATH. On Windows the real line is run for real
+            # instead, by the kit's GitHub check (.github/workflows/kit.yml).
+            self.skipTest("the sandbox needs a Mac or Linux; on Windows, kit.yml runs start.ps1 for real")
         for app in AI_APPS:
             if shutil.which(app, path=SYSTEM_PATH):
                 self.skipTest(f"{app} is installed in {SYSTEM_PATH}, so 'no AI app' cannot be tested here")
