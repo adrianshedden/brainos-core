@@ -102,7 +102,7 @@ class NineSteps(unittest.TestCase):
 
     def test_step_four_says_where_the_data_goes_before_anything_is_brought_in(self):
         four = flat(sections(self.setup)[4])
-        said = four.index("Your brain is stored as plain files on your laptop.")
+        said = four.index("Your brain's files stay in your folder.")
         for later in ("kit/check_setup.py", "importers/from_connector.py"):
             self.assertLess(said, four.index(later), later)
         self.assertIn("python3 kit/importers/from_connector.py . exports/", four, "the brain first, then the file")

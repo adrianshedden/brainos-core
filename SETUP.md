@@ -20,6 +20,8 @@ What you may and may not do:
 
 - Ask before you change anything. Change files only inside the brain folder (and your own scratch space, if your app has one). Never delete anything, and never overwrite what the person wrote. The one exception is the brain's `kit` folder, which is the kit's own copy (step 1).
 - Never send, upload or post the person's files anywhere. The kit's scripts never use the internet. Never send a message, email or post for them during setup.
+- Be honest about where files go. What you read goes to your AI company to work out the answer. If your app does the work on its company's computers (a cloud session: on Windows, the folder box says the files "are processed on Anthropic's servers"), say so in one line: "This app works on Anthropic's computers, so the files I use are copied there while we work." Never claim their files never left their computer.
+- You may already know things about the person from your app's own memory (for example the Claude app's memory of past chats). Never put one in the brain as a fact: say where it came from ("from my memory of our past chats"), and ask first.
 - Connections live in the AI app or on the computer, never in the brain folder. That is the one exception to "work only in my brain folder": with the person's yes, you may add a connection in the AI app's own settings (for example in Cursor, OpenCode, Codex or Claude Code, when a route in `connections.yaml` says to), and change nothing else outside the brain folder. Never put a connection's settings inside the brain folder. Passwords, keys and sign-in codes never go in the brain: never write one in a file, and never ask the person to type one into this chat. If a step needs one, they type it into the app's own screen.
 - Read-only wherever it is offered. If anything asks to allow sending (for example on WhatsApp), the person refuses: the brain only reads.
 - Command-line tools are for technical people only. Never offer a route marked `technical_only: true`, or a command-line tool, unless the person has said they are technical (for example "I'm a developer"). Never push one.
@@ -48,7 +50,7 @@ Commands:
    - **Nothing found:** make a new brain (point 4).
 4. Choose the place the same way the terminal line does. The brain goes in `Documents/brain`, unless Documents is copied to the cloud: then it goes in `brain` in their home folder, where it stays on this computer. To check: on a Mac, Documents is in iCloud when `~/Library/Mobile Documents/com~apple~CloudDocs/Documents` exists, and it is copied online when its real location is inside iCloud, OneDrive, Dropbox, Google Drive or `~/Library/CloudStorage`; on Windows, Documents is in OneDrive when its real location is inside a OneDrive folder. If it is copied, say so in one line: "Heads-up: your Documents folder is copied to iCloud, so your brain would be too. I'll make it in your home folder instead, where it stays on this computer." (Say OneDrive, or whichever it is.) Then ask, in one message, with that place first: "I'll make a folder called brain in your Documents. Is that all right? If not, say where: Desktop, Documents, or somewhere else. I'll create it once you say." (Name the home folder instead of Documents when Documents is copied.)
 5. With their yes, make the brain:
-   1. If you cannot reach that place, tell them how to let you. In the Claude app: start a new chat, click **Project or folder** under the message box, choose the place (for example Documents), then click **Always allow**. In Codex, Cursor or OpenCode: open that place as the folder to work in. For the home folder, if the app cannot open it, ask them to make the folder themselves (Mac: in Finder, **Go**, **Home**, then **File**, **New Folder**, named brain; Windows: in File Explorer, open the folder with their name, **New folder**, named brain) and choose that.
+   1. If you cannot reach that place, tell them how to let you. In the Claude app: it may open on the **Code** tab. Click the other tab, **Chat and Cowork**, start a new chat, click **Project or folder** under the message box, then **Add folder**, choose the place (for example Documents), then click **Always allow**. In Codex, Cursor or OpenCode: open that place as the folder to work in. For the home folder, if the app cannot open it, ask them to make the folder themselves (Mac: in Finder, **Go**, **Home**, then **File**, **New Folder**, named brain; Windows: in File Explorer, open the folder with their name, **New folder**, named brain) and choose that.
    2. Make the empty `brain` folder and get the kit into a folder called `kit` inside it (point 6).
    3. Build the brain: `python3 kit/create_brain.py . --domains network`. Step 5 adds more areas later.
    4. Check the three front doors match: `python3 scripts/level1.py check .` It should say level 1 is the same in `CLAUDE.md`, `GEMINI.md` and the top of `AGENTS.md`.
@@ -72,7 +74,7 @@ Two lines: where the brain is, and that it is a plain folder of text files they 
 1. Read `kit/connections.yaml`. Each source (for example `google-calendar`, `gmail`, `whatsapp`) has routes, each for one app (`app`) and of one type (`type`), already in the right order: the app's own connector (`builtin`), then a custom connector (`custom`), then a connector on the computer (`local`), then a command-line tool (`cli`), then an export file (`export`).
 2. For each source, keep only the routes that work here: `app` is the name you saved in step 1, or `any`. Drop `technical_only: true` routes unless the person has said they are technical. Leave out any source with no route left.
    - WhatsApp: keep only its export routes, for everyone, even technical people. Setup never links WhatsApp live. If they ask about a live link, say: "That's possible later, once your brain is set up. At the bootcamp, Rian shows it in the afternoon."
-3. Make a short list from what is left, most useful first: calendar, email, documents (Google Drive, OneDrive), Notion, Slack, their existing notes, WhatsApp, LinkedIn, then the rest. Put the same kind together so the list stays short ("Calendar: Google or Outlook"). After each, one line on why it fills the brain, and say plainly when the only route is a file they download ("a few chats you export from your phone"). Say LinkedIn is optional: "It takes up to a day, so you can add it later." Never ask them to export their calendar: connect it. A calendar file is only the fallback when it will not connect (for example a personal Outlook.com or Hotmail calendar).
+3. Make a short list from what is left, most useful first: calendar, email, documents (Google Drive, OneDrive), Notion, Slack, their existing notes, WhatsApp, LinkedIn, then the rest. Put the same kind together so the list stays short ("Calendar: Google or Outlook"). After each, one line on why it fills the brain, and say plainly when the only route is a file they download ("a few chats you export from your phone"). Say LinkedIn is optional: "It takes up to a day, so you can add it later." Never ask them to export their calendar: connect it. A calendar file is only the fallback when it will not connect. A personal Outlook.com or Hotmail account cannot use the app's own Microsoft connection: offer its connection on the computer first (see "Adding a custom connection" at the end), and a calendar file if that fails.
 
 **What you ask**
 
@@ -119,7 +121,7 @@ Give steps only for what they picked. Never list steps for the others.
 
 **What you do**
 
-1. Before you bring anything in, send the person this, in a message of its own (it is required, once per setup): "Your brain is stored as plain files on your laptop. When you use a cloud AI provider (Anthropic, OpenAI and others), whatever their agent reads is processed by that provider, like any chat. Run it with a local model in the future and it stays fully private on your machine. That is what we are working towards. The importers never use the internet. Nothing is published unless you back up to your own private GitHub." Then go ahead.
+1. Before you bring anything in, send the person this, in a message of its own (it is required, once per setup): "Your brain's files stay in your folder. When you ask a question, the parts the AI reads go to the AI company to work out the answer, the same as any chat with it. The kit sends nothing anywhere else. The importers never use the internet. Nothing is published unless you back up to your own private GitHub." Then go ahead.
 2. Export files: run `python3 kit/check_setup.py .`. It lists the files in `exports` and the exact line to run for each. Run them. Before the first WhatsApp import, ask once for their own name as it shows in their chats. For each source that came in, save `python3 kit/progress.py . connected <id> export`, and if it was pending, `python3 kit/progress.py . arrived "<what>"`.
 3. Live connections: read each one over a sensible window. Read only what the brain needs:
    - Calendar: the last 90 days and the next 14. For each event: when, who was there, and its title.
@@ -152,7 +154,7 @@ With their yes, add the ones from that list in one go, comma-separated, for exam
 
 ## 6. Review what it learned (review)
 
-**What you do:** follow `skills/mine-my-context/SKILL.md`. It tells the person what you now know about them and their work, asks at most five short questions, and writes only what they confirm. It ends by running `python3 scripts/level1.py sync .`
+**What you do:** follow `skills/mine-my-context/SKILL.md`. It tells the person what you now know about them and their work, asks at most five short questions, and writes only what they confirm. Anything you suggest from your app's own memory, rather than the brain's files, say so: "I know this from my memory of our past chats, not from your files." It ends by running `python3 scripts/level1.py sync .`
 
 **What you ask:** at most five short questions, as the skill says. Accept "skip". If it suggests more domains and they agree, add them the same way as in step 5.
 
@@ -206,11 +208,26 @@ A scheduled job only reads and drafts. It never sends, posts or replies by itsel
 
 **Save progress:** `python3 kit/progress.py . done`
 
+Do not end by claiming their files never left their computer: what you read went to your AI company (see "Be honest about where files go" above).
+
 That is the setup. Stop there and wait for the person.
 
 ## Coming back later
 
 When the person pastes the line again after setup is finished, `check_setup.py` says so on its first line. Ask what they would like: connect something new (step 3 for that one source, then step 4 for it), add a domain (step 5), or a new skill or scheduled job (steps 7 and 8). Only if they ask for a live link to WhatsApp, follow `kit/WHATSAPP-LIVE.md`. Save each change with `kit/progress.py` as above.
+
+## Adding a custom connection
+
+When the app has no connection of its own for a source, a custom connection can add one: a small free program, from the tool's maker or a well-kept open-source project, that runs on the computer or online. The worked example is a personal Outlook.com or Hotmail account (the `local` routes for `outlook-calendar` and `outlook-mail` in `connections.yaml`):
+
+1. Say what it is, in one line: "Your Outlook is a personal account, so it needs a free connection that runs on your computer. It reads only."
+2. Anything it needs installed first (here Node.js, which runs the connection), the person installs from its own website.
+3. Show the lines you will add to the app's own settings (outside the brain folder), and add them only after a yes. Never put them in the brain folder. Keep it read-only.
+4. Restart the app. The person signs in on the maker's own page (here Microsoft's, with a one-time code). Never ask for a password or code in the chat.
+5. Run the proof read, save `connected <id> local`, and add a line to `tools/TOOLS.md`.
+6. To remove it: take the lines out of the app's settings, with a yes, and restart the app.
+
+Only use a program from the maker's own site or a well-known open-source project. If you are not sure it is safe, say so, and use the export instead.
 
 ## Export steps
 

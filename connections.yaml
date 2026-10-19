@@ -27,7 +27,7 @@ sources:
         type: "builtin"
         clicks:
           - "In the Claude app, open Customize, then Connectors."
-          - "Click the + next to Connectors and choose Google Calendar."
+          - "Click + Add and choose Google Calendar."
           - "Click Connect. Sign in to Google and click Allow. Tick only the boxes you are happy with."
           - "Start a new chat. Click + under the message box, choose Connectors, and check Google Calendar is switched on."
           - "Say done."
@@ -96,7 +96,7 @@ sources:
         type: "builtin"
         clicks:
           - "In the Claude app, open Customize, then Connectors."
-          - "Click the + next to Connectors and choose Gmail."
+          - "Click + Add and choose Gmail."
           - "Click Connect. Sign in to Google and click Allow. Tick only the boxes you are happy with."
           - "Start a new chat. Click + under the message box, choose Connectors, and check Gmail is switched on."
           - "Say done."
@@ -164,7 +164,7 @@ sources:
         type: "builtin"
         clicks:
           - "In the Claude app, open Customize, then Connectors."
-          - "Click the + next to Connectors and choose Google Drive."
+          - "Click + Add and choose Google Drive."
           - "Click Connect. Sign in to Google and click Allow. Tick only the boxes you are happy with."
           - "Start a new chat. Click + under the message box, choose Connectors, and check Google Drive is switched on."
           - "Say done."
@@ -233,14 +233,14 @@ sources:
         type: "builtin"
         clicks:
           - "In the Claude app, open Customize, then Connectors."
-          - "Find Microsoft 365 (click the + next to Connectors if it is not there) and click Connect."
+          - "Find Microsoft 365 (click + Add if it is not under Yours) and click Connect."
           - "Sign in with your work Microsoft account and approve."
           - "Start a new chat. Click + under the message box, choose Connectors, and check Microsoft 365 is switched on."
           - "Say done."
         proof_read: "List tomorrow's events: times and titles only."
         technical_only: false
         checked_on: "2026-10-19"
-        notes: "Work or school accounts only. A personal Outlook.com or Hotmail account cannot connect: use the export. Your IT admin must approve Claude once for the whole organisation, so ask IT first. Read-only unless you add more. Help: support.claude.com/en/articles/12542951."
+        notes: "Work or school accounts only. A personal Outlook.com or Hotmail account cannot connect here: use the next route (a connection on your computer), or the export. Your IT admin must approve Claude once for the whole organisation, so ask IT first. Read-only unless you add more. Help: support.claude.com/en/articles/12542951."
       - app: "chatgpt"
         type: "builtin"
         clicks:
@@ -271,6 +271,43 @@ sources:
         technical_only: false
         checked_on: "2026-10-19"
         notes: "For the AI: only when the agent is Claude Code, signed in with a Claude account. Work accounts only, as in the claude route. Help: code.claude.com/docs/en/mcp."
+      - app: "claude"
+        type: "local"
+        clicks:
+          - "For a personal Outlook.com or Hotmail account. This adds a free connection that runs on your computer."
+          - "Install Node.js, free (it runs the connection): go to nodejs.org, click the download for your computer, open it and follow its steps."
+          - "Say yes when the AI asks to add the Outlook connection to the Claude app's own settings (outside your brain folder)."
+          - "Quit the Claude app fully, open it again, and start a new chat."
+          - "Ask: log in to Outlook. Open the web address it gives you, type the code, sign in with your Outlook.com or Hotmail account, and click Accept."
+          - "Say done."
+        proof_read: "List tomorrow's events: times and titles only."
+        technical_only: false
+        checked_on: null
+        notes: "Not yet tried. The worked example of a custom connection (SETUP.md, \"Adding a custom connection\"). For the AI: a free, open-source Microsoft connection that runs on the computer (github.com/softeria/ms-365-mcp-server, MIT licence, maintained). Personal accounts work by default. Keep --read-only. One connection covers Outlook email and calendar: if it is already added for the other, go straight to the log-in click. Sign-in happens on Microsoft's own page with a one-time code: never ask for the password or code in the chat. Settings file: on a Mac ~/Library/Application Support/Claude/claude_desktop_config.json, on Windows %APPDATA%\\Claude\\claude_desktop_config.json (Settings, Developer, Edit Config opens it). Under mcpServers add \"outlook\": {\"command\": \"npx\", \"args\": [\"-y\", \"@softeria/ms-365-mcp-server\", \"--preset\", \"mail,calendar\", \"--read-only\"]}. On Windows: \"command\": \"cmd\", with \"/c\", \"npx\" at the start of args. Show the person the lines first and keep the rest of the file as it is."
+      - app: "orca"
+        type: "local"
+        clicks:
+          - "For a personal Outlook.com or Hotmail account. This adds a free connection that runs on your computer."
+          - "Install Node.js, free (it runs the connection): go to nodejs.org, click the download for your computer, open it and follow its steps."
+          - "Say yes when the AI asks to add the Outlook connection to its own settings (outside your brain folder)."
+          - "Restart it. Ask: log in to Outlook. Open the web address it gives you, type the code, sign in with your Outlook.com or Hotmail account, and click Accept."
+          - "Say done."
+        proof_read: "List tomorrow's events: times and titles only."
+        technical_only: false
+        checked_on: null
+        notes: "Not yet tried. The worked example of a custom connection (SETUP.md, \"Adding a custom connection\"). For the AI: a free, open-source Microsoft connection that runs on the computer (github.com/softeria/ms-365-mcp-server, MIT licence, maintained). Personal accounts work by default. Keep --read-only. One connection covers Outlook email and calendar: if it is already added for the other, go straight to the log-in click. Sign-in happens on Microsoft's own page with a one-time code: never ask for the password or code in the chat. Only when the agent is Claude Code: claude mcp add outlook -s user -- npx -y @softeria/ms-365-mcp-server --preset mail,calendar --read-only (on Windows: claude mcp add outlook -s user -- cmd /c \"npx -y @softeria/ms-365-mcp-server --preset mail,calendar --read-only\"), then /mcp. With Codex or OpenCode, add the same command as a local connection in its own settings."
+      - app: "terminal"
+        type: "local"
+        clicks:
+          - "For a personal Outlook.com or Hotmail account. This adds a free connection that runs on your computer."
+          - "Install Node.js, free (it runs the connection): go to nodejs.org, click the download for your computer, open it and follow its steps."
+          - "Say yes when the AI asks to add the Outlook connection to its own settings (outside your brain folder)."
+          - "Restart it. Ask: log in to Outlook. Open the web address it gives you, type the code, sign in with your Outlook.com or Hotmail account, and click Accept."
+          - "Say done."
+        proof_read: "List tomorrow's events: times and titles only."
+        technical_only: false
+        checked_on: null
+        notes: "Not yet tried. The worked example of a custom connection (SETUP.md, \"Adding a custom connection\"). For the AI: a free, open-source Microsoft connection that runs on the computer (github.com/softeria/ms-365-mcp-server, MIT licence, maintained). Personal accounts work by default. Keep --read-only. One connection covers Outlook email and calendar: if it is already added for the other, go straight to the log-in click. Sign-in happens on Microsoft's own page with a one-time code: never ask for the password or code in the chat. Only when the agent is Claude Code: claude mcp add outlook -s user -- npx -y @softeria/ms-365-mcp-server --preset mail,calendar --read-only (on Windows: claude mcp add outlook -s user -- cmd /c \"npx -y @softeria/ms-365-mcp-server --preset mail,calendar --read-only\"), then /mcp. With Codex or OpenCode, add the same command as a local connection in its own settings."
       - app: "any"
         type: "cli"
         clicks:
@@ -316,14 +353,14 @@ sources:
         type: "builtin"
         clicks:
           - "In the Claude app, open Customize, then Connectors."
-          - "Find Microsoft 365 (click the + next to Connectors if it is not there) and click Connect."
+          - "Find Microsoft 365 (click + Add if it is not under Yours) and click Connect."
           - "Sign in with your work Microsoft account and approve."
           - "Start a new chat. Click + under the message box, choose Connectors, and check Microsoft 365 is switched on."
           - "Say done."
         proof_read: "Show the subject lines of my 3 newest emails. Do not open, send or change anything."
         technical_only: false
         checked_on: "2026-10-19"
-        notes: "Work or school accounts only. A personal Outlook.com or Hotmail account cannot connect: use the export. Your IT admin must approve Claude once for the whole organisation. Read-only unless you add more. Help: support.claude.com/en/articles/12542951."
+        notes: "Work or school accounts only. A personal Outlook.com or Hotmail account cannot connect here: use the next route (a connection on your computer), or the export. Your IT admin must approve Claude once for the whole organisation. Read-only unless you add more. Help: support.claude.com/en/articles/12542951."
       - app: "chatgpt"
         type: "builtin"
         clicks:
@@ -354,6 +391,43 @@ sources:
         technical_only: false
         checked_on: "2026-10-19"
         notes: "For the AI: only when the agent is Claude Code, signed in with a Claude account. Work accounts only. Help: code.claude.com/docs/en/mcp."
+      - app: "claude"
+        type: "local"
+        clicks:
+          - "For a personal Outlook.com or Hotmail account. This adds a free connection that runs on your computer."
+          - "Install Node.js, free (it runs the connection): go to nodejs.org, click the download for your computer, open it and follow its steps."
+          - "Say yes when the AI asks to add the Outlook connection to the Claude app's own settings (outside your brain folder)."
+          - "Quit the Claude app fully, open it again, and start a new chat."
+          - "Ask: log in to Outlook. Open the web address it gives you, type the code, sign in with your Outlook.com or Hotmail account, and click Accept."
+          - "Say done."
+        proof_read: "Show the subject lines of my 3 newest emails. Do not open, send or change anything."
+        technical_only: false
+        checked_on: null
+        notes: "Not yet tried. The worked example of a custom connection (SETUP.md, \"Adding a custom connection\"). For the AI: a free, open-source Microsoft connection that runs on the computer (github.com/softeria/ms-365-mcp-server, MIT licence, maintained). Personal accounts work by default. Keep --read-only. One connection covers Outlook email and calendar: if it is already added for the other, go straight to the log-in click. Sign-in happens on Microsoft's own page with a one-time code: never ask for the password or code in the chat. Settings file: on a Mac ~/Library/Application Support/Claude/claude_desktop_config.json, on Windows %APPDATA%\\Claude\\claude_desktop_config.json (Settings, Developer, Edit Config opens it). Under mcpServers add \"outlook\": {\"command\": \"npx\", \"args\": [\"-y\", \"@softeria/ms-365-mcp-server\", \"--preset\", \"mail,calendar\", \"--read-only\"]}. On Windows: \"command\": \"cmd\", with \"/c\", \"npx\" at the start of args. Show the person the lines first and keep the rest of the file as it is."
+      - app: "orca"
+        type: "local"
+        clicks:
+          - "For a personal Outlook.com or Hotmail account. This adds a free connection that runs on your computer."
+          - "Install Node.js, free (it runs the connection): go to nodejs.org, click the download for your computer, open it and follow its steps."
+          - "Say yes when the AI asks to add the Outlook connection to its own settings (outside your brain folder)."
+          - "Restart it. Ask: log in to Outlook. Open the web address it gives you, type the code, sign in with your Outlook.com or Hotmail account, and click Accept."
+          - "Say done."
+        proof_read: "Show the subject lines of my 3 newest emails. Do not open, send or change anything."
+        technical_only: false
+        checked_on: null
+        notes: "Not yet tried. The worked example of a custom connection (SETUP.md, \"Adding a custom connection\"). For the AI: a free, open-source Microsoft connection that runs on the computer (github.com/softeria/ms-365-mcp-server, MIT licence, maintained). Personal accounts work by default. Keep --read-only. One connection covers Outlook email and calendar: if it is already added for the other, go straight to the log-in click. Sign-in happens on Microsoft's own page with a one-time code: never ask for the password or code in the chat. Only when the agent is Claude Code: claude mcp add outlook -s user -- npx -y @softeria/ms-365-mcp-server --preset mail,calendar --read-only (on Windows: claude mcp add outlook -s user -- cmd /c \"npx -y @softeria/ms-365-mcp-server --preset mail,calendar --read-only\"), then /mcp. With Codex or OpenCode, add the same command as a local connection in its own settings."
+      - app: "terminal"
+        type: "local"
+        clicks:
+          - "For a personal Outlook.com or Hotmail account. This adds a free connection that runs on your computer."
+          - "Install Node.js, free (it runs the connection): go to nodejs.org, click the download for your computer, open it and follow its steps."
+          - "Say yes when the AI asks to add the Outlook connection to its own settings (outside your brain folder)."
+          - "Restart it. Ask: log in to Outlook. Open the web address it gives you, type the code, sign in with your Outlook.com or Hotmail account, and click Accept."
+          - "Say done."
+        proof_read: "Show the subject lines of my 3 newest emails. Do not open, send or change anything."
+        technical_only: false
+        checked_on: null
+        notes: "Not yet tried. The worked example of a custom connection (SETUP.md, \"Adding a custom connection\"). For the AI: a free, open-source Microsoft connection that runs on the computer (github.com/softeria/ms-365-mcp-server, MIT licence, maintained). Personal accounts work by default. Keep --read-only. One connection covers Outlook email and calendar: if it is already added for the other, go straight to the log-in click. Sign-in happens on Microsoft's own page with a one-time code: never ask for the password or code in the chat. Only when the agent is Claude Code: claude mcp add outlook -s user -- npx -y @softeria/ms-365-mcp-server --preset mail,calendar --read-only (on Windows: claude mcp add outlook -s user -- cmd /c \"npx -y @softeria/ms-365-mcp-server --preset mail,calendar --read-only\"), then /mcp. With Codex or OpenCode, add the same command as a local connection in its own settings."
       - app: "any"
         type: "cli"
         clicks:
@@ -385,7 +459,7 @@ sources:
         type: "builtin"
         clicks:
           - "In the Claude app, open Customize, then Connectors."
-          - "Find Microsoft 365 (click the + next to Connectors if it is not there) and click Connect."
+          - "Find Microsoft 365 (click + Add if it is not under Yours) and click Connect."
           - "Sign in with your work Microsoft account and approve."
           - "Start a new chat. Click + under the message box, choose Connectors, and check Microsoft 365 is switched on."
           - "Say done."
@@ -586,7 +660,7 @@ sources:
         type: "builtin"
         clicks:
           - "In the Claude app, open Customize, then Connectors."
-          - "Click the + next to Connectors and choose Notion."
+          - "Click + Add and choose Notion."
           - "Click Connect. Sign in to Notion, pick your workspace, and click Allow."
           - "Start a new chat. Click + under the message box, choose Connectors, and check Notion is switched on."
           - "Say done."
@@ -697,7 +771,7 @@ sources:
         clicks:
           - "Check your Slack has the Claude app: a Slack admin adds it from the Slack Marketplace."
           - "In the Claude app, open Customize, then Connectors."
-          - "Find Slack (click the + next to Connectors if it is not there) and click Connect."
+          - "Find Slack (click + Add if it is not under Yours) and click Connect."
           - "Sign in to Slack and click Allow."
           - "Start a new chat. Click + under the message box, choose Connectors, and check Slack is switched on."
           - "Say done."
@@ -808,7 +882,7 @@ sources:
         type: "builtin"
         clicks:
           - "In the Claude app, open Customize, then Connectors."
-          - "Click the + next to Connectors and search for the tool by name."
+          - "Click + Add and search for the tool by name."
           - "If it is there, click Connect, sign in, and click Allow."
           - "Start a new chat. Click + under the message box, choose Connectors, and check it is switched on."
           - "Say done."
@@ -849,7 +923,7 @@ sources:
         type: "custom"
         clicks:
           - "Find the tool's connection address on its own help pages (search for its name and Claude connector). The AI can help you look."
-          - "In the Claude app, open Customize, then Connectors. Click +, then Add custom connector."
+          - "In the Claude app, open Customize, then Connectors. Click + Add, then Add custom connector."
           - "Type a name, paste the address, and click Continue. Leave the sign-in settings as they are and click Add."
           - "Click Connect next to it, sign in, and click Allow."
           - "Say done."

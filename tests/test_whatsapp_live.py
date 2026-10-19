@@ -1,10 +1,10 @@
 """The optional live WhatsApp module (WHATSAPP-LIVE.md, whatsapp_live.py, whatsapp_send_guard.py).
 
 Rian, sheet v8 (19 Oct 2026): attendees who want it can link WhatsApp live in the afternoon build session, to
-read and to write. It stays out of setup, which only imports exported chats. The guide says the risks first and
-waits for a yes; reading comes first; sending is a second yes, and the send guard makes Claude Code show every
-message, word for word, and ask before it goes. It can be switched off and removed. Nothing of Rian's (names,
-numbers, paths, chat ids) is in it. No network."""
+read and to write. It stays out of setup, which only imports exported chats. Sheet v10: two routes, wacli (quick)
+and Beeper (sustainable), kept short. The guide says the risks first and waits for a yes; reading comes first;
+sending is a second yes, and the send guard makes Claude Code show every message, word for word, and ask before
+it goes. It can be switched off and removed. Nothing of Rian's (names, numbers, paths, chat ids) is in it."""
 import ast
 import io
 import json
@@ -110,6 +110,40 @@ class SendGuard(unittest.TestCase):
         guard.main(["--mode", "write", "--log", str(self.log)], stdin=io.StringIO("not json"), out=out)
         self.assertEqual(json.loads(out.getvalue())["hookSpecificOutput"]["permissionDecision"], "deny")
 
+    def bash(self, command, mode="read", cap=20):
+        return self.judge({"tool_name": "Bash", "tool_input": {"command": command}}, mode, cap=cap)
+
+    def test_wacli_reads_only_with_read_only(self):
+        for mode in ("read", "write"):
+            for command in ("wacli --read-only --json chats list", 'wacli --read-only messages search "invoice"',
+                            "WACLI_READONLY=1 wacli --json doctor", "/opt/homebrew/bin/wacli --read-only chats list",
+                            "wacli sync --once"):
+                self.assertIsNone(self.bash(command, mode), f"{command} in {mode} mode")
+            for command in ("wacli messages search invoice", "wacli sync", "wacli sync --follow", "wacli auth",
+                            "wacli auth logout", "wacli chats archive Sam", "wacli --read-only chats list; rm -rf x",
+                            "wacli --read-only chats list && wacli chats mute Sam", 'wacli --read-only "unclosed'):
+                self.assertEqual(kind(self.bash(command, mode)), "deny", f"{command} in {mode} mode")
+        for command in ("ls -la", "git status", "python3 kit/check_setup.py ."):
+            self.assertIsNone(self.bash(command, "read"), "other commands are not its business")
+        self.assertIsNone(self.judge({"tool_name": "Bash", "tool_input": {}}, "read"))
+
+    def test_wacli_sends_only_plain_text_with_a_yes(self):
+        send = 'wacli send text --to "Sam Sample" --message "See you at six."'
+        self.assertEqual(kind(self.bash(send, "read")), "deny")
+        answer = self.bash(send, "write")
+        self.assertEqual(kind(answer), "ask")
+        reason = answer["hookSpecificOutput"]["permissionDecisionReason"]
+        self.assertIn("To: Sam Sample", reason)
+        self.assertIn("Message: See you at six.", reason)
+        self.assertEqual(kind(self.bash('wacli send text --to Sam --message="Hi there"', "write")), "ask")
+        for command in ("wacli send text --to Sam", "wacli send file --to Sam --file x.pdf",
+                        "wacli send react --to Sam --id 1", "wacli send status --message hi",
+                        'wacli send text --to a --message b; wacli send text --to c --message d'):
+            self.assertEqual(kind(self.bash(command, "write")), "deny", command)
+        for _ in range(2):
+            self.bash(send, "write")
+        self.assertEqual(kind(self.bash(send, "write", cap=3)), "deny", "the daily cap covers wacli too")
+
     def test_it_runs_as_claude_code_runs_it(self):
         def run(payload, mode):
             r = subprocess.run([sys.executable, str(CORE / "whatsapp_send_guard.py"), "--mode", mode,
@@ -176,12 +210,13 @@ class Switch(unittest.TestCase):
         self.assertNotIn("ask", data["permissions"])
         self.assertEqual(data["hooks"]["Stop"], self.BEFORE["hooks"]["Stop"])
         self.assertIn(self.BEFORE["hooks"]["PreToolUse"][0], data["hooks"]["PreToolUse"])
-        [ours] = self.ours(data)
-        self.assertEqual(ours["matcher"], "mcp__beeper__.*")
-        self.assertTrue(ours["hooks"][0]["command"].endswith("--mode read"))
+        ours = self.ours(data)
+        self.assertEqual([g["matcher"] for g in ours], ["mcp__beeper__.*", "Bash|PowerShell"])
+        self.assertTrue(all(g["hooks"][0]["command"].endswith("--mode read") for g in ours))
+        self.assertIn("Bash(wacli send *)", data["permissions"]["deny"])
         copied = self.brain / "scripts" / "whatsapp_send_guard.py"
         self.assertEqual(copied.read_bytes(), (CORE / "whatsapp_send_guard.py").read_bytes())
-        self.assertIn(str(copied), ours["hooks"][0]["command"])
+        self.assertIn(str(copied), ours[0]["hooks"][0]["command"])
         backups = [p for p in self.settings.parent.iterdir() if p.name.endswith(".bak")]
         self.assertEqual(len(backups), 1)
         self.assertEqual(json.loads(backups[0].read_text(encoding="utf-8")), self.BEFORE)
@@ -201,11 +236,13 @@ class Switch(unittest.TestCase):
         self.run_mode("read")
         self.run_mode("write")
         data = self.data()
-        self.assertEqual(data["permissions"]["ask"], ["mcp__beeper__send*"])
+        self.assertEqual(data["permissions"]["ask"], ["mcp__beeper__send*", "Bash(wacli send *)", "Bash(wacli * send *)"])
         self.assertNotIn("mcp__beeper__send*", data["permissions"]["deny"])
+        self.assertNotIn("Bash(wacli send *)", data["permissions"]["deny"])
         self.assertIn("mcp__beeper__*delete*", data["permissions"]["deny"])
-        [ours] = self.ours(data)
-        self.assertTrue(ours["hooks"][0]["command"].endswith("--mode write"))
+        ours = self.ours(data)
+        self.assertEqual(len(ours), 2)
+        self.assertTrue(all(g["hooks"][0]["command"].endswith("--mode write") for g in ours))
 
     def test_the_same_mode_twice_changes_nothing(self):
         self.run_mode("read")
@@ -219,6 +256,7 @@ class Switch(unittest.TestCase):
         self.run_mode("off")
         data = self.data()
         self.assertIn("mcp__beeper", data["permissions"]["deny"])
+        self.assertIn("Bash(wacli *)", data["permissions"]["deny"])
         self.assertNotIn("ask", data["permissions"])
         self.assertEqual(self.ours(data), [])
 
@@ -255,46 +293,58 @@ class Switch(unittest.TestCase):
     @unittest.skipIf(os.name == "nt", "the shell line is checked on a Mac or Linux")
     def test_the_line_it_adds_refuses_a_send_when_run(self):
         self.run_mode("read")
-        [ours] = self.ours(self.data())
-        r = subprocess.run(ours["hooks"][0]["command"], shell=True, capture_output=True, timeout=30,
-                           input=json.dumps(call("send_message", chatID="c", text="hi")).encode())
-        self.assertEqual(json.loads(r.stdout)["hookSpecificOutput"]["permissionDecision"], "deny", r.stderr)
+        for group, payload in zip(self.ours(self.data()), (
+                call("send_message", chatID="c", text="hi"),
+                {"tool_name": "Bash", "tool_input": {"command": "wacli send text --to c --message hi"}})):
+            r = subprocess.run(group["hooks"][0]["command"], shell=True, capture_output=True, timeout=30,
+                               input=json.dumps(payload).encode())
+            self.assertEqual(json.loads(r.stdout)["hookSpecificOutput"]["permissionDecision"], "deny", r.stderr)
 
 
 class Guide(unittest.TestCase):
+    def section(self, n):
+        return GUIDE.split(f"## {n}.", 1)[1].split("\n## ", 1)[0]
+
     def test_the_risks_and_a_yes_come_before_anything_is_installed(self):
-        risks = GUIDE.index("## 1. Say the risks first")
-        for first_step in ("beeper.com/download", "whatsapp_live.py", "claude mcp"):
+        risks = GUIDE.index("## 1. The risks, and a yes")
+        for first_step in ("brew install", "beeper.com/download", "whatsapp_live.py", "wacli auth"):
             self.assertLess(risks, GUIDE.index(first_step), first_step)
-        said = GUIDE[risks:GUIDE.index("## 2.")]
-        for must in ("no official way", "ban", "afford to lose access", "won't install anything until you say yes",
-                     "Wait for a clear yes", "is a no"):
+        said = self.section(1)
+        for must in ("no official way", "ban", "afford to lose access", "It's up to you",
+                     "won't install anything until you say yes", "Wait for a clear yes", "is a no"):
             self.assertIn(must, said)
 
-    def test_reading_first_then_sending_with_a_second_yes(self):
-        self.assertLess(GUIDE.index("## 3. Reading"), GUIDE.index("## 4. Sending (a second yes, Claude Code only)"))
-        sending = GUIDE.split("## 4.", 1)[1].split("## 5.", 1)[0]
-        for must in ("draft you approve", "nothing goes until you click yes", "write --apply", "One message per yes",
-                     "wait for a clear yes"):
-            self.assertIn(must.lower(), sending.lower(), must)
-        reading = GUIDE.split("## 3.", 1)[1].split("## 4.", 1)[0]
-        self.assertIn("read --apply", reading)
-        self.assertIn("always deny sending", reading)
+    def test_two_routes_quick_wacli_and_sustainable_beeper(self):
+        routes = self.section(2)
+        self.assertIn("**Quick route: wacli.**", routes)
+        self.assertIn("**Sustainable route: Beeper.**", routes)
+        self.assertLess(routes.index("Quick route"), routes.index("Sustainable route"))
+        for must in ("Mac", "Windows", "have not yet been tried", "only in Claude Code", "reading only",
+                     "do not arrive by themselves"):
+            self.assertIn(must, routes)
+        read = self.section(3)
+        for must in ("wacli auth", "--read-only", "Linked devices", "Desktop API", "read --apply", "always deny sending"):
+            self.assertIn(must, read)
 
-    def test_mac_and_windows_are_both_covered_and_limits_said_plainly(self):
-        where = GUIDE.split("## 2.", 1)[1].split("## 3.", 1)[0]
-        for must in ("Mac", "Windows", "have not yet been tried on Windows", "only in Claude Code", "reading only",
-                     "not in this kit"):
-            self.assertIn(must, where)
-        self.assertIn("py", GUIDE.split("## 1.", 1)[0])
+    def test_sending_is_a_second_yes_with_every_word_shown(self):
+        sending = self.section(4).lower()
+        for must in ("second yes", "draft you approve", "nothing goes until you click yes", "write --apply",
+                     "one message per yes", "wait for a clear yes", 'wacli send text --to "<chat>"'):
+            self.assertIn(must, sending, must)
 
     def test_it_can_be_switched_off_and_removed(self):
-        off = GUIDE.split("## 5. Switch it off", 1)[1].split("## 6.", 1)[0]
-        self.assertIn("off --apply", off)
-        self.assertIn("quit Beeper", off)
-        gone = GUIDE.split("## 6. Remove it completely", 1)[1]
-        for must in ("Linked devices", "Log out", "claude mcp remove beeper", "remove --apply", "Uninstall"):
+        gone = self.section(5)
+        for must in ("off --apply", "quit Beeper", "Linked devices", "Log out", "claude mcp remove beeper",
+                     "remove --apply", "Uninstall", ".wacli"):
             self.assertIn(must, gone)
+
+    def test_it_is_short(self):
+        self.assertLess(len(GUIDE.split()), 1100, "Rian, sheet v10: keep it short")
+
+    def test_the_always_on_server_answer_names_waha_and_nothing_private(self):
+        answer = GUIDE.split("## How does it work on an always-on server?", 1)[1]
+        self.assertIn("WAHA", answer)
+        self.assertIn("ready-made WhatsApp Web server", answer)
 
     def test_nothing_of_rians_is_in_it(self):
         personal = re.compile(r"Rian|Adrian|Shedden|/Users/|/home/|beeper\.local|metanova|Becky|\+44|07\d{9}|"

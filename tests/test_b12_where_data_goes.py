@@ -15,18 +15,18 @@ DOCS = ["README.md", "INSTRUCTIONS.md", "SETUP.md", "GITHUB.md", "template/LEVEL
 AI_INSTRUCTIONS = ["INSTRUCTIONS.md", "template/LEVEL1.md"]
 AI_IMPORTING = ["INSTRUCTIONS.md", "template/AGENTS.md"]
 # Promises the kit cannot keep once an AI tool reads the brain, and which stopped Claude cold.
-UNTRUE = [r"nothing leaves (their|your) (machine|computer)", r"everything stays on this machine",
+UNTRUE = [r"nothing leaves (their|your) (machine|computer)", r"nothing (of yours )?left (their|your) computer", r"everything stays on this machine",
           r"do not send any file from this folder to a website or service"]
-# The approved privacy wording (16 Oct 2026), word for word, wherever the kit says where the data goes.
-APPROVED = ("Your brain is stored as plain files on your laptop. When you use a cloud AI provider (Anthropic, "
-            "OpenAI and others), whatever their agent reads is processed by that provider, like any chat. Run it "
-            "with a local model in the future and it stays fully private on your machine. That is what we are "
-            "working towards.")
+# The approved privacy wording, word for word, wherever the kit says where the data goes. Rian, sheet v10
+# (19 Oct 2026), after the Windows test: honest about the AI company, and no promise that nothing leaves.
+APPROVED = ("Your brain's files stay in your folder. When you ask a question, the parts the AI reads go to the AI "
+            "company to work out the answer, the same as any chat with it. The kit sends nothing anywhere else.")
 SAYS_WHERE = ["README.md", "INSTRUCTIONS.md", "SETUP.md", "template/LEVEL1.md", "template/tools/TOOLS.md",
               "sample/brain/CLAUDE.md", "sample/brain/tools/TOOLS.md"]
 # The wording it replaced, which must not come back.
 OLD = ["stored as files on your own computer", "processed by that tool's provider", "processed by that AI's provider",
-       "processed by the company behind the tool", "Anthropic's servers. It is the same"]
+       "processed by the company behind the tool", "Anthropic's servers. It is the same",
+       "When you use a cloud AI provider", "Run it with a local model in the future"]
 
 
 def read(rel):

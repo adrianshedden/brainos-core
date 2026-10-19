@@ -13,7 +13,7 @@ the settings file beside it, then writes. It changes only what it added itself, 
 (`whatsapp_send_guard.py`) into the brain's `scripts/` folder. It does not install Beeper or add the Beeper
 connection: WHATSAPP-LIVE.md does those, with the person's yes. Standard library only; no network.
 
-What it adds, for the connection called beeper (or --server):
+What it adds, for the Beeper connection (called beeper, or --server) and for wacli commands:
 - read:   the guard (a check before each WhatsApp action) in read mode, and rules that refuse sending and
           changes (archive, edit, delete, reminders).
 - write:  the guard in write mode, a rule that makes Claude Code ask before every send (it asks in every
@@ -36,10 +36,11 @@ MODES = ("read", "write", "off", "remove")
 
 def rules(server):
     always = [f"mcp__{server}__*{verb}*" for verb in ("archive", "delete", "edit", "remind")]
+    sends = [f"mcp__{server}__send*", "Bash(wacli send *)", "Bash(wacli * send *)"]
     return {
-        "read": {"deny": always + [f"mcp__{server}__send*"], "ask": []},
-        "write": {"deny": always, "ask": [f"mcp__{server}__send*"]},
-        "off": {"deny": [f"mcp__{server}"], "ask": []},
+        "read": {"deny": always + sends, "ask": []},
+        "write": {"deny": always, "ask": sends},
+        "off": {"deny": [f"mcp__{server}", "Bash(wacli *)"], "ask": []},
         "remove": {"deny": [], "ask": []},
     }
 
@@ -99,8 +100,9 @@ def updated(data, mode, server, guard, windows):
     hooks = new.setdefault("hooks", {})
     pre = [g for g in hooks.get("PreToolUse", []) or [] if not is_ours(g)]
     if mode in ("read", "write"):
-        pre.append({"matcher": f"mcp__{server}__.*",
-                    "hooks": [{"type": "command", "command": guard_command(guard, mode, windows)}]})
+        for matcher in (f"mcp__{server}__.*", "Bash|PowerShell"):
+            pre.append({"matcher": matcher,
+                        "hooks": [{"type": "command", "command": guard_command(guard, mode, windows)}]})
     if pre:
         hooks["PreToolUse"] = pre
     else:
