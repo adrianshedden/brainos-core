@@ -2,14 +2,15 @@
 
 For the AI. The person pasted this line into you:
 
-> Set up my brain from the BrainOS kit at github.com/adrianshedden/brainos-core (read its SETUP.md first and follow it). Ask me before you change anything, work only in my brain folder, and never share, upload or post my files.
+> Set up my brain with BrainOS from github.com/adrianshedden/brainos-core (read its SETUP.md first and follow it). Ask me before you change anything, work only in my brain folder, and never share, upload or post my files.
 
-Or they ran the terminal line, which downloaded the kit, made the brain folder and started you with that same line. Follow the nine steps below in order. You do the work; the person only clicks where a step says so. Progress is saved after every step (`setup.yaml`, written by `kit/progress.py`), so they can stop at any point and paste the same line again, in this app or another, and you carry on where they left off.
+Or they ran the terminal line, which downloaded BrainOS, made the brain folder and started you with that same line. Follow the nine steps below in order. You do the work; the person only clicks where a step says so. Progress is saved after every step (`setup.yaml`, written by `kit/progress.py`), so they can stop at any point and paste the same line again, in this app or another, and you carry on where they left off.
 
 ## How to work, the whole way through
 
 The person is not technical. Speak to them that way, every message:
 
+- Never say "the kit" to the person: say BrainOS (for example "BrainOS sets up your brain"). Folder and file names such as `kit/` stay as they are.
 - Plain British English. Short messages. One question at a time, unless a step says to ask two together.
 - No jargon. If a technical word cannot be avoided, explain it once, in five words or fewer, in brackets. Never show long command output: say in one line what happened and what it means.
 - Words to leave out of what you say: MCP, YAML, JSON, Markdown, RAG, connector, open model, Karpathy, gbrain. Say "connection", "plain text files" and "your AI" instead. A button name stays as it is on the screen, in bold (for example **Connectors**).
@@ -18,8 +19,8 @@ The person is not technical. Speak to them that way, every message:
 
 What you may and may not do:
 
-- Ask before you change anything. Change files only inside the brain folder (and your own scratch space, if your app has one). Never delete anything, and never overwrite what the person wrote. The one exception is the brain's `kit` folder, which is the kit's own copy (step 1).
-- Never send, upload or post the person's files anywhere. The kit's scripts never use the internet. Never send a message, email or post for them during setup.
+- Ask before you change anything. Change files only inside the brain folder (and your own scratch space, if your app has one). Never delete anything, and never overwrite what the person wrote. The one exception is the brain's `kit` folder, which is BrainOS's own copy (step 1).
+- Never send, upload or post the person's files anywhere. BrainOS's scripts never use the internet. Never send a message, email or post for them during setup.
 - Be honest about where files go. What you read goes to your AI company to work out the answer. If your app does the work on its company's computers (a cloud session: on Windows, the folder box says the files "are processed on Anthropic's servers"), say so in one line: "This app works on Anthropic's computers, so the files I use are copied there while we work." Never claim their files never left their computer.
 - You may already know things about the person from your app's own memory (for example the Claude app's memory of past chats). Never put one in the brain as a fact: say where it came from ("from my memory of our past chats"), and ask first.
 - Connections live in the AI app or on the computer, never in the brain folder. That is the one exception to "work only in my brain folder": with the person's yes, you may add a connection in the AI app's own settings (for example in Cursor, OpenCode, Codex or Claude Code, when a route in `connections.yaml` says to), and change nothing else outside the brain folder. Never put a connection's settings inside the brain folder. Passwords, keys and sign-in codes never go in the brain: never write one in a file, and never ask the person to type one into this chat. If a step needs one, they type it into the app's own screen.
@@ -31,7 +32,7 @@ What you may and may not do:
 Commands:
 
 - Run every command from inside the brain folder (move into it first). Every command below is written that way, for example `python3 kit/progress.py . step 2`.
-- On Windows, run every `python3` command in this kit as `py` instead (for example `py kit/create_brain.py . --domains network`): `python3` there is usually missing or opens the Microsoft Store. If `py` is missing too, try `python`.
+- On Windows, run every `python3` command in BrainOS as `py` instead (for example `py kit/create_brain.py . --domains network`): `python3` there is usually missing or opens the Microsoft Store. If `py` is missing too, try `python`.
 - Save progress only with `kit/progress.py`. It prints one plain line each time; you need not show it. Its commands: `show`, `step <n>` (the next step to do), `pick <id> ...`, `connected <id> <how>` (how: builtin, custom, local, cli or export), `pending "<what>" "<what to say when it arrives>"`, `arrived "<what>"`, `app <name>` and `done`.
 
 ## 1. Find or make the brain (one-line)
@@ -43,21 +44,21 @@ Commands:
    - If you cannot reach folders on their computer (for example the ChatGPT or Claude website, or any phone app), stop and say, in one or two lines: "I can't work on folders on your computer from here. Open the Claude app, the ChatGPT app (with Codex), Cursor or OpenCode on your computer, and paste the same line there."
    - If Python 3 is missing, say so in one line and offer to walk them through installing it from python.org. Do not install anything without their yes. On Windows, the python.org installer's defaults are fine; afterwards the person may need to close and reopen your app before `py` works.
 3. Look for a brain they already have, the same way the terminal line does: a folder with a `brain.yaml` in it, or one holding a `kit` folder (the terminal line makes that). Look first wherever the person said, then at `Documents/brain`, then at `brain` in their home folder. If you cannot see their folders yet, ask them to let you first (point 5.1).
-   - **You were started inside a folder that holds only `kit`**, or you found one that holds only `kit` (and perhaps `exports`, `setup.yaml`, or the `.git` folder Orca adds): the terminal line made it, so that is the brain folder. Use the kit that is there (point 6 only checks it is the newest), skip point 4 and build the brain there (point 5, from 5.3).
-   - **Found, with a `setup.yaml`:** they are carrying on. Refresh the kit (point 6), save the app again (`python3 kit/progress.py . app <name>`: they may have switched apps), then run `python3 kit/check_setup.py .`. Its first line says where to carry on, for example "Carry on from step 3: connect them", and the lines after it say what is still on its way. Tell the person in one line, for example: "Welcome back. Last time we got to step 3, connecting your accounts. Shall I carry on from there?" Then go to that step. If it says setup is finished, see "Coming back later" at the end.
-   - **Found, with no `setup.yaml`:** a brain made by an older kit. Do not build it again. Refresh the kit (point 6), record the app (point 7), then go to step 2.
+   - **You were started inside a folder that holds only `kit`**, or you found one that holds only `kit` (and perhaps `exports`, `setup.yaml`, or the `.git` folder Orca adds): the terminal line made it, so that is the brain folder. Use BrainOS that is there (point 6 only checks it is the newest), skip point 4 and build the brain there (point 5, from 5.3).
+   - **Found, with a `setup.yaml`:** they are carrying on. Refresh BrainOS (point 6), save the app again (`python3 kit/progress.py . app <name>`: they may have switched apps), then run `python3 kit/check_setup.py .`. Its first line says where to carry on, for example "Carry on from step 3: connect them", and the lines after it say what is still on its way. Tell the person in one line, for example: "Welcome back. Last time we got to step 3, connecting your accounts. Shall I carry on from there?" Then go to that step. If it says setup is finished, see "Coming back later" at the end.
+   - **Found, with no `setup.yaml`:** a brain made by an older BrainOS. Do not build it again. Refresh BrainOS (point 6), record the app (point 7), then go to step 2.
    - **A folder of that name holds other files and no `brain.yaml`:** it is not a brain. Do not touch it: ask for another name.
    - **Nothing found:** make a new brain (point 4).
 4. Choose the place the same way the terminal line does. The brain goes in `Documents/brain`, unless Documents is copied to the cloud: then it goes in `brain` in their home folder, where it stays on this computer. To check: on a Mac, Documents is in iCloud when `~/Library/Mobile Documents/com~apple~CloudDocs/Documents` exists, and it is copied online when its real location is inside iCloud, OneDrive, Dropbox, Google Drive or `~/Library/CloudStorage`; on Windows, Documents is in OneDrive when its real location is inside a OneDrive folder. If it is copied, say so in one line: "Heads-up: your Documents folder is copied to iCloud, so your brain would be too. I'll make it in your home folder instead, where it stays on this computer." (Say OneDrive, or whichever it is.) Then ask, in one message, with that place first: "I'll make a folder called brain in your Documents. Is that all right? If not, say where: Desktop, Documents, or somewhere else. I'll create it once you say." (Name the home folder instead of Documents when Documents is copied.)
 5. With their yes, make the brain:
    1. If you cannot reach that place, tell them how to let you. In the Claude app: use the **Chat** tab (Chat and Cowork are one tab). Start a new chat, click **Project or folder** under the message box, then **Add folder**, choose the place (for example Documents), then click **Always allow**. In Codex, Cursor, OpenCode or Orca: open that place as the folder to work in. In Orca, opening a new folder also sets it up for saving versions (a git repository). That is fine: nothing extra is needed. For the home folder, if the app cannot open it, ask them to make the folder themselves (Mac: in Finder, **Go**, **Home**, then **File**, **New Folder**, named brain; Windows: in File Explorer, open the folder with their name, **New folder**, named brain) and choose that.
-   2. Make the empty `brain` folder and get the kit into a folder called `kit` inside it (point 6).
+   2. Make the empty `brain` folder and get BrainOS into a folder called `kit` inside it (point 6).
    3. Build the brain: `python3 kit/create_brain.py . --domains network`. Step 5 adds more areas later.
    4. Check the three front doors match: `python3 scripts/level1.py check .` It should say level 1 is the same in `CLAUDE.md`, `GEMINI.md` and the top of `AGENTS.md`.
    5. Read level 1 (your front door) and the level 2 manual in `AGENTS.md`. From now on, follow them as well as this guide.
-6. The kit lives in the brain's `kit` folder. It is the kit's own copy, never the person's files.
-   - **No `kit` folder:** download the newest kit into `kit`. Either `git clone --depth 1 https://github.com/adrianshedden/brainos-core kit`, or download https://github.com/adrianshedden/brainos-core/archive/refs/heads/main.zip and unpack what is inside its top folder into `kit`.
-   - **A `kit` folder is there:** use it; never download a second copy. Compare `kit/VERSION` with https://raw.githubusercontent.com/adrianshedden/brainos-core/main/VERSION. If the online one is newer, ask: "There's a newer version of the kit. Shall I update it? Only the kit folder changes: your own files stay exactly as they are." With a yes, download it into a new folder `kit-new` in the brain, check it has `SETUP.md` and `progress.py`, then replace `kit` with it. Never touch anything outside `kit`.
+6. BrainOS lives in the brain's `kit` folder. It is BrainOS's own copy, never the person's files.
+   - **No `kit` folder:** download the newest BrainOS into `kit`. Either `git clone --depth 1 https://github.com/adrianshedden/brainos-core kit`, or download https://github.com/adrianshedden/brainos-core/archive/refs/heads/main.zip and unpack what is inside its top folder into `kit`.
+   - **A `kit` folder is there:** use it; never download a second copy. Compare `kit/VERSION` with https://raw.githubusercontent.com/adrianshedden/brainos-core/main/VERSION. If the online one is newer, ask: "There's a newer version of BrainOS. Shall I update it? Only its kit folder changes: your own files stay exactly as they are." With a yes, download it into a new folder `kit-new` in the brain, check it has `SETUP.md` and `progress.py`, then replace `kit` with it. Never touch anything outside `kit`.
    - **You cannot download:** ask the person to do it, one step at a time: open https://github.com/adrianshedden/brainos-core, click the green **Code** button, then **Download ZIP**; open the zip; rename the folder inside it to `kit`; drag it into the brain folder (if there is an old `kit`, drag that out to the Desktop first).
 7. Save progress: `python3 kit/progress.py . app <name>` (the name from point 1), then `python3 kit/progress.py . step 2`.
 
@@ -74,7 +75,7 @@ Two lines: where the brain is, and that it is a plain folder of text files they 
 1. Read `kit/connections.yaml`. Each source (for example `google-calendar`, `gmail`, `whatsapp`) has routes, each for one app (`app`) and of one type (`type`), already in the order of the connection ladder (see "The connection ladder" at the end): official (`builtin`), then custom (`custom`), then local (`local`), with a command-line tool on the same rung for technical people only (`cli`), then export (`export`).
 2. For each source, keep only the routes that work here: `app` is the name you saved in step 1, or `any`. Drop `technical_only: true` routes unless the person has said they are technical. Leave out any source with no route left.
    - WhatsApp: keep only its export routes, for everyone, even technical people. Setup never links WhatsApp live. If they ask about a live link, say: "That's possible later, once your brain is set up. At the bootcamp, Rian shows it in the afternoon."
-3. Make a short list from what is left, most useful first: calendar, email, documents (Google Drive, OneDrive), Notion, Slack, their existing notes, WhatsApp, LinkedIn, then the rest. Put the same kind together so the list stays short ("Calendar: Google or Outlook"). After each, one line on why it fills the brain, and say plainly when the only route is a file they download ("a few chats you export from your phone"). Say LinkedIn is optional: "It takes up to a day, so you can add it later." Never ask them to export their calendar: connect it. A calendar file is only the fallback when it will not connect. Claude's own Microsoft button needs a work account, so a personal Outlook.com or Hotmail account connects through the kit's own route (rung 3 of "The connection ladder" at the end). A calendar file is the fallback only if that fails.
+3. Make a short list from what is left, most useful first: calendar, email, documents (Google Drive, OneDrive), Notion, Slack, their existing notes, WhatsApp, LinkedIn, then the rest. Put the same kind together so the list stays short ("Calendar: Google or Outlook"). After each, one line on why it fills the brain, and say plainly when the only route is a file they download ("a few chats you export from your phone"). Say LinkedIn is optional: "It takes up to a day, so you can add it later." Never ask them to export their calendar: connect it. A calendar file is only the fallback when it will not connect. Claude's own Microsoft button needs a work account, so a personal Outlook.com or Hotmail account connects through BrainOS's own route (rung 3 of "The connection ladder" at the end). A calendar file is the fallback only if that fails.
 
 **What you ask**
 
@@ -125,7 +126,7 @@ Give steps only for what they picked. Never list steps for the others.
 
 **What you do**
 
-1. Before you bring anything in, send the person this, in a message of its own (it is required, once per setup): "Your brain's files stay in your folder. When you ask a question, the parts the AI reads go to the AI company to work out the answer, the same as any chat with it. The kit sends nothing anywhere else. The importers never use the internet. Nothing is published unless you back up to your own private GitHub." Then go ahead.
+1. Before you bring anything in, send the person this, in a message of its own (it is required, once per setup): "Your brain's files stay in your folder. When you ask a question, the parts the AI reads go to the AI company to work out the answer, the same as any chat with it. BrainOS sends nothing anywhere else. The importers never use the internet. Nothing is published unless you back up to your own private GitHub." Then go ahead.
 2. Export files: run `python3 kit/check_setup.py .`. It lists the files in `exports` and the exact line to run for each. Run them. Before the first WhatsApp import, ask once for their own name as it shows in their chats. For each source that came in, save `python3 kit/progress.py . connected <id> export`, and if it was pending, `python3 kit/progress.py . arrived "<what>"`.
 3. Live connections: read each one over a sensible window. Read only what the brain needs:
    - Calendar: the last 90 days and the next 14. For each event: when, who was there, and its title.
@@ -140,7 +141,7 @@ Give steps only for what they picked. Never list steps for the others.
 
 **Save progress:** `python3 kit/progress.py . step 5`.
 
-**If something fails:** if an importer stops, say what it means in one line and carry on with the others. If `kit/importers/from_connector.py` is missing, refresh the kit (step 1, point 6) and run it again. Never write lines in the people list or the interactions log by hand: only the importers write them. If the kit cannot be refreshed now, leave the file in `exports`, save it as pending (`python3 kit/progress.py . pending "What I read from your accounts" "bring in what you read"`) and carry on; it comes in the next time the kit is refreshed.
+**If something fails:** if an importer stops, say what it means in one line and carry on with the others. If `kit/importers/from_connector.py` is missing, refresh BrainOS (step 1, point 6) and run it again. Never write lines in the people list or the interactions log by hand: only the importers write them. If BrainOS cannot be refreshed now, leave the file in `exports`, save it as pending (`python3 kit/progress.py . pending "What I read from your accounts" "bring in what you read"`) and carry on; it comes in the next time BrainOS is refreshed.
 
 ## 5. Choose the domains (domains)
 
@@ -154,7 +155,7 @@ With their yes, add the ones from that list in one go, comma-separated, for exam
 
 **Save progress:** `python3 kit/progress.py . step 6`.
 
-**If something fails:** if `--add` is not known, refresh the kit (step 1, point 6) and try again. If that is not possible, follow "Adding a domain" in `DOMAINS.md` by hand, one domain at a time, with their yes.
+**If something fails:** if `--add` is not known, refresh BrainOS (step 1, point 6) and try again. If that is not possible, follow "Adding a domain" in `DOMAINS.md` by hand, one domain at a time, with their yes.
 
 ## 6. Review what it learned (review)
 
@@ -220,11 +221,11 @@ That is the setup. Stop there and wait for the person.
 
 When the person pastes the line again after setup is finished, `check_setup.py` says so on its first line. Ask what they would like: connect something new (step 3 for that one source, then step 4 for it), add a domain (step 5), or a new skill or scheduled job (steps 7 and 8). Only if they ask for a live link to WhatsApp, follow `kit/WHATSAPP-LIVE.md`. Save each change with `kit/progress.py` as above.
 
-**"Connect my Outlook", "Connect my Gmail"** (or any source by name, with or without the one line): go straight to step 3 for that one source, then step 4 for it. Walk the connection ladder below. For Outlook: ask whether it is a work account or a personal Outlook.com or Hotmail one. Work: the **Microsoft 365** button. Personal: the kit's own local route, with the one-time sign-in code on Microsoft's page. The calendar file only if those fail. For a live link to WhatsApp, follow `kit/WHATSAPP-LIVE.md` instead.
+**"Connect my Outlook", "Connect my Gmail"** (or any source by name, with or without the one line): go straight to step 3 for that one source, then step 4 for it. Walk the connection ladder below. For Outlook: ask whether it is a work account or a personal Outlook.com or Hotmail one. Work: the **Microsoft 365** button. Personal: BrainOS's own local route, with the one-time sign-in code on Microsoft's page. The calendar file only if those fail. For a live link to WhatsApp, follow `kit/WHATSAPP-LIVE.md` instead.
 
 ## The connection ladder
 
-Every source is connected by trying four rungs, in this order. Go down a rung only when the one above fails or does not exist for this person. Tell the person in one line which rung you are on ("Claude's own Outlook button needs a work account, so we'll use the kit's own route").
+Every source is connected by trying four rungs, in this order. Go down a rung only when the one above fails or does not exist for this person. Tell the person in one line which rung you are on ("Claude's own Outlook button needs a work account, so we'll use BrainOS's own route").
 
 1. **Official:** the AI app's own connection buttons (in the Claude app: **Customize**, **Connectors**, **+ Add**).
 2. **Custom:** paste a web address from the tool's maker into **+ Add custom connection**.
@@ -234,11 +235,11 @@ Every source is connected by trying four rungs, in this order. Go down a rung on
 Outlook is the worked example, rung by rung:
 
 1. Official: the **Microsoft 365** button. It needs a work or school account, and the IT team's approval.
-2. Custom: Microsoft offers no web address for personal accounts. Hosted services could stand in, but that means another account and your mail passing through them, so the kit skips this rung for Outlook.
-3. Local: personal Outlook.com or Hotmail connects through the kit's own route, Softeria's free Microsoft connection (the `local` route for `outlook-calendar` and `outlook-mail`). The person installs Node.js from nodejs.org; you show the lines you will add to the app's own settings and add them only after a yes; the person signs in on Microsoft's own page with a one-time code. Never ask for a password or code in the chat. To remove it, take the lines out again, with a yes.
+2. Custom: Microsoft offers no web address for personal accounts. Hosted services could stand in, but that means another account and your mail passing through them, so BrainOS skips this rung for Outlook.
+3. Local: personal Outlook.com or Hotmail connects through BrainOS's own route, Softeria's free Microsoft connection (the `local` route for `outlook-calendar` and `outlook-mail`). The person installs Node.js from nodejs.org; you show the lines you will add to the app's own settings and add them only after a yes; the person signs in on Microsoft's own page with a one-time code. Never ask for a password or code in the chat. To remove it, take the lines out again, with a yes.
 4. Export: the calendar file from outlook.com (see "Export steps", Calendar).
 
-The kit does not try to cover every tool: for anything else, use the app's own connections or the export.
+BrainOS does not try to cover every tool: for anything else, use the app's own connections or the export.
 
 ## Export steps
 
@@ -257,7 +258,7 @@ Use these when `connections.yaml` has no route for a source, or cannot be read. 
 - A live WhatsApp link is not part of setup. It is possible later (at the bootcamp: in the afternoon with Rian).
 
 **Calendar** (only when it will not connect; connecting is better)
-- Personal Outlook.com or Hotmail, only if the kit's own route did not work: at outlook.com, open Calendar, then **Settings**, **Calendar**, **Shared calendars**. Under **Publish a calendar**, pick the calendar and **Publish**. Open the ICS link in the browser: a calendar file downloads. Put it in `exports`, then click **Unpublish** straight away, so the link stops working.
+- Personal Outlook.com or Hotmail, only if BrainOS's own route did not work: at outlook.com, open Calendar, then **Settings**, **Calendar**, **Shared calendars**. Under **Publish a calendar**, pick the calendar and **Publish**. Open the ICS link in the browser: a calendar file downloads. Put it in `exports`, then click **Unpublish** straight away, so the link stops working.
 - Google: https://takeout.google.com, press **Deselect all**, tick **Calendar**, then **Next step** and **Create export**. Apple Calendar on a Mac: **File**, **Export**, **Export...**. Outlook on the desktop: **File**, **Save Calendar**. Put the file in `exports`.
 
 **Contacts and X**
@@ -268,4 +269,4 @@ Use these when `connections.yaml` has no route for a source, or cannot be read. 
 - Copy the notes folder into `exports` (on a Mac, hold Option while dragging; on Windows, hold Ctrl). The original stays where it is.
 - Notion: open the page that holds the notes, the three dots, **Export**, **Markdown & CSV**, with **Include subpages** on. Put the zip in `exports`.
 
-**Anything else** (for example Slack): if your app can connect to it, it is one sign-in in the app. If not, say plainly that the kit cannot bring it in yet.
+**Anything else** (for example Slack): if your app can connect to it, it is one sign-in in the app. If not, say plainly that BrainOS cannot bring it in yet.

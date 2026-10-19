@@ -20,7 +20,7 @@ UNTRUE = [r"nothing leaves (their|your) (machine|computer)", r"nothing (of yours
 # The approved privacy wording, word for word, wherever the kit says where the data goes. Rian, sheet v10
 # (19 Oct 2026), after the Windows test: honest about the AI company, and no promise that nothing leaves.
 APPROVED = ("Your brain's files stay in your folder. When you ask a question, the parts the AI reads go to the AI "
-            "company to work out the answer, the same as any chat with it. The kit sends nothing anywhere else.")
+            "company to work out the answer, the same as any chat with it. BrainOS sends nothing anywhere else.")
 SAYS_WHERE = ["README.md", "INSTRUCTIONS.md", "SETUP.md", "template/LEVEL1.md", "template/tools/TOOLS.md",
               "sample/brain/CLAUDE.md", "sample/brain/tools/TOOLS.md"]
 # The wording it replaced, which must not come back.

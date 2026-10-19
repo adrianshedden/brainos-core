@@ -1,14 +1,14 @@
 # BrainOS core: instructions for any AI
 
-BrainOS core makes an empty brain (a folder of Markdown and YAML files) on the person's own computer and fills it from their own exports and from the connections in their AI app. Plain Python 3, nothing to install. No script in this kit uses the internet, except the optional GitHub backup, which the person starts themselves (`GITHUB.md`). Run each step for the person and tell them the result in plain English.
+BrainOS core makes an empty brain (a folder of Markdown and YAML files) on the person's own computer and fills it from their own exports and from the connections in their AI app. Plain Python 3, nothing to install. No script in BrainOS uses the internet, except the optional GitHub backup, which the person starts themselves (`GITHUB.md`). Run each step for the person and tell them the result in plain English.
 
-Setting a brain up for the first time, or carrying on with one, because the person pasted the one line? Follow `SETUP.md` instead: it is the guided first run in nine steps (find or make the brain, choose and connect their accounts, pull everything in, domains, review, skills, scheduled jobs, a first real answer), and it saves progress in the brain's `setup.yaml`. This file is the reference for every step. The one line, from the kit's home at github.com/adrianshedden/brainos-core:
+Setting a brain up for the first time, or carrying on with one, because the person pasted the one line? Follow `SETUP.md` instead: it is the guided first run in nine steps (find or make the brain, choose and connect their accounts, pull everything in, domains, review, skills, scheduled jobs, a first real answer), and it saves progress in the brain's `setup.yaml`. This file is the reference for every step. The one line, from BrainOS's home at github.com/adrianshedden/brainos-core:
 
-- In an AI app: Set up my brain from the BrainOS kit at github.com/adrianshedden/brainos-core (read its SETUP.md first and follow it). Ask me before you change anything, work only in my brain folder, and never share, upload or post my files.
+- In an AI app: Set up my brain with BrainOS from github.com/adrianshedden/brainos-core (read its SETUP.md first and follow it). Ask me before you change anything, work only in my brain folder, and never share, upload or post my files.
 - In a terminal on a Mac: `curl -fsSL https://raw.githubusercontent.com/adrianshedden/brainos-core/main/start.sh | sh`
 - In a terminal on Windows (PowerShell): `irm https://raw.githubusercontent.com/adrianshedden/brainos-core/main/start.ps1 | iex`
 
-On Windows, type `py` wherever this kit says `python3` (`python3` there is usually missing or opens the Microsoft Store); if `py` is missing too, try `python`.
+On Windows, type `py` wherever BrainOS says `python3` (`python3` there is usually missing or opens the Microsoft Store); if `py` is missing too, try `python`.
 
 The order is: check, choose domains, create the brain, import, mine my context, first skills.
 
@@ -41,7 +41,7 @@ To see what a filled brain looks like, open `sample/brain/` (made-up people, bui
 
 Say this to the person once, before the first import, in these or similar plain words:
 
-"Your brain's files stay in your folder. When you ask a question, the parts the AI reads go to the AI company to work out the answer, the same as any chat with it. The kit sends nothing anywhere else. The importers never use the internet. Nothing is published unless you back up to your own private GitHub."
+"Your brain's files stay in your folder. When you ask a question, the parts the AI reads go to the AI company to work out the answer, the same as any chat with it. BrainOS sends nothing anywhere else. The importers never use the internet. Nothing is published unless you back up to your own private GitHub."
 
 ## Rules
 

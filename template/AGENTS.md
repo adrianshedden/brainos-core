@@ -18,7 +18,7 @@ Read level 1 first: it is the block above (the same words as `CLAUDE.md` and `GE
 | Morning brief, brief me, what's on today, start my day | Follow `skills/morning-brief/SKILL.md` |
 | Weekly review, review my week, plan next week | Follow `skills/weekly-review/SKILL.md` |
 | Show it visually, make it a page, show me that as a page | Follow `skills/show-it-visually/SKILL.md` |
-| Set up my BrainOS, finish my setup, connect something new: connect my Outlook, connect my Gmail, connect my calendar | Follow `kit/SETUP.md` (the setup guide in the BrainOS kit): "Coming back later", then step 3 for that one source, down the connection ladder |
+| Set up my BrainOS, finish my setup, connect something new: connect my Outlook, connect my Gmail, connect my calendar | Follow `kit/SETUP.md` (the setup guide in BrainOS): "Coming back later", then step 3 for that one source, down the connection ladder |
 | Connect my WhatsApp live, connect my WhatsApp using WHATSAPP-LIVE.md | Follow `kit/WHATSAPP-LIVE.md`: risks and a yes first |
 | Import an export, add my LinkedIn, WhatsApp, calendar, contacts or X | See "Importing" below |
 | Note a decision, or something that happened | Add one line to `memory/decisions.jsonl` or `memory/events.jsonl` (see `memory/MEMORY.md`) |
@@ -37,10 +37,10 @@ GEMINI.md          level 1 for Gemini: the same words, copied by scripts/level1.
 AGENTS.md          level 1 block (the same words), then level 2: this manual
 DOMAINS.md         the domains this brain has
 README.md          what the folder is, for the person
-brain.yaml         the files a brain must have (checked by the kit's tests)
+brain.yaml         the files a brain must have (checked by BrainOS's tests)
 setup.yaml         how far the setup has got; written only by kit/progress.py (made during setup)
 exports/           raw export files; read only to import them; never backed up
-kit/               the BrainOS kit (setup guide, importers); never edit it; never backed up
+kit/               BrainOS (setup guide, importers); never edit it; never backed up
 automations/       AUTOMATIONS.md: scheduled jobs
 memory/            MEMORY.md, decisions.jsonl, events.jsonl, calendar/, conversations/, profile/
 scripts/           SCRIPTS.md, jobs.py, level1.py
@@ -61,7 +61,7 @@ views/             pages made by show-it-visually, views/<YYYY-MM-DD>-<name>.htm
 
 ## Importing
 
-Importers live in the BrainOS kit, in this brain's `kit/importers/` folder. If there is no `kit/` folder, ask the person to paste the one line again: it names the kit, and its `SETUP.md` puts the kit back in `kit/` without touching the brain. Each importer takes an export file and this brain folder. Run them from this folder with Python 3 (nothing to install). Look for the export files in this brain's `exports/` folder first: `python3 kit/check_setup.py .` lists them, with the exact line to run for each.
+Importers live in BrainOS, in this brain's `kit/importers/` folder. If there is no `kit/` folder, ask the person to paste the one line again: it names BrainOS, and its `SETUP.md` puts BrainOS back in `kit/` without touching the brain. Each importer takes an export file and this brain folder. Run them from this folder with Python 3 (nothing to install). Look for the export files in this brain's `exports/` folder first: `python3 kit/check_setup.py .` lists them, with the exact line to run for each.
 
 If you cannot see the export files, send the person one short message with two choices, and no others: drag the files into this brain's `exports` folder (then you need only this folder); or leave them in Downloads, and they click "Allow once" when you ask to use Downloads (it lasts this chat only; heads-up: you can then read and change everything in Downloads for this chat, and the files you read are processed by your provider).
 

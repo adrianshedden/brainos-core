@@ -46,7 +46,7 @@ jobs:
           grep -q "and paste this line:" "$RUNNER_TEMP/start.txt"
           python3 "$BRAINOS_DIR/kit/check_setup.py" "$BRAINOS_DIR" | tee "$RUNNER_TEMP/check.txt"
           grep -q "Python: .* Good." "$RUNNER_TEMP/check.txt"
-          grep -q "Kit: all the files it needs are here" "$RUNNER_TEMP/check.txt"
+          grep -q "BrainOS: all the files it needs are here" "$RUNNER_TEMP/check.txt"
           grep -q "is empty and ready for create_brain.py" "$RUNNER_TEMP/check.txt"
 
       - name: The Windows line for real (start.ps1)
@@ -64,7 +64,7 @@ jobs:
           $check = py "$env:BRAINOS_DIR\kit\check_setup.py" "$env:BRAINOS_DIR" | Out-String
           Write-Host $check
           if ($check -notmatch 'Python: .* Good\.') { throw "check_setup: Python" }
-          if ($check -notmatch 'Kit: all the files it needs are here') { throw "check_setup: kit files" }
+          if ($check -notmatch 'BrainOS: all the files it needs are here') { throw "check_setup: kit files" }
           if ($check -notmatch 'is empty and ready for create_brain.py') { throw "check_setup: brain folder" }
 
       - name: The personal Outlook connection, as connections.yaml sets it up

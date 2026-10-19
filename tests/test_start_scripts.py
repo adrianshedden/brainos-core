@@ -19,7 +19,7 @@ nonet.install()
 CORE = Path(__file__).resolve().parents[1]
 START_SH = CORE / "start.sh"
 START_PS1 = CORE / "start.ps1"
-LINE = ("Set up my brain from the BrainOS kit at github.com/adrianshedden/brainos-core (read its SETUP.md first "
+LINE = ("Set up my brain with BrainOS from github.com/adrianshedden/brainos-core (read its SETUP.md first "
         "and follow it). Ask me before you change anything, work only in my brain folder, and never share, "
         "upload or post my files.")
 AI_APPS = ("claude", "codex", "opencode")
@@ -31,15 +31,15 @@ ALLOWED_URLS = {"https://raw.githubusercontent.com/adrianshedden/brainos-core/ma
                 "https://github.com/adrianshedden/brainos-core/archive/refs/heads"}
 # Plain words both scripts print for the same step.
 SHARED_WORDS = ("BrainOS: getting your brain folder ready. This takes about a minute.",
-                "Downloading the BrainOS kit...",
+                "Downloading BrainOS...",
                 "Your Documents folder is copied online by",
                 "instead, which stays on this computer.",
                 "and it is not a brain. To keep those files safe, nothing was changed.",
-                "Python is not on this computer yet. The kit uses it to read your files. To get it, free:",
+                "Python is not on this computer yet. BrainOS uses it to read your files. To get it, free:",
                 "1. Go to python.org/downloads and click the yellow Download button.",
                 "in your brain folder with the set-up line. Answer its questions there.",
                 "Next, open your AI app (for example the Claude app), choose the folder",
-                "Could not download the BrainOS kit. Check this computer is online")
+                "Could not download BrainOS. Check this computer is online")
 
 
 def kit_zip(dest, top="brainos-core-main", leave_out=()):
@@ -209,7 +209,7 @@ class StartSh(Sandbox):
         broken = kit_zip(self.root / "broken.zip", leave_out=("SETUP.md",))
         r = self.run_sh(BRAINOS_ZIP=broken)
         self.assertNotEqual(r.returncode, 0)
-        self.assertIn("does not look like the BrainOS kit", r.stderr.decode())
+        self.assertIn("does not look like BrainOS", r.stderr.decode())
         self.assertEqual((brain / "kit" / "marker.txt").read_text(encoding="utf-8"), "the kit from before")
 
     def test_no_python_prints_plain_steps_installs_nothing_and_still_gives_the_line(self):

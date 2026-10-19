@@ -24,4 +24,4 @@ It keeps when each skill was last done in `skills/jobs-state.json`.
 ## What stays out
 
 - Anything that uses the internet, sends messages or holds passwords.
-- The importers: they stay in the BrainOS kit (`kit/`), not in `scripts/`.
+- The importers: they stay in BrainOS (`kit/`), not in `scripts/`.

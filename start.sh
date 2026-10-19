@@ -23,7 +23,7 @@
 set -eu
 
 # The AI-app line: the same words everywhere (SETUP.md, README, both start scripts, the tests).
-LINE='Set up my brain from the BrainOS kit at github.com/adrianshedden/brainos-core (read its SETUP.md first and follow it). Ask me before you change anything, work only in my brain folder, and never share, upload or post my files.'
+LINE='Set up my brain with BrainOS from github.com/adrianshedden/brainos-core (read its SETUP.md first and follow it). Ask me before you change anything, work only in my brain folder, and never share, upload or post my files.'
 REPO_ZIP='https://github.com/adrianshedden/brainos-core/archive/refs/heads'
 
 say() {
@@ -119,24 +119,24 @@ download_kit() {
     cp "$src" "$zip"
   elif command -v curl >/dev/null 2>&1; then
     curl -fsSL --retry 2 -o "$zip" "$src" \
-      || fail "Could not download the BrainOS kit. Check this computer is online, then run this line again."
+      || fail "Could not download BrainOS. Check this computer is online, then run this line again."
   elif command -v wget >/dev/null 2>&1; then
     wget -q -O "$zip" "$src" \
-      || fail "Could not download the BrainOS kit. Check this computer is online, then run this line again."
+      || fail "Could not download BrainOS. Check this computer is online, then run this line again."
   else
-    fail "This computer has no download tool, so the kit could not be fetched. Use the line for your AI app instead."
+    fail "This computer has no download tool, so BrainOS could not be downloaded. Use the line for your AI app instead."
   fi
   mkdir "$WORK/unzipped"
   if command -v unzip >/dev/null 2>&1; then
-    unzip -q "$zip" -d "$WORK/unzipped" >/dev/null 2>&1 || fail "The kit download was damaged. Run this line again."
+    unzip -q "$zip" -d "$WORK/unzipped" >/dev/null 2>&1 || fail "The BrainOS download was damaged. Run this line again."
   elif command -v python3 >/dev/null 2>&1; then
-    python3 -m zipfile -e "$zip" "$WORK/unzipped" >/dev/null 2>&1 || fail "The kit download was damaged. Run this line again."
+    python3 -m zipfile -e "$zip" "$WORK/unzipped" >/dev/null 2>&1 || fail "The BrainOS download was damaged. Run this line again."
   else
-    tar -xf "$zip" -C "$WORK/unzipped" >/dev/null 2>&1 || fail "The kit download was damaged. Run this line again."
+    tar -xf "$zip" -C "$WORK/unzipped" >/dev/null 2>&1 || fail "The BrainOS download was damaged. Run this line again."
   fi
   set -- "$WORK/unzipped"/*
   if [ "$#" -ne 1 ] || [ ! -f "$1/SETUP.md" ] || [ ! -f "$1/create_brain.py" ]; then
-    fail "The download does not look like the BrainOS kit, so nothing was changed. Run this line again."
+    fail "The download does not look like BrainOS, so nothing was changed. Run this line again."
   fi
   KIT_SOURCE=$1
 }
@@ -177,9 +177,9 @@ check_python() {
     return 0
   fi
   if [ "$found" = old ]; then
-    say "The Python on this computer is too old for the kit (it needs version 3.8 or newer). To get a new one, free:"
+    say "The Python on this computer is too old for BrainOS (it needs version 3.8 or newer). To get a new one, free:"
   else
-    say "Python is not on this computer yet. The kit uses it to read your files. To get it, free:"
+    say "Python is not on this computer yet. BrainOS uses it to read your files. To get it, free:"
   fi
   say "  1. Go to python.org/downloads and click the yellow Download button."
   say "  2. Open the file you downloaded and follow its steps."
@@ -245,10 +245,10 @@ main() {
   WORK=$(mktemp -d 2>/dev/null || mktemp -d -t brainos)
   trap cleanup EXIT
   trap 'exit 1' HUP INT TERM
-  say "Downloading the BrainOS kit..."
+  say "Downloading BrainOS..."
   download_kit
   place_kit
-  say "Your brain folder is $BRAIN, and the kit is in its kit folder."
+  say "Your brain folder is $BRAIN, and BrainOS is in its kit folder."
   check_python
   if start_ai; then
     return 0

@@ -1,6 +1,6 @@
 # Connect WhatsApp live (afternoon, if you want it)
 
-**Tell your AI:** Connect my WhatsApp using WHATSAPP-LIVE.md from the BrainOS kit at github.com/adrianshedden/brainos-core.
+**Tell your AI:** Connect my WhatsApp using WHATSAPP-LIVE.md from BrainOS at github.com/adrianshedden/brainos-core.
 
 For the AI, when the person sends that line: read this whole guide first, then follow it from section 1. Say the risks and wait for a clear yes before you install or change anything. Work in their brain folder (`SETUP.md` step 1 says how to find it); its `kit` folder holds the scripts named below. If they have no brain yet, offer to set one up first with `SETUP.md`.
 
@@ -22,9 +22,9 @@ Wait for a clear yes. Anything else is a no: stop, and remind them that exportin
 ## 2. Pick a route
 
 - **Quick route: wacli.** A small free program (github.com/openclaw/wacli) that links to WhatsApp and keeps a copy of your chats on your computer. About ten minutes. Mac (macOS 15 or newer) and Windows. Works with Claude Code (in a terminal), Codex, OpenCode and Orca: the AI runs it for you. Not in the Claude app's chat.
-- **Sustainable route: Beeper.** A free chat app (beeper.com) that holds WhatsApp beside your other chats and lets your AI apps read it. Longer to set up, and the better choice to keep. Mac and Windows. Works in every AI app the kit supports.
+- **Sustainable route: Beeper.** A free chat app (beeper.com) that holds WhatsApp beside your other chats and lets your AI apps read it. Longer to set up, and the better choice to keep. Mac and Windows. Works in every AI app BrainOS supports.
 
-Sending, with a yes for each message, works only in Claude Code, on either route. Only Claude Code lets the kit add a check before each message goes (the send guard). Everywhere else, it is reading only. The Windows steps have not yet been tried: if a screen looks different, stop and offer the export. New messages do not arrive by themselves on either route: you read WhatsApp when the person asks.
+Sending, with a yes for each message, works only in Claude Code, on either route. Only Claude Code lets BrainOS add a check before each message goes (the send guard). Everywhere else, it is reading only. The Windows steps have not yet been tried: if a screen looks different, stop and offer the export. New messages do not arrive by themselves on either route: you read WhatsApp when the person asks.
 
 ## 3. Read
 
@@ -58,4 +58,4 @@ Every time: write the message in the chat first and name the chat. Send only whe
 
 ## How does it work on an always-on server?
 
-Some people run WhatsApp on a computer that never switches off. That uses WAHA, a ready-made WhatsApp Web server: it links like WhatsApp on a computer, and a small program passes messages between it and the AI. The same risks apply. It is not part of this kit.
+Some people run WhatsApp on a computer that never switches off. That uses WAHA, a ready-made WhatsApp Web server: it links like WhatsApp on a computer, and a small program passes messages between it and the AI. The same risks apply. It is not part of BrainOS.

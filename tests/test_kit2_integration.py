@@ -92,7 +92,7 @@ class Template(unittest.TestCase):
 
 class Readme(unittest.TestCase):
     def test_the_paid_line_stays_as_locked(self):
-        self.assertIn("- Paid: Remyn, the guided set-up website, with templates and support, on top of this same kit.",
+        self.assertIn("- Paid: Remyn, the guided set-up website, with templates and support, on top of this same BrainOS core.",
                       read("README.md"))
 
     def test_the_kit_version_is_two(self):
