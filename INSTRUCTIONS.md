@@ -41,7 +41,7 @@ To see what a filled brain looks like, open `sample/brain/` (made-up people, bui
 
 Say this to the person once, before the first import, in these or similar plain words:
 
-"Your brain is stored as plain files on your laptop. When you use a cloud AI provider (Anthropic, OpenAI and others), whatever their agent reads is processed by that provider, like any chat. Run it with a local model in the future and it stays fully private on your machine. That is what we are working towards. The importers never use the internet. Nothing is published unless you back up to your own private GitHub."
+"Your brain's files stay in your folder. When you ask a question, the parts the AI reads go to the AI company to work out the answer, the same as any chat with it. The kit sends nothing anywhere else. The importers never use the internet. Nothing is published unless you back up to your own private GitHub."
 
 ## Rules
 

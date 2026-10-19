@@ -52,7 +52,7 @@ class Spine(unittest.TestCase):
             self.assertTrue((brain / name).is_file(), name)
         claude = (brain / "CLAUDE.md").read_text(encoding="utf-8")
         for must in ("## Who this is for", "## How to start a session", "## Rules", "AGENTS.md",
-                     "Only the person's own data", "processed by that provider", "`source`", "`confidence`"):
+                     "Only the person's own data", "go to the AI company", "`source`", "`confidence`"):
             self.assertIn(must, claude)
         agents = (brain / "AGENTS.md").read_text(encoding="utf-8")
         for must in ("## Routing table", "## File index", "## Conventions", "`source`", "`confidence`"):

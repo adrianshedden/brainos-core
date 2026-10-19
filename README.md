@@ -14,7 +14,7 @@ A second brain is everything the AI remembers about you and your work and life. 
 
 ## Where your data goes
 
-Your brain is stored as plain files on your laptop. When you use a cloud AI provider (Anthropic, OpenAI and others), whatever their agent reads is processed by that provider, like any chat. Run it with a local model in the future and it stays fully private on your machine. That is what we are working towards.
+Your brain's files stay in your folder. When you ask a question, the parts the AI reads go to the AI company to work out the answer, the same as any chat with it. The kit sends nothing anywhere else.
 
 - The importers read your export files and write the brain. They never use the internet.
 - Nothing is published. The only copy that goes online is a backup to your own private GitHub, and only if you set one up.
@@ -27,7 +27,11 @@ Your brain is stored as plain files on your laptop. When you use a cloud AI prov
 
 ## Set up with your AI (no commands)
 
-Using the Claude app? Install it from claude.com/download, open it, and sign in inside the Claude app window. Signing in on the website does not sign in the app.
+Using the Claude app? Install it from claude.com/download, open it, and sign in inside the Claude app window. Signing in on the website does not sign in the app. It may open on the Code tab: click the other tab, Chat and Cowork. Under the message box, click Project or folder, then Add folder, and choose your brain folder.
+
+Before anything starts you will see three boxes asking for permission: to change files in your folder, to use that folder, and to read the kit's pages on GitHub. That is normal: click Allow (or Always allow) on each.
+
+Your AI may already know things about you from its own memory of your past chats. It may suggest some of them for your brain. It should say where each one came from; say no to anything you don't want in.
 
 Paste this one line into the Claude app, the ChatGPT app (with Codex), Cursor, OpenCode or Orca on your computer:
 

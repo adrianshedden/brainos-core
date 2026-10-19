@@ -221,6 +221,20 @@ class ConnectionsYaml(unittest.TestCase):
         self.assertIn("IT admin", claude["notes"])
         self.assertTrue(any(r["type"] == "export" and "outlook.com" in " ".join(r["clicks"]) for r in routes_))
 
+    def test_personal_outlook_has_a_custom_connection_on_the_computer(self):
+        # Rian, sheet v10 (19 Oct 2026): personal Hotmail or Outlook needs a connection on the computer, the worked
+        # example of a custom route. Read-only, and marked not yet tried.
+        for sid in ("outlook-calendar", "outlook-mail"):
+            local = [r for r in DATA["sources"][sid]["routes"] if r["type"] == "local"]
+            self.assertEqual({r["app"] for r in local}, {"claude", "orca", "terminal"}, sid)
+            for r in local:
+                self.assertIn("personal Outlook.com or Hotmail", r["clicks"][0], sid)
+                self.assertIn("softeria/ms-365-mcp-server", r["notes"], sid)
+                self.assertIn("--read-only", r["notes"], sid)
+                self.assertIn("Not yet tried", r["notes"], sid)
+                self.assertIsNone(r["checked_on"], sid)
+                self.assertIn("never ask for the password", r["notes"], sid)
+
     def test_checked_on_is_a_real_date_or_null(self):
         checked = 0
         for sid, i, r in routes():
