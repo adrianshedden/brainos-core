@@ -1,0 +1,63 @@
+# The kit's own check on a real Mac and a real Windows computer (GitHub's own machines).
+# Rian, 19 Oct 2026: no Windows laptop test, so prove it here instead. Two parts on each:
+#   1. every test: bash tests/run_all.sh
+#   2. the terminal line for real, in a temporary folder, up to where the AI takes over: Python found,
+#      the kit downloaded from GitHub (this branch), the brain folder made, and check_setup.py happy.
+name: kit
+on:
+  push:
+    branches: [main, kit-2.0]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  kit:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Every test
+        shell: bash
+        run: bash tests/run_all.sh
+
+      - name: The Mac line for real (start.sh)
+        if: runner.os == 'macOS'
+        shell: bash
+        env:
+          BRAINOS_DIR: ${{ runner.temp }}/brain
+          BRAINOS_REF: ${{ github.head_ref || github.ref_name }}
+        run: |
+          sh start.sh </dev/null | tee "$RUNNER_TEMP/start.txt"
+          test -f "$BRAINOS_DIR/kit/SETUP.md"
+          test -f "$BRAINOS_DIR/kit/check_setup.py"
+          grep -q "Python is ready." "$RUNNER_TEMP/start.txt"
+          grep -q "and paste this line:" "$RUNNER_TEMP/start.txt"
+          python3 "$BRAINOS_DIR/kit/check_setup.py" "$BRAINOS_DIR" | tee "$RUNNER_TEMP/check.txt"
+          grep -q "Python: .* Good." "$RUNNER_TEMP/check.txt"
+          grep -q "Kit: all the files it needs are here" "$RUNNER_TEMP/check.txt"
+          grep -q "is empty and ready for create_brain.py" "$RUNNER_TEMP/check.txt"
+
+      - name: The Windows line for real (start.ps1)
+        if: runner.os == 'Windows'
+        shell: powershell
+        env:
+          BRAINOS_DIR: ${{ runner.temp }}\brain
+          BRAINOS_REF: ${{ github.head_ref || github.ref_name }}
+        run: |
+          $out = & { Get-Content -Raw .\start.ps1 | Invoke-Expression } *>&1 | Out-String
+          Write-Host $out
+          if (-not (Test-Path "$env:BRAINOS_DIR\kit\SETUP.md")) { throw "kit not in the brain folder" }
+          if ($out -notmatch 'Python is ready\.') { throw "Python not found by start.ps1" }
+          if ($out -notmatch 'and paste this line:') { throw "start.ps1 did not hand over to the AI app" }
+          $check = py "$env:BRAINOS_DIR\kit\check_setup.py" "$env:BRAINOS_DIR" | Out-String
+          Write-Host $check
+          if ($check -notmatch 'Python: .* Good\.') { throw "check_setup: Python" }
+          if ($check -notmatch 'Kit: all the files it needs are here') { throw "check_setup: kit files" }
+          if ($check -notmatch 'is empty and ready for create_brain.py') { throw "check_setup: brain folder" }
