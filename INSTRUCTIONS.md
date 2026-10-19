@@ -4,7 +4,7 @@ BrainOS core makes an empty brain (a folder of Markdown and YAML files) on the p
 
 Setting a brain up for the first time, or carrying on with one, because the person pasted the one line? Follow `SETUP.md` instead: it is the guided first run in nine steps (find or make the brain, choose and connect their accounts, pull everything in, domains, review, skills, scheduled jobs, a first real answer), and it saves progress in the brain's `setup.yaml`. This file is the reference for every step. The one line, from the kit's home at github.com/adrianshedden/brainos-core:
 
-- In an AI app: Set up my brain from the BrainOS kit at github.com/adrianshedden/brainos-core (read its SETUP.md first and follow it). Ask me before you change anything, work only in my brain folder, and never send my files anywhere.
+- In an AI app: Set up my brain from the BrainOS kit at github.com/adrianshedden/brainos-core (read its SETUP.md first and follow it). Ask me before you change anything, work only in my brain folder, and never share, upload or post my files.
 - In a terminal on a Mac: `curl -fsSL https://raw.githubusercontent.com/adrianshedden/brainos-core/main/start.sh | sh`
 - In a terminal on Windows (PowerShell): `irm https://raw.githubusercontent.com/adrianshedden/brainos-core/main/start.ps1 | iex`
 

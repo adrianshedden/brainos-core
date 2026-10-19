@@ -16,8 +16,8 @@ import progress  # noqa: E402
 from create_brain import create_brain  # noqa: E402
 
 ONE_LINE = ("Set up my brain from the BrainOS kit at github.com/adrianshedden/brainos-core (read its SETUP.md first "
-            "and follow it). Ask me before you change anything, work only in my brain folder, and never send my "
-            "files anywhere.")
+            "and follow it). Ask me before you change anything, work only in my brain folder, and never share, "
+            "upload or post my files.")
 MAC = "curl -fsSL https://raw.githubusercontent.com/adrianshedden/brainos-core/main/start.sh | sh"
 WINDOWS = "irm https://raw.githubusercontent.com/adrianshedden/brainos-core/main/start.ps1 | iex"
 CONNECTIONS = "Connections live in your AI app or on your computer, never in this folder, and passwords never go in it."
@@ -102,9 +102,12 @@ class NineSteps(unittest.TestCase):
 
     def test_step_two_uses_tick_boxes_when_the_app_has_them(self):
         # Rian's Mac test, 19 Oct 2026 (card UT): "for selecting the connectors it would be tick boxes".
+        self.assertNotIn("**Code** tab", self.setup)
         two = flat(sections(self.setup)[2])
-        for must in ("tick boxes", "one tick box per source", "at most four tick boxes per question",
-                     '"Your accounts"', '"Files you bring"', "Otherwise, send the list as short numbered lines"):
+        # Rian's Chat-tab test: the Claude app's Chat tab shows a clickable question. Never send people to Code.
+        for must in ("clickable question", "Chat tab", "one choice per source", "one question per group",
+                     '"Your accounts"', '"Files you bring"', "If your app offers tick boxes",
+                     "Otherwise, send the list as short numbered lines", "one read-only check"):
             self.assertIn(must, two)
 
     def test_step_four_says_where_the_data_goes_before_anything_is_brought_in(self):

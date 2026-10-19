@@ -2,7 +2,7 @@
 
 For the AI. The person pasted this line into you:
 
-> Set up my brain from the BrainOS kit at github.com/adrianshedden/brainos-core (read its SETUP.md first and follow it). Ask me before you change anything, work only in my brain folder, and never send my files anywhere.
+> Set up my brain from the BrainOS kit at github.com/adrianshedden/brainos-core (read its SETUP.md first and follow it). Ask me before you change anything, work only in my brain folder, and never share, upload or post my files.
 
 Or they ran the terminal line, which downloaded the kit, made the brain folder and started you with that same line. Follow the nine steps below in order. You do the work; the person only clicks where a step says so. Progress is saved after every step (`setup.yaml`, written by `kit/progress.py`), so they can stop at any point and paste the same line again, in this app or another, and you carry on where they left off.
 
@@ -50,7 +50,7 @@ Commands:
    - **Nothing found:** make a new brain (point 4).
 4. Choose the place the same way the terminal line does. The brain goes in `Documents/brain`, unless Documents is copied to the cloud: then it goes in `brain` in their home folder, where it stays on this computer. To check: on a Mac, Documents is in iCloud when `~/Library/Mobile Documents/com~apple~CloudDocs/Documents` exists, and it is copied online when its real location is inside iCloud, OneDrive, Dropbox, Google Drive or `~/Library/CloudStorage`; on Windows, Documents is in OneDrive when its real location is inside a OneDrive folder. If it is copied, say so in one line: "Heads-up: your Documents folder is copied to iCloud, so your brain would be too. I'll make it in your home folder instead, where it stays on this computer." (Say OneDrive, or whichever it is.) Then ask, in one message, with that place first: "I'll make a folder called brain in your Documents. Is that all right? If not, say where: Desktop, Documents, or somewhere else. I'll create it once you say." (Name the home folder instead of Documents when Documents is copied.)
 5. With their yes, make the brain:
-   1. If you cannot reach that place, tell them how to let you. In the Claude app: it may open on the **Code** tab. Click the other tab, **Chat and Cowork**, start a new chat, click **Project or folder** under the message box, then **Add folder**, choose the place (for example Documents), then click **Always allow**. In Codex, Cursor or OpenCode: open that place as the folder to work in. For the home folder, if the app cannot open it, ask them to make the folder themselves (Mac: in Finder, **Go**, **Home**, then **File**, **New Folder**, named brain; Windows: in File Explorer, open the folder with their name, **New folder**, named brain) and choose that.
+   1. If you cannot reach that place, tell them how to let you. In the Claude app: use the **Chat** tab (Chat and Cowork are one tab). Start a new chat, click **Project or folder** under the message box, then **Add folder**, choose the place (for example Documents), then click **Always allow**. In Codex, Cursor or OpenCode: open that place as the folder to work in. For the home folder, if the app cannot open it, ask them to make the folder themselves (Mac: in Finder, **Go**, **Home**, then **File**, **New Folder**, named brain; Windows: in File Explorer, open the folder with their name, **New folder**, named brain) and choose that.
    2. Make the empty `brain` folder and get the kit into a folder called `kit` inside it (point 6).
    3. Build the brain: `python3 kit/create_brain.py . --domains network`. Step 5 adds more areas later.
    4. Check the three front doors match: `python3 scripts/level1.py check .` It should say level 1 is the same in `CLAUDE.md`, `GEMINI.md` and the top of `AGENTS.md`.
@@ -78,7 +78,9 @@ Two lines: where the brain is, and that it is a plain folder of text files they 
 
 **What you ask**
 
-If your app has a built-in way to ask a question with tick boxes (for example Claude Code's question tool with more than one choice allowed, which the Claude app's **Code** tab has), use it: one tick box per source, with its one line on why as the description. It takes at most four tick boxes per question, so ask two questions at once: "Your accounts" (calendar, email, documents, Notion or Slack) and "Files you bring" (your existing notes, WhatsApp chats, LinkedIn (optional), something else). Ticking none means "none for now".
+If your app offers a clickable question (the Claude app's Chat tab does: a box of numbered choices the person clicks), use it for this step. If it lets them pick several, give one choice per source, with its one line on why underneath. If it takes only a few choices at a time, ask one question per group: "Your accounts" (calendar, email, documents, Notion or Slack) and "Files you bring" (your existing notes, WhatsApp chats, LinkedIn (optional), something else). If your app offers tick boxes, use them the same way. Picking none means "none for now".
+
+If the app already has connections that can read a source (for example a Google, Microsoft mail or Beeper connection), offer to use each one as it is, with one read-only check, instead of adding a new one.
 
 Otherwise, send the list as short numbered lines and ask them to pick any (numbers are fine), or "none for now". For a source with two names (Google or Outlook), ask which one they use.
 
