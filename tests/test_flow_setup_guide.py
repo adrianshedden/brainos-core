@@ -121,6 +121,16 @@ class NineSteps(unittest.TestCase):
         agents = (CORE / "template" / "AGENTS.md").read_text(encoding="utf-8")
         self.assertIn("connect my Outlook, connect my Gmail", agents)
 
+    def test_the_core_message_opens_the_readme_and_the_setup(self):
+        # Locked (dec_20261019_2310_brainos_core_message): what BrainOS is, before any connection.
+        readme_top = (CORE / "README.md").read_text(encoding="utf-8").split("\n## ", 1)[0]
+        setup_top = self.setup.split("## 1.", 1)[0]
+        for text in (readme_top, setup_top):
+            for must in ("just knows", "re-attaching explanations, PDFs, documents or exports", "connections you choose",
+                         "none is guaranteed", "giving it information directly"):
+                self.assertIn(must, text)
+        self.assertIn("**Your first message.**", setup_top)
+
     def test_step_two_uses_tick_boxes_when_the_app_has_them(self):
         # Rian's Mac test, 19 Oct 2026 (card UT): "for selecting the connectors it would be tick boxes".
         self.assertNotIn("**Code** tab", self.setup)

@@ -6,6 +6,8 @@ For the AI. The person pasted this line into you:
 
 Or they ran the terminal line, which downloaded BrainOS, made the brain folder and started you with that same line. Follow the nine steps below in order. You do the work; the person only clicks where a step says so. Progress is saved after every step (`setup.yaml`, written by `kit/progress.py`), so they can stop at any point and paste the same line again, in this app or another, and you carry on where they left off.
 
+**Your first message.** Before step 1, tell the person what BrainOS is, in its own short message, in these or similar words: "BrainOS gives your AI a brain to use and keep adding to, so it just knows you and your work: no more re-attaching explanations, PDFs, documents or exports to every new chat. You fill it two ways: connections you choose (some are one click, some take a few extra steps, and none is guaranteed), or by giving it information directly." Connections help, but they are not the point: a brain filled by hand works just as well.
+
 ## How to work, the whole way through
 
 The person is not technical. Speak to them that way, every message:
