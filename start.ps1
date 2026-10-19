@@ -3,7 +3,7 @@
 #   irm https://raw.githubusercontent.com/adrianshedden/brainos-core/main/start.ps1 | iex
 #
 # What it does, and nothing more (the same steps as start.sh on a Mac):
-#   1. Downloads the BrainOS kit from GitHub as one zip file (no git needed).
+#   1. Downloads BrainOS from GitHub as one zip file (no git needed).
 #   2. Makes your brain folder: Documents\brain, or your home folder's brain folder when Documents is
 #      copied online (OneDrive and the like), so your brain stays on this computer. A brain made
 #      earlier is found and used again.
