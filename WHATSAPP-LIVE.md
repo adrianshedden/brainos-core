@@ -1,5 +1,9 @@
 # Connect WhatsApp live (afternoon, if you want it)
 
+**Tell your AI:** Connect my WhatsApp using WHATSAPP-LIVE.md from the BrainOS kit at github.com/adrianshedden/brainos-core.
+
+For the AI, when the person sends that line: read this whole guide first, then follow it from section 1. Say the risks and wait for a clear yes before you install or change anything. Work in their brain folder (`SETUP.md` step 1 says how to find it); its `kit` folder holds the scripts named below. If they have no brain yet, offer to set one up first with `SETUP.md`.
+
 For the AI. Optional, and not part of setup: setup only brings in chats the person exports from their phone. Use this only when the person asks for a live link to WhatsApp after setup, for example in an afternoon build session. Speak as `SETUP.md` says: plain words, one step at a time, wait for "done". Run commands from inside the brain folder; on Windows, type `py` instead of `python3`.
 
 ## 1. The risks, and a yes

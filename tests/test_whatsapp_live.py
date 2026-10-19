@@ -339,18 +339,29 @@ class Guide(unittest.TestCase):
             self.assertIn(must, gone)
 
     def test_it_is_short(self):
-        self.assertLess(len(GUIDE.split()), 1100, "Rian, sheet v10: keep it short")
+        self.assertLess(len(GUIDE.split()), 1200, "Rian, sheet v10: keep it short")
 
     def test_the_always_on_server_answer_names_waha_and_nothing_private(self):
         answer = GUIDE.split("## How does it work on an always-on server?", 1)[1]
         self.assertIn("WAHA", answer)
         self.assertIn("ready-made WhatsApp Web server", answer)
 
+    def test_the_guide_opens_with_the_line_to_tell_your_ai(self):
+        # Rian's slide review: people reach this page from a QR code and need a line to hand their AI.
+        top = GUIDE.split("## 1.", 1)[0]
+        self.assertIn("**Tell your AI:** Connect my WhatsApp using WHATSAPP-LIVE.md from the BrainOS kit at "
+                      "github.com/adrianshedden/brainos-core.", top)
+        self.assertIn("follow it from section 1", top)
+        self.assertIn("wait for a clear yes before you install or change anything", top)
+        agents = (CORE / "template" / "AGENTS.md").read_text(encoding="utf-8")
+        self.assertIn("connect my WhatsApp using WHATSAPP-LIVE.md | Follow `kit/WHATSAPP-LIVE.md`", agents)
+
     def test_nothing_of_rians_is_in_it(self):
         personal = re.compile(r"Rian|Adrian|Shedden|/Users/|/home/|beeper\.local|metanova|Becky|\+44|07\d{9}|"
                               r"[\w.]+@[\w-]+\.\w+|super-mcp|claudedanger", re.IGNORECASE)
         for name in ("WHATSAPP-LIVE.md", "whatsapp_live.py", "whatsapp_send_guard.py"):
-            text = (CORE / name).read_text(encoding="utf-8")
+            # The kit's own public address is allowed: it is where people get the kit.
+            text = (CORE / name).read_text(encoding="utf-8").replace("github.com/adrianshedden/brainos-core", "")
             self.assertIsNone(personal.search(text), f"{name}: {personal.search(text)}")
 
     def test_setup_leaves_it_out(self):
