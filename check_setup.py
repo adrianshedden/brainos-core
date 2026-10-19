@@ -9,6 +9,9 @@ Read-only: it changes nothing and never touches the network. It says, in plain E
 - one next step, in the build-along order: check, choose domains, create the brain, import, mine my
   context, first skills.
 
+If the brain has saved progress (setup.yaml, written by progress.py), the very first line says where to
+carry on, for example "Carry on from step 3: connect them", then what is still on its way.
+
 It always finishes with exit code 0, whatever it finds. Only wrong arguments stop it."""
 import os
 import shlex
@@ -22,9 +25,11 @@ sys.path.insert(0, str(KIT / "importers"))
 import linkedin  # noqa: E402
 import whatsapp  # noqa: E402
 import x_export  # noqa: E402
+sys.path.insert(0, str(KIT))
+import progress  # noqa: E402
 
 MIN_PYTHON = (3, 8)
-NEEDED = ["create_brain.py", "level1.py", "SETUP.md", "template/brain.yaml", "template/LEVEL1.md", "template/AGENTS.md",
+NEEDED = ["create_brain.py", "level1.py", "progress.py", "SETUP.md", "template/brain.yaml", "template/LEVEL1.md", "template/AGENTS.md",
           "importers/common.py",
           "importers/linkedin.py", "importers/whatsapp.py", "importers/calendar_ics.py",
           "importers/apple_contacts.py", "importers/x_export.py"]
@@ -39,6 +44,7 @@ KINDS = {
     "whatsapp": ("a WhatsApp chat export", "importers/whatsapp.py"),
     "calendar": ("a calendar export", "importers/calendar_ics.py"),
     "contacts": ("an Apple Contacts export", "importers/apple_contacts.py"),
+    "connector": ("what your AI read through a connector", "importers/from_connector.py"),
 }
 
 
@@ -95,6 +101,8 @@ def kind_of(path):
         head = _head(path).decode("utf-8-sig", errors="replace")
     except (OSError, zipfile.BadZipFile) as e:
         return None, f"could not be opened ({e.__class__.__name__})"
+    if suffix == ".json" and head.lstrip().startswith("{") and ('"people"' in head or '"interactions"' in head):
+        return "connector", ""
     if suffix in (".vcf", ".vcard") or head.lstrip().upper().startswith("BEGIN:VCARD"):
         return "contacts", ""
     if suffix in (".ics", ".ical") or head.lstrip().upper().startswith("BEGIN:VCALENDAR"):
@@ -116,7 +124,33 @@ def command(*args, windows=None):
 
 
 def importer_line(kind, export, brain):
+    if kind == "connector":  # this one takes the brain first, then the file
+        return command(KIT / KINDS[kind][1], brain, export)
     return command(KIT / KINDS[kind][1], export, brain)
+
+
+def carry_on(folder):
+    """The lines that open the report when the brain has saved progress (setup.yaml). Empty when it has none."""
+    try:
+        data = progress.load(folder)
+    except progress.SetupFileError as e:
+        return [f"Saved progress: setup.yaml could not be read ({e}). Rename it (for example to setup-old.yaml); "
+                "the next progress.py command starts a fresh one. The brain itself is fine.", ""]
+    if data is None:
+        return []
+    if data["done"]:
+        out = ["Setup is finished: all nine steps are done. To add more, carry on from step 3: connect them."]
+    else:
+        name = progress.step_name(data["step"])
+        line = f"Carry on from step {data['step']}: {name[0].lower() + name[1:]}"
+        waiting = [p for p in data["picks"] if p not in data["connected"]]
+        if data["step"] == 3 and waiting:
+            line += f" (still to connect: {', '.join(waiting)})"
+        out = [line + "."]
+    for item in data["pending"]:
+        say = f" When it arrives, say: {progress.sentence(item['say_when_arrives'])}" if item["say_when_arrives"] else ""
+        out.append(progress.plain(f"Still on its way: {item['what']}.{say}"))
+    return out + [""]
 
 
 def brain_state(folder):
@@ -146,7 +180,8 @@ def level1_note(folder):
 def report(folder):
     """The lines to print, in order. Changes nothing."""
     folder = Path(folder).expanduser().resolve()
-    out = ["BrainOS setup check. Nothing is changed by this check.", ""]
+    out = carry_on(folder) if folder.is_dir() else []
+    out += ["BrainOS setup check. Nothing is changed by this check.", ""]
     py = ".".join(map(str, sys.version_info[:3]))
     old_python = sys.version_info[:2] < MIN_PYTHON
     out.append(f"Python: {py}. " + ("Too old: BrainOS needs Python 3.8 or newer." if old_python else "Good."))
@@ -173,7 +208,11 @@ def report(folder):
             out.append("- None yet.")
         for p in items:
             kind, note = kind_of(p)
-            if kind:
+            if kind and not (KIT / KINDS[kind][1]).is_file():
+                unknown.append(p)
+                out.append(f"- {p.name}: looks like {KINDS[kind][0]}, but this kit has no {KINDS[kind][1]}. "
+                           "Get the newest kit (SETUP.md, step 1), then run this check again.")
+            elif kind:
                 found.append(p)
                 out.append(f"- {p.name}: looks like {KINDS[kind][0]}. Import it with:")
                 out.append(f"    {importer_line(kind, p, folder)}")

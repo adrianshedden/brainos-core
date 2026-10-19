@@ -119,24 +119,20 @@ class KitInsideTheBrain(unittest.TestCase):
     def test_setup_guide_is_versioned_and_asks_before_creating(self):
         setup = read(CORE / "SETUP.md")
         self.assertIn(f"kit version {read(CORE / 'VERSION').strip()}", setup)
-        at = [setup.index(s) for s in ("## 1. Check you can do this here", "## 2. Ask where the brain should live",
-                                       "## 3. Ask what to connect first", "## 4. Steps for what they picked",
-                                       "## 5. Bring in what is ready now", "## 6. Get to know them",
-                                       "## 7. Finish with a clear way back")]
-        self.assertEqual(at, sorted(at))
+        # The nine headings, in order, are checked in test_flow_setup_guide.py.
         for must in ("Desktop, Documents, or somewhere else", "I'll create it once you say", "Never delete",
                      "Never send, upload or post", "Give steps only for what they picked",
                      "LinkedIn, WhatsApp, then the rest", "add my LinkedIn", "kit/create_brain.py",
                      "scripts/level1.py check"):
             self.assertIn(must, setup)
-        # the connect-first list: most popular first, each with one line on why it fills the brain
-        menu = setup.split("## 3. Ask what to connect first", 1)[1].split("\n## ", 1)[0]
+        # the fallback connect list (no connections.yaml): most popular first, each with one line on why it fills the brain
+        menu = setup.split("## 2. Choose what to connect", 1)[1].split("\n## ", 1)[0]
+        menu = menu.split("use this list instead", 1)[1]
         names = ["Email", "Calendar", "LinkedIn", "WhatsApp", "Google Drive", "Something else"]
         at = [menu.index(f"**{n}") for n in names]
         self.assertEqual(at, sorted(at))
         for line in [l for l in menu.splitlines() if l[:2] in {f"{i}." for i in range(1, 7)}]:
             self.assertRegex(line, r"\*\*: .{20,}", line)
-
 
 if __name__ == "__main__":
     unittest.main()
