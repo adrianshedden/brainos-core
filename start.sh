@@ -89,7 +89,7 @@ refuse_other_folders() {
       continue
     fi
     case ${item##*/} in
-      kit | exports | setup.yaml | .DS_Store) ;;
+      kit | exports | setup.yaml | .DS_Store | .git) ;;
       *) fail "There is already a folder at $BRAIN with other files in it, and it is not a brain. To keep those files safe, nothing was changed. Move or rename that folder, then run this line again." ;;
     esac
   done

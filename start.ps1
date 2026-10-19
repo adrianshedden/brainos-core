@@ -29,7 +29,7 @@
     # The AI-app line: the same words everywhere (SETUP.md, README, both start scripts, the tests).
     $Line = 'Set up my brain from the BrainOS kit at github.com/adrianshedden/brainos-core (read its SETUP.md first and follow it). Ask me before you change anything, work only in my brain folder, and never share, upload or post my files.'
     $RepoZip = 'https://github.com/adrianshedden/brainos-core/archive/refs/heads'
-    $Allowed = @('kit', 'exports', 'setup.yaml', '.DS_Store', 'desktop.ini')
+    $Allowed = @('kit', 'exports', 'setup.yaml', '.DS_Store', 'desktop.ini', '.git')
 
     function Say([string]$Text) { Write-Host $Text }
 

@@ -32,7 +32,8 @@ TEMPLATE = KIT / "template"
 LIBRARY = TEMPLATE / "domains"
 # What a folder may already hold and still count as empty: the person's exports, the kit, the saved
 # setup progress (written by kit/progress.py before the brain exists), and the Finder's own file.
-MAY_HOLD = {"exports", "kit", "setup.yaml", ".DS_Store"}
+# .git: Orca makes every new folder a git repository (it saves versions); that is fine for a brain.
+MAY_HOLD = {"exports", "kit", "setup.yaml", ".DS_Store", ".git"}
 # Folders in a brain that are not the brain's own text: never rendered, never checked as brain files.
 NOT_BRAIN = {"exports", "kit"}
 # Personal domains: what each holds, the requests AGENTS.md routes to it, and its files.
