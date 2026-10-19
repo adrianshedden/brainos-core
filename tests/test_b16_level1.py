@@ -116,6 +116,22 @@ class KitInsideTheBrain(unittest.TestCase):
             self.assertEqual(check_brain.check(brain), [])
             self.assertIn("kit/", read(brain / ".gitignore").splitlines())
 
+    def test_a_folder_orca_made_a_git_repository_is_still_ready_for_a_brain(self):
+        # Orca (Rian's test, 19 Oct 2026) makes every new folder a git repository: its .git must not block the brain.
+        import check_setup
+        from create_brain import create_brain
+        with tempfile.TemporaryDirectory() as tmp:
+            brain = Path(tmp) / "brain"
+            (brain / ".git").mkdir(parents=True)
+            (brain / ".git" / "HEAD").write_text("ref: refs/heads/main\n", encoding="utf-8")
+            self.assertEqual(check_setup.brain_state(brain), "empty")
+            create_brain(brain)
+            self.assertTrue((brain / "brain.yaml").is_file())
+            self.assertEqual((brain / ".git" / "HEAD").read_text(encoding="utf-8"), "ref: refs/heads/main\n")
+        self.assertIn("In Orca, opening a new folder also sets it up for saving versions", read(CORE / "SETUP.md"))
+        for script in ("start.sh", "start.ps1"):
+            self.assertIn(".git", read(CORE / script).split("refuse" if script == "start.sh" else "$Allowed", 1)[1][:600])
+
     def test_setup_guide_is_versioned_and_asks_before_creating(self):
         setup = read(CORE / "SETUP.md")
         self.assertIn(f"kit version {read(CORE / 'VERSION').strip()}", setup)
