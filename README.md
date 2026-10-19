@@ -73,6 +73,7 @@ Each importer prints what it found and what it skipped, and is safe to re-run.
 - `importers/` — LinkedIn, WhatsApp, calendar, Apple Contacts and X export readers, plus `from_connector.py`, which saves who and when from what your AI read through a connection. They only ever read a file you give them.
 - `jobs.py` — lists the brain's skills and which are due, and marks one done. Each brain gets its own copy in `scripts/`.
 - `publish_github.py` and `GITHUB.md` — back the brain up to a private GitHub repository you own, step by step.
+- `WHATSAPP-LIVE.md`, `whatsapp_live.py` and `whatsapp_send_guard.py` — optional, never part of setup: a live link to WhatsApp, for people who want it after setup. Risks and a yes first, reading first, and sending only with a second yes, with each message shown to you word for word before it goes. Sending works in Claude Code only. Switch it off or remove it any time.
 - `template/` — the brain itself. `LEVEL1.md` is level 1 (who it is for, how to start, the rules), written once and
   copied word for word to `CLAUDE.md` (Claude), `GEMINI.md` (Gemini) and the top of `AGENTS.md` (Codex, Cursor and
   others); `AGENTS.md` is level 2 (which folder or skill answers which request) and `DOMAINS.md` lists level 3; five core domains, each with its own instructions file: `automations/`,

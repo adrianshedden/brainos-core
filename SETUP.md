@@ -210,7 +210,7 @@ That is the setup. Stop there and wait for the person.
 
 ## Coming back later
 
-When the person pastes the line again after setup is finished, `check_setup.py` says so on its first line. Ask what they would like: connect something new (step 3 for that one source, then step 4 for it), add a domain (step 5), or a new skill or scheduled job (steps 7 and 8). Save each change with `kit/progress.py` as above.
+When the person pastes the line again after setup is finished, `check_setup.py` says so on its first line. Ask what they would like: connect something new (step 3 for that one source, then step 4 for it), add a domain (step 5), or a new skill or scheduled job (steps 7 and 8). Only if they ask for a live link to WhatsApp, follow `kit/WHATSAPP-LIVE.md`. Save each change with `kit/progress.py` as above.
 
 ## Export steps
 

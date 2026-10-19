@@ -33,6 +33,7 @@ The order is: check, choose domains, create the brain, import, mine my context, 
 9. `<folder>/tools/ai-tools/` has one card per AI tool (the Claude app's Chat tab, Claude in a browser, Claude Code, ChatGPT, Codex, OpenCode, Cursor, Orca, others): how to point it at the brain and what it can and cannot do, each line with its source and the date it was checked.
 10. Setup progress lives in `<folder>/setup.yaml` and is written only by `progress.py`: `python3 progress.py <folder> show`, `step <n>`, `pick <id> ...`, `connected <id> <how>`, `pending "<what>" "<what to say when it arrives>"`, `arrived "<what>"`, `app <name>`, `done`. Each prints one plain line. `check_setup.py` reads it and starts with "Carry on from step <n>". The connections each AI app offers, with the exact clicks, are in `connections.yaml`.
 11. To back the brain up to the person's own private GitHub, walk them through `GITHUB.md`. Always show the dry run first: `python3 publish_github.py <folder> <their-repo-address>`. Only add `--apply` when they say so. The `exports` folder is never backed up.
+12. A live link to WhatsApp, only when the person asks for it after setup: follow `WHATSAPP-LIVE.md`. Setup itself only imports exported chats.
 
 To see what a filled brain looks like, open `sample/brain/` (made-up people, built by `python3 sample/build_sample.py`).
 
