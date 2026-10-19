@@ -28,6 +28,12 @@ QUESTIONS = {
     "who-have-i-gone-quiet-with": "Who have I gone quiet with?",
 }
 SETUP = {"mine-my-context": "Who am I, as far as my own files show?"}  # the skill that comes before the starters
+# Kit 2.0 (19 Oct 2026): a daily brief, a weekly review and a page maker. Checked in test_kit2_skills.py.
+ROUTINES = {
+    "morning-brief": "What do I need to know this morning?",
+    "weekly-review": "How did my week go, and what are my top three for next week?",
+    "show-it-visually": "Show this answer as a page.",
+}
 MESSAGE = re.compile(r"^- (\d{4}-\d{2}-\d{2}) \d{2}:\d{2} \*\*(.+?)\*\*: (.*)$")
 
 
@@ -133,7 +139,7 @@ class StarterJobs(unittest.TestCase):
         for brain in (TEMPLATE, SAMPLE):
             found = {p.parent.name: field(p.read_text(encoding="utf-8"), "Question")
                      for p in (brain / "skills").glob("*/SKILL.md")}
-            self.assertEqual(found, {**QUESTIONS, **SETUP}, brain)
+            self.assertEqual(found, {**QUESTIONS, **SETUP, **ROUTINES}, brain)
 
     def test_every_skill_has_the_header_the_claude_app_reads(self):
         for name in {**QUESTIONS, **SETUP}:
@@ -263,14 +269,14 @@ class StarterJobs(unittest.TestCase):
                 self.assertIn(f"`{name}/`", skills_md, f"{name} missing from {brain.name}/skills/SKILLS.md")
                 self.assertIn(f"skills/{name}/SKILL.md", agents, f"{name} missing from {brain.name}/AGENTS.md")
                 self.assertIn(f"  - skills/{name}/SKILL.md\n", manifest, f"{name} missing from {brain.name}/brain.yaml")
-            self.assertIn("Eight skills ship with the brain", skills_md)
+            self.assertIn("Eleven skills ship with the brain", skills_md)
         # 16 Oct 2026: the guides said "seven starter skills" while eight ship. Every count is the total.
-        words = {"five": 5, "six": 6, "seven": 7, "eight": 8, "nine": 9}
+        words = {"five": 5, "six": 6, "seven": 7, "eight": 8, "nine": 9, "ten": 10, "eleven": 11, "twelve": 12}
         for guide in ("README.md", "INSTRUCTIONS.md"):
             text = (CORE / guide).read_text(encoding="utf-8")
-            counts = re.findall(r"\b(five|six|seven|eight|nine) (?:starter )?skills", text)
+            counts = re.findall(r"\b(" + "|".join(words) + r") (?:starter )?skills", text)
             self.assertTrue(counts, guide)
-            self.assertEqual({words[c] for c in counts}, {len(QUESTIONS) + len(SETUP)}, guide)
+            self.assertEqual({words[c] for c in counts}, {len(QUESTIONS) + len(SETUP) + len(ROUTINES)}, guide)
         self.assertIn("prep me for my next meeting, who have I gone quiet with",
                       (CORE / "INSTRUCTIONS.md").read_text(encoding="utf-8"))
 

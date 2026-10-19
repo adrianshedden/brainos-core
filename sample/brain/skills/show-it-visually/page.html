@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[[TITLE]]</title>
+<style>
+[[STYLE]]
+</style>
+</head>
+<body>
+<main class="page">
+  <header class="masthead">
+    <p class="label">[[LABEL]]</p>
+    <h1>[[HEADLINE]]</h1>
+    <p class="lede">[[SUMMARY]]</p>
+  </header>
+  <!-- shape: make_page.py fills this page and removes this note. By hand, replace each [[SLOT]]:
+  [[TITLE]] the headline, short. [[STYLE]] the whole of style.css, pasted in (never a link to it).
+  [[LABEL]] "From your brain" and today's date. [[HEADLINE]] one sentence that says the point.
+  [[SUMMARY]] one or two lines, only what the points show. [[SOURCES]] one chip per file used.
+  [[MADE]] "Made on <date> from the files in your brain. Each point names the file it came from."
+  [[SECTIONS]] one of these for each section, one li for each point:
+  <section class="card">
+    <h2>A short heading</h2>
+    <ul class="points">
+      <li>One fact in plain words.<span class="src"><span class="src__k">Source</span>memory/calendar/events.yaml</span></li>
+    </ul>
+  </section>
+  A chip: <li class="chip">memory/calendar/events.yaml</li> -->
+[[SECTIONS]]
+  <footer class="foot">
+    <p class="label">Where this came from</p>
+    <ul class="chips">
+[[SOURCES]]
+    </ul>
+    <p class="small muted">[[MADE]]</p>
+  </footer>
+</main>
+</body>
+</html>
