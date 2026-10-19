@@ -78,7 +78,9 @@ Two lines: where the brain is, and that it is a plain folder of text files they 
 
 **What you ask**
 
-Send the list and ask them to pick any (numbers are fine), or "none for now". For a source with two names (Google or Outlook), ask which one they use.
+If your app has a built-in way to ask a question with tick boxes (for example Claude Code's question tool with more than one choice allowed, which the Claude app's **Code** tab has), use it: one tick box per source, with its one line on why as the description. It takes at most four tick boxes per question, so ask two questions at once: "Your accounts" (calendar, email, documents, Notion or Slack) and "Files you bring" (your existing notes, WhatsApp chats, LinkedIn (optional), something else). Ticking none means "none for now".
+
+Otherwise, send the list as short numbered lines and ask them to pick any (numbers are fine), or "none for now". For a source with two names (Google or Outlook), ask which one they use.
 
 **Save progress:** `python3 kit/progress.py . pick <id> <id> ...` with the ids from `connections.yaml`, then `python3 kit/progress.py . step 3`. ("None for now" goes straight to `step 4`.)
 
@@ -218,16 +220,7 @@ When the person pastes the line again after setup is finished, `check_setup.py` 
 
 ## Adding a custom connection
 
-When the app has no connection of its own for a source, a custom connection can add one: a small free program, from the tool's maker or a well-kept open-source project, that runs on the computer or online. The worked example is a personal Outlook.com or Hotmail account (the `local` routes for `outlook-calendar` and `outlook-mail` in `connections.yaml`):
-
-1. Say what it is, in one line: "Your Outlook is a personal account, so it needs a free connection that runs on your computer. It reads only."
-2. Anything it needs installed first (here Node.js, which runs the connection), the person installs from its own website.
-3. Show the lines you will add to the app's own settings (outside the brain folder), and add them only after a yes. Never put them in the brain folder. Keep it read-only.
-4. Restart the app. The person signs in on the maker's own page (here Microsoft's, with a one-time code). Never ask for a password or code in the chat.
-5. Run the proof read, save `connected <id> local`, and add a line to `tools/TOOLS.md`.
-6. To remove it: take the lines out of the app's settings, with a yes, and restart the app.
-
-Only use a program from the maker's own site or a well-known open-source project. If you are not sure it is safe, say so, and use the export instead.
+One worked example, so the person sees how: a personal Outlook.com or Hotmail account, which the app's own Microsoft connection cannot take (the `local` route for `outlook-calendar` and `outlook-mail` in `connections.yaml`). Say in one line what it is: "Your Outlook is a personal account, so it needs a free connection that runs on your computer. It only reads." Then give the route's clicks: the person installs what it needs from its own website, you show the lines you will add to the app's own settings and add them only after a yes, and the person signs in on Microsoft's own page. To remove it, take the lines out again, with a yes. The kit does not try to cover every tool: for anything else, use the app's own connections or the export.
 
 ## Export steps
 

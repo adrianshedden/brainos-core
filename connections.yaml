@@ -283,31 +283,7 @@ sources:
         proof_read: "List tomorrow's events: times and titles only."
         technical_only: false
         checked_on: null
-        notes: "Not yet tried. The worked example of a custom connection (SETUP.md, \"Adding a custom connection\"). For the AI: a free, open-source Microsoft connection that runs on the computer (github.com/softeria/ms-365-mcp-server, MIT licence, maintained). Personal accounts work by default. Keep --read-only. One connection covers Outlook email and calendar: if it is already added for the other, go straight to the log-in click. Sign-in happens on Microsoft's own page with a one-time code: never ask for the password or code in the chat. Settings file: on a Mac ~/Library/Application Support/Claude/claude_desktop_config.json, on Windows %APPDATA%\\Claude\\claude_desktop_config.json (Settings, Developer, Edit Config opens it). Under mcpServers add \"outlook\": {\"command\": \"npx\", \"args\": [\"-y\", \"@softeria/ms-365-mcp-server\", \"--preset\", \"mail,calendar\", \"--read-only\"]}. On Windows: \"command\": \"cmd\", with \"/c\", \"npx\" at the start of args. Show the person the lines first and keep the rest of the file as it is."
-      - app: "orca"
-        type: "local"
-        clicks:
-          - "For a personal Outlook.com or Hotmail account. This adds a free connection that runs on your computer."
-          - "Install Node.js, free (it runs the connection): go to nodejs.org, click the download for your computer, open it and follow its steps."
-          - "Say yes when the AI asks to add the Outlook connection to its own settings (outside your brain folder)."
-          - "Restart it. Ask: log in to Outlook. Open the web address it gives you, type the code, sign in with your Outlook.com or Hotmail account, and click Accept."
-          - "Say done."
-        proof_read: "List tomorrow's events: times and titles only."
-        technical_only: false
-        checked_on: null
-        notes: "Not yet tried. The worked example of a custom connection (SETUP.md, \"Adding a custom connection\"). For the AI: a free, open-source Microsoft connection that runs on the computer (github.com/softeria/ms-365-mcp-server, MIT licence, maintained). Personal accounts work by default. Keep --read-only. One connection covers Outlook email and calendar: if it is already added for the other, go straight to the log-in click. Sign-in happens on Microsoft's own page with a one-time code: never ask for the password or code in the chat. Only when the agent is Claude Code: claude mcp add outlook -s user -- npx -y @softeria/ms-365-mcp-server --preset mail,calendar --read-only (on Windows: claude mcp add outlook -s user -- cmd /c \"npx -y @softeria/ms-365-mcp-server --preset mail,calendar --read-only\"), then /mcp. With Codex or OpenCode, add the same command as a local connection in its own settings."
-      - app: "terminal"
-        type: "local"
-        clicks:
-          - "For a personal Outlook.com or Hotmail account. This adds a free connection that runs on your computer."
-          - "Install Node.js, free (it runs the connection): go to nodejs.org, click the download for your computer, open it and follow its steps."
-          - "Say yes when the AI asks to add the Outlook connection to its own settings (outside your brain folder)."
-          - "Restart it. Ask: log in to Outlook. Open the web address it gives you, type the code, sign in with your Outlook.com or Hotmail account, and click Accept."
-          - "Say done."
-        proof_read: "List tomorrow's events: times and titles only."
-        technical_only: false
-        checked_on: null
-        notes: "Not yet tried. The worked example of a custom connection (SETUP.md, \"Adding a custom connection\"). For the AI: a free, open-source Microsoft connection that runs on the computer (github.com/softeria/ms-365-mcp-server, MIT licence, maintained). Personal accounts work by default. Keep --read-only. One connection covers Outlook email and calendar: if it is already added for the other, go straight to the log-in click. Sign-in happens on Microsoft's own page with a one-time code: never ask for the password or code in the chat. Only when the agent is Claude Code: claude mcp add outlook -s user -- npx -y @softeria/ms-365-mcp-server --preset mail,calendar --read-only (on Windows: claude mcp add outlook -s user -- cmd /c \"npx -y @softeria/ms-365-mcp-server --preset mail,calendar --read-only\"), then /mcp. With Codex or OpenCode, add the same command as a local connection in its own settings."
+        notes: "Not yet tried. The one worked example of adding your own connection (SETUP.md, \"Adding a custom connection\"). For the AI: github.com/softeria/ms-365-mcp-server (free, open source; personal accounts work). One connection covers email and calendar. In the Claude app's settings file (Settings, Developer, Edit Config), under mcpServers, add \"outlook\": {\"command\": \"npx\", \"args\": [\"-y\", \"@softeria/ms-365-mcp-server\", \"--preset\", \"mail,calendar\", \"--read-only\"]} (on Windows: \"command\": \"cmd\", with \"/c\", \"npx\" first in args). Show the person first. Keep --read-only. Sign-in is on Microsoft's page with a one-time code: never ask for the password or code in the chat."
       - app: "any"
         type: "cli"
         clicks:
@@ -403,31 +379,7 @@ sources:
         proof_read: "Show the subject lines of my 3 newest emails. Do not open, send or change anything."
         technical_only: false
         checked_on: null
-        notes: "Not yet tried. The worked example of a custom connection (SETUP.md, \"Adding a custom connection\"). For the AI: a free, open-source Microsoft connection that runs on the computer (github.com/softeria/ms-365-mcp-server, MIT licence, maintained). Personal accounts work by default. Keep --read-only. One connection covers Outlook email and calendar: if it is already added for the other, go straight to the log-in click. Sign-in happens on Microsoft's own page with a one-time code: never ask for the password or code in the chat. Settings file: on a Mac ~/Library/Application Support/Claude/claude_desktop_config.json, on Windows %APPDATA%\\Claude\\claude_desktop_config.json (Settings, Developer, Edit Config opens it). Under mcpServers add \"outlook\": {\"command\": \"npx\", \"args\": [\"-y\", \"@softeria/ms-365-mcp-server\", \"--preset\", \"mail,calendar\", \"--read-only\"]}. On Windows: \"command\": \"cmd\", with \"/c\", \"npx\" at the start of args. Show the person the lines first and keep the rest of the file as it is."
-      - app: "orca"
-        type: "local"
-        clicks:
-          - "For a personal Outlook.com or Hotmail account. This adds a free connection that runs on your computer."
-          - "Install Node.js, free (it runs the connection): go to nodejs.org, click the download for your computer, open it and follow its steps."
-          - "Say yes when the AI asks to add the Outlook connection to its own settings (outside your brain folder)."
-          - "Restart it. Ask: log in to Outlook. Open the web address it gives you, type the code, sign in with your Outlook.com or Hotmail account, and click Accept."
-          - "Say done."
-        proof_read: "Show the subject lines of my 3 newest emails. Do not open, send or change anything."
-        technical_only: false
-        checked_on: null
-        notes: "Not yet tried. The worked example of a custom connection (SETUP.md, \"Adding a custom connection\"). For the AI: a free, open-source Microsoft connection that runs on the computer (github.com/softeria/ms-365-mcp-server, MIT licence, maintained). Personal accounts work by default. Keep --read-only. One connection covers Outlook email and calendar: if it is already added for the other, go straight to the log-in click. Sign-in happens on Microsoft's own page with a one-time code: never ask for the password or code in the chat. Only when the agent is Claude Code: claude mcp add outlook -s user -- npx -y @softeria/ms-365-mcp-server --preset mail,calendar --read-only (on Windows: claude mcp add outlook -s user -- cmd /c \"npx -y @softeria/ms-365-mcp-server --preset mail,calendar --read-only\"), then /mcp. With Codex or OpenCode, add the same command as a local connection in its own settings."
-      - app: "terminal"
-        type: "local"
-        clicks:
-          - "For a personal Outlook.com or Hotmail account. This adds a free connection that runs on your computer."
-          - "Install Node.js, free (it runs the connection): go to nodejs.org, click the download for your computer, open it and follow its steps."
-          - "Say yes when the AI asks to add the Outlook connection to its own settings (outside your brain folder)."
-          - "Restart it. Ask: log in to Outlook. Open the web address it gives you, type the code, sign in with your Outlook.com or Hotmail account, and click Accept."
-          - "Say done."
-        proof_read: "Show the subject lines of my 3 newest emails. Do not open, send or change anything."
-        technical_only: false
-        checked_on: null
-        notes: "Not yet tried. The worked example of a custom connection (SETUP.md, \"Adding a custom connection\"). For the AI: a free, open-source Microsoft connection that runs on the computer (github.com/softeria/ms-365-mcp-server, MIT licence, maintained). Personal accounts work by default. Keep --read-only. One connection covers Outlook email and calendar: if it is already added for the other, go straight to the log-in click. Sign-in happens on Microsoft's own page with a one-time code: never ask for the password or code in the chat. Only when the agent is Claude Code: claude mcp add outlook -s user -- npx -y @softeria/ms-365-mcp-server --preset mail,calendar --read-only (on Windows: claude mcp add outlook -s user -- cmd /c \"npx -y @softeria/ms-365-mcp-server --preset mail,calendar --read-only\"), then /mcp. With Codex or OpenCode, add the same command as a local connection in its own settings."
+        notes: "Not yet tried. The one worked example of adding your own connection (SETUP.md, \"Adding a custom connection\"). For the AI: github.com/softeria/ms-365-mcp-server (free, open source; personal accounts work). One connection covers email and calendar. In the Claude app's settings file (Settings, Developer, Edit Config), under mcpServers, add \"outlook\": {\"command\": \"npx\", \"args\": [\"-y\", \"@softeria/ms-365-mcp-server\", \"--preset\", \"mail,calendar\", \"--read-only\"]} (on Windows: \"command\": \"cmd\", with \"/c\", \"npx\" first in args). Show the person first. Keep --read-only. Sign-in is on Microsoft's page with a one-time code: never ask for the password or code in the chat."
       - app: "any"
         type: "cli"
         clicks:

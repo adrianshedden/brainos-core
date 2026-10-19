@@ -222,11 +222,12 @@ class ConnectionsYaml(unittest.TestCase):
         self.assertTrue(any(r["type"] == "export" and "outlook.com" in " ".join(r["clicks"]) for r in routes_))
 
     def test_personal_outlook_has_a_custom_connection_on_the_computer(self):
-        # Rian, sheet v10 (19 Oct 2026): personal Hotmail or Outlook needs a connection on the computer, the worked
-        # example of a custom route. Read-only, and marked not yet tried.
+        # Rian, sheet v10 (19 Oct 2026): personal Hotmail or Outlook needs a connection on the computer, the one worked
+        # example of adding your own connection (not a full integration: the kit does not cover every tool).
+        # Read-only, and marked not yet tried.
         for sid in ("outlook-calendar", "outlook-mail"):
             local = [r for r in DATA["sources"][sid]["routes"] if r["type"] == "local"]
-            self.assertEqual({r["app"] for r in local}, {"claude", "orca", "terminal"}, sid)
+            self.assertEqual([r["app"] for r in local], ["claude"], "one short worked example, not a full integration")
             for r in local:
                 self.assertIn("personal Outlook.com or Hotmail", r["clicks"][0], sid)
                 self.assertIn("softeria/ms-365-mcp-server", r["notes"], sid)
