@@ -1,5 +1,7 @@
 # BrainOS core — the free edition
 
+BrainOS gives your AI a brain to use and keep adding to, so it just knows you and your work: no more re-attaching explanations, PDFs, documents or exports to every new chat. You fill it two ways: connections you choose (some are one click, some take a few extra steps, and none is guaranteed), or by giving it information directly.
+
 Your own second brain: a folder of plain text files on your own computer, readable by any AI.
 Plain Python 3, nothing to install, no account. BrainOS's scripts never use the internet, except the
 backup to a private GitHub repo of your own, if you choose to make one (step 7).
