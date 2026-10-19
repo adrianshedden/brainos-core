@@ -20,6 +20,6 @@ Each folder below is a domain: one area of this brain, with its own `{DOMAIN}.md
 
 ## Adding a domain
 
-Ask the person first. For an area from the kit's library (network, work, knowledge, family, health, finance), run `python3 kit/create_brain.py . --add work,family` from this folder (their areas, comma-separated): it makes each folder and its `{DOMAIN}.md`, adds a row here, a line to the routing table and the file index in `AGENTS.md`, and its place in `brain.yaml`, and changes nothing else.
+Ask the person first. For an area from BrainOS's library (network, work, knowledge, family, health, finance), run `python3 kit/create_brain.py . --add work,family` from this folder (their areas, comma-separated): it makes each folder and its `{DOMAIN}.md`, adds a row here, a line to the routing table and the file index in `AGENTS.md`, and its place in `brain.yaml`, and changes nothing else.
 
 For any other area, add one when a kind of information keeps coming up and fits none of the folders above. Make the folder, write its `{DOMAIN}.md` (what goes in, what stays out, its files), add a row here and a line to the routing table in `AGENTS.md`, and note the decision in `memory/decisions.jsonl`.

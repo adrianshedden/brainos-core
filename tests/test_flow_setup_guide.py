@@ -15,7 +15,7 @@ sys.path.insert(0, str(CORE))
 import progress  # noqa: E402
 from create_brain import create_brain  # noqa: E402
 
-ONE_LINE = ("Set up my brain from the BrainOS kit at github.com/adrianshedden/brainos-core (read its SETUP.md first "
+ONE_LINE = ("Set up my brain with BrainOS from github.com/adrianshedden/brainos-core (read its SETUP.md first "
             "and follow it). Ask me before you change anything, work only in my brain folder, and never share, "
             "upload or post my files.")
 MAC = "curl -fsSL https://raw.githubusercontent.com/adrianshedden/brainos-core/main/start.sh | sh"
@@ -115,7 +115,7 @@ class NineSteps(unittest.TestCase):
     def test_connect_my_outlook_walks_the_ladder(self):
         later = self.setup.split("## Coming back later", 1)[1].split("## The connection ladder", 1)[0]
         for must in ('"Connect my Outlook"', '"Connect my Gmail"', "step 3 for that one source", "connection ladder",
-                     "personal Outlook.com or Hotmail", "the kit's own local route", "one-time sign-in code",
+                     "personal Outlook.com or Hotmail", "BrainOS's own local route", "one-time sign-in code",
                      "The calendar file only if those fail"):
             self.assertIn(must, later)
         agents = (CORE / "template" / "AGENTS.md").read_text(encoding="utf-8")

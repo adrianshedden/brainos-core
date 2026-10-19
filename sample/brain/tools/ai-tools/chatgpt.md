@@ -10,7 +10,7 @@ Use the ChatGPT desktop app's Codex for your brain: it opens this folder and alw
 
 ## What it can do
 
-- With Codex, read and change the files in your brain folder and run the kit's importers, asking you first. (Source: https://learn.chatgpt.com/codex/cli, checked 1 October 2026)
+- With Codex, read and change the files in your brain folder and run BrainOS's importers, asking you first. (Source: https://learn.chatgpt.com/codex/cli, checked 1 October 2026)
 - With the GitHub app, ChatGPT chat can read and search your private backup when it needs to. (Source: https://help.openai.com/en/articles/11145903-connecting-github-to-chatgpt, checked 1 October 2026)
 
 ## What it cannot do

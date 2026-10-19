@@ -27,7 +27,7 @@
     $ProgressPreference = 'SilentlyContinue'
 
     # The AI-app line: the same words everywhere (SETUP.md, README, both start scripts, the tests).
-    $Line = 'Set up my brain from the BrainOS kit at github.com/adrianshedden/brainos-core (read its SETUP.md first and follow it). Ask me before you change anything, work only in my brain folder, and never share, upload or post my files.'
+    $Line = 'Set up my brain with BrainOS from github.com/adrianshedden/brainos-core (read its SETUP.md first and follow it). Ask me before you change anything, work only in my brain folder, and never share, upload or post my files.'
     $RepoZip = 'https://github.com/adrianshedden/brainos-core/archive/refs/heads'
     $Allowed = @('kit', 'exports', 'setup.yaml', '.DS_Store', 'desktop.ini', '.git')
 
@@ -117,7 +117,7 @@
     }
 
     # 2. Download the kit and 3. put it in <brain>\kit. Only kit is replaced.
-    Say 'Downloading the BrainOS kit...'
+    Say 'Downloading BrainOS...'
     $Ref = if ($env:BRAINOS_REF) { $env:BRAINOS_REF } else { 'main' }
     $Source = if ($env:BRAINOS_ZIP) { $env:BRAINOS_ZIP } else { "$RepoZip/$Ref.zip" }
     $Work = Join-Path ([IO.Path]::GetTempPath()) ('brainos-' + [guid]::NewGuid().ToString('N'))
@@ -135,7 +135,7 @@
             try {
                 Invoke-WebRequest -Uri $Source -OutFile $Zip -UseBasicParsing
             } catch {
-                Say 'Could not download the BrainOS kit. Check this computer is online, then paste the line again.'
+                Say 'Could not download BrainOS. Check this computer is online, then paste the line again.'
                 return
             }
         }
@@ -145,13 +145,13 @@
         try {
             Expand-Archive -LiteralPath $Zip -DestinationPath $Stage -Force
         } catch {
-            Say 'The kit download was damaged. Paste the line again.'
+            Say 'The BrainOS download was damaged. Paste the line again.'
             return
         }
         $tops = @(Get-ChildItem -LiteralPath $Stage -Directory)
         if (($tops.Count -ne 1) -or -not (Test-Path -LiteralPath (Join-Path $tops[0].FullName 'SETUP.md')) -or
             -not (Test-Path -LiteralPath (Join-Path $tops[0].FullName 'create_brain.py'))) {
-            Say 'The download does not look like the BrainOS kit, so nothing was changed. Paste the line again.'
+            Say 'The download does not look like BrainOS, so nothing was changed. Paste the line again.'
             return
         }
         $Kit = Join-Path $Brain 'kit'
@@ -173,7 +173,7 @@
             else { Move-Item -LiteralPath $OldKit -Destination (Join-Path $Brain 'kit') -ErrorAction SilentlyContinue }
         }
     }
-    Say "Your brain folder is $Brain, and the kit is in its kit folder."
+    Say "Your brain folder is $Brain, and BrainOS is in its kit folder."
 
     # 4. Check for Python: py first (from python.org), then python. Installs nothing.
     $Python = $null
@@ -183,7 +183,7 @@
     if ($Python) {
         Say 'Python is ready.'
     } else {
-        Say 'Python is not on this computer yet. The kit uses it to read your files. To get it, free:'
+        Say 'Python is not on this computer yet. BrainOS uses it to read your files. To get it, free:'
         Say '  1. Go to python.org/downloads and click the yellow Download button.'
         Say '  2. Open the file you downloaded. On its first screen, tick "Add python.exe to PATH", then click Install Now.'
         Say '  3. Close this window, open PowerShell again, and paste the same line.'

@@ -349,7 +349,7 @@ class Guide(unittest.TestCase):
     def test_the_guide_opens_with_the_line_to_tell_your_ai(self):
         # Rian's slide review: people reach this page from a QR code and need a line to hand their AI.
         top = GUIDE.split("## 1.", 1)[0]
-        self.assertIn("**Tell your AI:** Connect my WhatsApp using WHATSAPP-LIVE.md from the BrainOS kit at "
+        self.assertIn("**Tell your AI:** Connect my WhatsApp using WHATSAPP-LIVE.md from BrainOS at "
                       "github.com/adrianshedden/brainos-core.", top)
         self.assertIn("follow it from section 1", top)
         self.assertIn("wait for a clear yes before you install or change anything", top)

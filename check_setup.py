@@ -199,7 +199,7 @@ def report(folder):
     out.append(f"Python: {py}. " + ("Too old: BrainOS needs Python 3.8 or newer." if old_python else "Good."))
 
     missing = [rel for rel in NEEDED if not (KIT / rel).is_file()]
-    out.append(f"Kit: {'these files are missing: ' + ', '.join(missing) if missing else 'all the files it needs are here'} ({KIT}).")
+    out.append(f"BrainOS: {'these files are missing: ' + ', '.join(missing) if missing else 'all the files it needs are here'} ({KIT}).")
 
     state = brain_state(folder)
     out.append("Brain folder: " + {
@@ -226,8 +226,8 @@ def report(folder):
                            "know you (skills/mine-my-context/SKILL.md).")
             elif kind and not (KIT / KINDS[kind][1]).is_file():
                 unknown.append(p)
-                out.append(f"- {p.name}: looks like {KINDS[kind][0]}, but this kit has no {KINDS[kind][1]}. "
-                           "Get the newest kit (SETUP.md, step 1), then run this check again.")
+                out.append(f"- {p.name}: looks like {KINDS[kind][0]}, but this copy of BrainOS has no {KINDS[kind][1]}. "
+                           "Get the newest BrainOS (SETUP.md, step 1), then run this check again.")
             elif kind:
                 found.append(p)
                 out.append(f"- {p.name}: looks like {KINDS[kind][0]}. Import it with:")
@@ -244,7 +244,7 @@ def report(folder):
 
     out.append("")
     if missing:
-        step = "Download the BrainOS kit again: some of its files are missing."
+        step = "Download BrainOS again: some of its files are missing."
     elif old_python:
         step = "Install a newer Python 3 (3.8 or later), then run this check again."
     elif state in ("missing", "empty"):

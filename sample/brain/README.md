@@ -14,6 +14,6 @@ A second brain is everything the AI remembers about you and your work and life. 
 - `scripts/`: small helper programs.
 - Personal domains I chose, such as `network/` (people I know and our conversations).
 
-`exports/` is where I put my export files (LinkedIn, WhatsApp, calendar, contacts, X) before importing them. They are never backed up to GitHub. `kit/`, if you have it, is the BrainOS kit your AI set you up with: leave it as it is.
+`exports/` is where I put my export files (LinkedIn, WhatsApp, calendar, contacts, X) before importing them. They are never backed up to GitHub. `kit/`, if you have it, is BrainOS itself, which your AI set you up with: leave it as it is.
 
 Start with `CLAUDE.md` (or `AGENTS.md`, or `GEMINI.md`: they open with the same words).

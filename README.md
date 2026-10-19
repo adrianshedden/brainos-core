@@ -1,20 +1,20 @@
 # BrainOS core — the free edition
 
 Your own second brain: a folder of plain text files on your own computer, readable by any AI.
-Plain Python 3, nothing to install, no account. The kit's scripts never use the internet, except the
+Plain Python 3, nothing to install, no account. BrainOS's scripts never use the internet, except the
 backup to a private GitHub repo of your own, if you choose to make one (step 7).
 
 This is the free edition, under the GNU Affero General Public License v3.0 (AGPL-3.0). The paid part is a separate
 product and is not in this folder.
 
 Who makes it: BrainOS is the product, Remyn is the brand, and AI Ops is the company behind both.
-This kit lives in the `brainos-core` repository on GitHub: github.com/adrianshedden/brainos-core.
+BrainOS lives in the `brainos-core` repository on GitHub: github.com/adrianshedden/brainos-core.
 
 A second brain is everything the AI remembers about you and your work and life. Facts, history, and how you like things done. The agent is what acts on it, tools are how it acts.
 
 ## Where your data goes
 
-Your brain's files stay in your folder. When you ask a question, the parts the AI reads go to the AI company to work out the answer, the same as any chat with it. The kit sends nothing anywhere else.
+Your brain's files stay in your folder. When you ask a question, the parts the AI reads go to the AI company to work out the answer, the same as any chat with it. BrainOS sends nothing anywhere else.
 
 - The importers read your export files and write the brain. They never use the internet.
 - Nothing is published. The only copy that goes online is a backup to your own private GitHub, and only if you set one up.
@@ -22,22 +22,22 @@ Your brain's files stay in your folder. When you ask a question, the parts the A
 
 ## Free and paid
 
-- Free: this kit. Your AI sets up your brain in a chat. It connects the accounts your AI app can reach (such as your calendar and email), and uses export files you download for the rest.
-- Paid: Remyn, the guided set-up website, with templates and support, on top of this same kit.
+- Free: BrainOS core, this folder. Your AI sets up your brain in a chat. It connects the accounts your AI app can reach (such as your calendar and email), and uses export files you download for the rest.
+- Paid: Remyn, the guided set-up website, with templates and support, on top of this same BrainOS core.
 
 ## Set up with your AI (no commands)
 
 Using the Claude app? Install it from claude.com/download, open it, and sign in inside the Claude app window. Signing in on the website does not sign in the app. Use the Chat tab (Chat and Cowork are one tab now). Under the message box, click Project or folder, then Add folder, and choose your brain folder.
 
-Before anything starts you will see three boxes asking for permission: to change files in your folder, to use that folder, and to read the kit's pages on GitHub. That is normal: click Allow (or Always allow) on each.
+Before anything starts you will see three boxes asking for permission: to change files in your folder, to use that folder, and to read BrainOS's pages on GitHub. That is normal: click Allow (or Always allow) on each.
 
 Your AI may already know things about you from its own memory of your past chats. It may suggest some of them for your brain. It should say where each one came from; say no to anything you don't want in.
 
 Paste this one line into the Claude app, the ChatGPT app (with Codex), Cursor, OpenCode or Orca on your computer:
 
-> Set up my brain from the BrainOS kit at github.com/adrianshedden/brainos-core (read its SETUP.md first and follow it). Ask me before you change anything, work only in my brain folder, and never share, upload or post my files.
+> Set up my brain with BrainOS from github.com/adrianshedden/brainos-core (read its SETUP.md first and follow it). Ask me before you change anything, work only in my brain folder, and never share, upload or post my files.
 
-How it connects each account, tried in order, moving down only when a rung fails: 1. official (the AI app's own buttons), 2. custom (a web address you paste into + Add custom connection), 3. local (a small free program on your laptop), 4. export (a file you download). Outlook shows all four: the work Microsoft 365 button; no custom address for personal accounts, so that rung is skipped; the kit's own local route for personal Hotmail; and a calendar file as the last resort.
+How it connects each account, tried in order, moving down only when a rung fails: 1. official (the AI app's own buttons), 2. custom (a web address you paste into + Add custom connection), 3. local (a small free program on your laptop), 4. export (a file you download). Outlook shows all four: the work Microsoft 365 button; no custom address for personal accounts, so that rung is skipped; BrainOS's own local route for personal Hotmail; and a calendar file as the last resort.
 
 Your AI follows `SETUP.md`, in nine steps: it finds or makes your brain (a folder called brain in your Documents, unless you choose another place), shows what it can connect (your calendar, email, documents, Notion, Slack and your existing notes, such as an Obsidian folder; WhatsApp chats you export; LinkedIn, if you like, now or later), gives you the exact clicks for each one, fills your brain, suggests the areas it should keep, learns what matters to you, sets up skills and scheduled jobs, and answers a first real question. Progress is saved after every step: stop any time, paste the same line again, and it carries on, in the same app or another.
 
@@ -46,7 +46,7 @@ Prefer a terminal? One line does the download and starts your AI if it finds one
 - Mac: `curl -fsSL https://raw.githubusercontent.com/adrianshedden/brainos-core/main/start.sh | sh`
 - Windows (PowerShell): `irm https://raw.githubusercontent.com/adrianshedden/brainos-core/main/start.ps1 | iex`
 
-This is kit version 2.0 (`VERSION`).
+This is BrainOS core version 2.0 (`VERSION`).
 
 ## Quick start (by hand)
 
@@ -69,11 +69,11 @@ Each importer prints what it found and what it skipped, and is safe to re-run.
 
 ## What is in here
 
-- `check_setup.py` — checks Python, the kit, the brain folder and your exports, and says the next step. Changes nothing.
+- `check_setup.py` — checks Python, BrainOS's own files, the brain folder and your exports, and says the next step. Changes nothing.
 - `SETUP.md` — the guided first run your AI follows when you paste the one line: nine steps, with progress saved.
 - `progress.py` — saves how far the setup has got, in the brain's `setup.yaml`, so you can stop and carry on later.
 - `create_brain.py` — stamps an empty brain from `template/`, with the personal domains you choose; `--add` puts more into a brain you already have (for example `python3 kit/create_brain.py . --add work,family` from inside the brain).
-- `start.sh` and `start.ps1` — the terminal line for a Mac and for Windows: download the kit into your brain folder and start your AI.
+- `start.sh` and `start.ps1` — the terminal line for a Mac and for Windows: download BrainOS into your brain folder and start your AI.
 - `connections.yaml` — every account each AI app can connect, with the exact clicks, in the order the setup offers them.
 - `level1.py` — keeps level 1 the same at every AI's front door; each brain gets a copy in `scripts/`.
 - `importers/` — LinkedIn, WhatsApp, calendar, Apple Contacts and X export readers, plus `from_connector.py`, which saves who and when from what your AI read through a connection. They only ever read a file you give them.
