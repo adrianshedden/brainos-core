@@ -20,8 +20,8 @@ CORE = Path(__file__).resolve().parents[1]
 START_SH = CORE / "start.sh"
 START_PS1 = CORE / "start.ps1"
 LINE = ("Set up my brain from the BrainOS kit at github.com/adrianshedden/brainos-core (read its SETUP.md first "
-        "and follow it). Ask me before you change anything, work only in my brain folder, and never send my "
-        "files anywhere.")
+        "and follow it). Ask me before you change anything, work only in my brain folder, and never share, "
+        "upload or post my files.")
 AI_APPS = ("claude", "codex", "opencode")
 SYSTEM_PATH = "/usr/bin:/bin"
 DEAD_PROXY = "http://127.0.0.1:9"

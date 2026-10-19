@@ -23,7 +23,7 @@
 set -eu
 
 # The AI-app line: the same words everywhere (SETUP.md, README, both start scripts, the tests).
-LINE='Set up my brain from the BrainOS kit at github.com/adrianshedden/brainos-core (read its SETUP.md first and follow it). Ask me before you change anything, work only in my brain folder, and never send my files anywhere.'
+LINE='Set up my brain from the BrainOS kit at github.com/adrianshedden/brainos-core (read its SETUP.md first and follow it). Ask me before you change anything, work only in my brain folder, and never share, upload or post my files.'
 REPO_ZIP='https://github.com/adrianshedden/brainos-core/archive/refs/heads'
 
 say() {

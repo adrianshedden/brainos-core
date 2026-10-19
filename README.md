@@ -27,7 +27,7 @@ Your brain's files stay in your folder. When you ask a question, the parts the A
 
 ## Set up with your AI (no commands)
 
-Using the Claude app? Install it from claude.com/download, open it, and sign in inside the Claude app window. Signing in on the website does not sign in the app. It may open on the Code tab: click the other tab, Chat and Cowork. Under the message box, click Project or folder, then Add folder, and choose your brain folder.
+Using the Claude app? Install it from claude.com/download, open it, and sign in inside the Claude app window. Signing in on the website does not sign in the app. Use the Chat tab (Chat and Cowork are one tab now). Under the message box, click Project or folder, then Add folder, and choose your brain folder.
 
 Before anything starts you will see three boxes asking for permission: to change files in your folder, to use that folder, and to read the kit's pages on GitHub. That is normal: click Allow (or Always allow) on each.
 
@@ -35,7 +35,7 @@ Your AI may already know things about you from its own memory of your past chats
 
 Paste this one line into the Claude app, the ChatGPT app (with Codex), Cursor, OpenCode or Orca on your computer:
 
-> Set up my brain from the BrainOS kit at github.com/adrianshedden/brainos-core (read its SETUP.md first and follow it). Ask me before you change anything, work only in my brain folder, and never send my files anywhere.
+> Set up my brain from the BrainOS kit at github.com/adrianshedden/brainos-core (read its SETUP.md first and follow it). Ask me before you change anything, work only in my brain folder, and never share, upload or post my files.
 
 Your AI follows `SETUP.md`, in nine steps: it finds or makes your brain (a folder called brain in your Documents, unless you choose another place), shows what it can connect (your calendar, email, documents, Notion, Slack and your existing notes, such as an Obsidian folder; WhatsApp chats you export; LinkedIn, if you like, now or later), gives you the exact clicks for each one, fills your brain, suggests the areas it should keep, learns what matters to you, sets up skills and scheduled jobs, and answers a first real question. Progress is saved after every step: stop any time, paste the same line again, and it carries on, in the same app or another.
 
