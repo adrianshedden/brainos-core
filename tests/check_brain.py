@@ -6,6 +6,12 @@ import re
 import sys
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+import level1  # noqa: E402
+
+# Not the brain's own text: the person's raw exports and the downloaded kit. Never scanned as brain files.
+NOT_BRAIN = ("exports", "kit")
+
 PERSONAL = [r"\badrian\b", r"\brian\b", r"shedden", r"hotmail", r"/users/", r"@s\.whatsapp\.net", r"@g\.us",
             r"@lid\b", r"metafactory", r"metanova", r"!\w+:beeper", r"\bbeeper\b"]
 
@@ -33,17 +39,20 @@ def check(brain):
     for rel in declared:
         if not (brain / rel).is_file():
             problems.append(f"declared file missing: {rel}")
-    for spine in ("CLAUDE.md", "AGENTS.md"):
+    problems += level1.check(brain)
+    for spine in ("CLAUDE.md", "GEMINI.md", "AGENTS.md"):
         try:
             if len((brain / spine).read_text(encoding="utf-8").strip()) < 200:
                 problems.append(f"{spine} is too short to be useful")
         except OSError:
             problems.append(f"{spine} is not readable")
     for p in sorted(brain.rglob("*.md")):
+        if p.relative_to(brain).parts[0] in NOT_BRAIN[1:]:
+            continue
         if "{{" in p.read_text(encoding="utf-8", errors="replace"):
             problems.append(f"unfilled placeholder in {p.relative_to(brain)}")
     for p in sorted(brain.rglob("*")):
-        if p.is_file():
+        if p.is_file() and p.relative_to(brain).parts[0] not in NOT_BRAIN[1:]:
             text = p.read_bytes().decode("utf-8", errors="replace").lower()
             for pat in PERSONAL:
                 if re.search(pat, text) or re.search(pat, str(p.relative_to(brain)).lower()):

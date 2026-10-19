@@ -30,7 +30,7 @@ EXPLAIN = {
 }
 
 # Keeps the raw export files out of every save. Its README stays, so the folder's purpose is backed up too.
-IGNORE_EXPORTS = ("exports/*", "!exports/README.md")
+IGNORE_EXPORTS = ("exports/*", "!exports/README.md", "kit/")
 IGNORE_NOTE = "# Raw export files stay on this computer: they are never part of the GitHub backup."
 
 # What a refused push usually means, in plain words. Matched against git's own message.

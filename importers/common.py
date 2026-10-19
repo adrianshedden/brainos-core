@@ -72,7 +72,9 @@ def write_yaml(brain, relpath, obj, header=None):
 # Interactions (messages, meetings) go next to them in interactions.jsonl. One JSON object per line, no
 # header line: every line carries `source` and `confidence`. Re-importing replaces only that source's lines.
 
-BASE_CONFIDENCE = {"whatsapp": "medium"}  # a WhatsApp name is however the person is saved in a phone
+# A WhatsApp name is however the person is saved in a phone, whether it came from an export (whatsapp) or
+# was read live through a connection (whatsapp-live, written by from_connector.py): medium either way.
+BASE_CONFIDENCE = {"whatsapp": "medium", "whatsapp-live": "medium"}
 
 
 def people_home(brain):

@@ -9,10 +9,10 @@ import nonet
 
 nonet.install()
 CORE = Path(__file__).resolve().parents[1]
-DOCS = ["README.md", "INSTRUCTIONS.md", "GITHUB.md", "template/CLAUDE.md", "template/AGENTS.md", "template/README.md",
+DOCS = ["README.md", "INSTRUCTIONS.md", "SETUP.md", "GITHUB.md", "template/LEVEL1.md", "template/AGENTS.md", "template/README.md",
         "template/exports/README.md", "template/tools/TOOLS.md", "template/tools/ai-tools/claude-desktop.md"]
-# What the AI reads: the kit's own instructions, and in the brain the rules (CLAUDE.md) and importing (AGENTS.md).
-AI_INSTRUCTIONS = ["INSTRUCTIONS.md", "template/CLAUDE.md"]
+# What the AI reads: the kit's own instructions, and in the brain the rules (level 1, template/LEVEL1.md) and importing (AGENTS.md).
+AI_INSTRUCTIONS = ["INSTRUCTIONS.md", "template/LEVEL1.md"]
 AI_IMPORTING = ["INSTRUCTIONS.md", "template/AGENTS.md"]
 # Promises the kit cannot keep once an AI tool reads the brain, and which stopped Claude cold.
 UNTRUE = [r"nothing leaves (their|your) (machine|computer)", r"everything stays on this machine",
@@ -22,7 +22,7 @@ APPROVED = ("Your brain is stored as plain files on your laptop. When you use a 
             "OpenAI and others), whatever their agent reads is processed by that provider, like any chat. Run it "
             "with a local model in the future and it stays fully private on your machine. That is what we are "
             "working towards.")
-SAYS_WHERE = ["README.md", "INSTRUCTIONS.md", "template/CLAUDE.md", "template/tools/TOOLS.md",
+SAYS_WHERE = ["README.md", "INSTRUCTIONS.md", "SETUP.md", "template/LEVEL1.md", "template/tools/TOOLS.md",
               "sample/brain/CLAUDE.md", "sample/brain/tools/TOOLS.md"]
 # The wording it replaced, which must not come back.
 OLD = ["stored as files on your own computer", "processed by that tool's provider", "processed by that AI's provider",
@@ -52,7 +52,11 @@ class WhereDataGoes(unittest.TestCase):
             self.assertIn("Nothing is published unless you back up to your own private GitHub.", text, rel)
             self.assertIn("Do not stop to offer other ways of doing it.", text, rel)
             self.assertIn("Only the person's own data", text, rel)
-            self.assertRegex(text, r"Never build a live connection here", rel)
+            # 19 Oct 2026: connections are now made in the AI app or on the computer (setup step 3), so the old
+            # "Never build a live connection here" became this, word for word.
+            self.assertIn("Connections live in your AI app or on your computer, never in this folder, "
+                          "and passwords never go in it.", text, rel)
+            self.assertNotIn("Never build a live connection here", text, rel)
 
     def test_every_place_that_says_where_data_goes_uses_the_approved_words(self):
         for rel in SAYS_WHERE:
