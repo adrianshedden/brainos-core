@@ -13,7 +13,8 @@ The JSON file:
 - people: name or email is needed; email and phone are optional. interactions: when, with and channel
   are needed; summary is optional. Every entry needs a source: use the id from connections.yaml
   (google-calendar, gmail, google-drive, outlook-calendar, outlook-mail, onedrive, whatsapp, notion,
-  slack, other-custom), not the name of the tool in between.
+  slack, other-custom), not the name of the tool in between. It may end with the day it was read
+  ("google-calendar, 2026-10-21", as SETUP.md writes it): that is the same source.
 - when: YYYY-MM-DD, optionally followed by a time (2026-10-19T09:30 or 2026-10-19 09:30).
 
 What it keeps, and what it never keeps:
@@ -39,8 +40,9 @@ from common import merge_people, people_home, replace_interactions, require_brai
 
 SUMMARY_MAX = 200
 LIVE = "-live"
-# A WhatsApp name is however the person is saved in someone's phone, read live or exported: medium.
-common.BASE_CONFIDENCE.setdefault("whatsapp" + LIVE, "medium")
+# A source may carry the day it was read, as SETUP.md writes it ("google-calendar, 2026-10-21"): that day is
+# already kept as read_on, so it is taken off the source and every read of one source stays under one id.
+READ_DAY = re.compile(r"[\s,;:(-]*\d{4}-\d{2}-\d{2}\)?\s*$")
 
 WHEN = re.compile(r"^(\d{4})-(\d{2})-(\d{2})(?:[T ](\d{2}):(\d{2})(?::\d{2}(?:\.\d+)?)?(?:Z|[+-]\d{2}:?\d{2})?)?$")
 USAGE = "Usage: python3 importers/from_connector.py <brain-folder> <file.json>"
@@ -51,8 +53,9 @@ class BadFile(Exception):
 
 
 def live_source(text):
-    """'Google Calendar' -> 'google-calendar-live'. The same id however the AI spelled it."""
-    s = slugify(text, "")
+    """'Google Calendar' or 'google-calendar, 2026-10-21' -> 'google-calendar-live'. The same id however the
+    AI spelled it, with or without the day it was read."""
+    s = slugify(READ_DAY.sub("", text), "")
     if s.endswith(LIVE):
         s = s[: -len(LIVE)]
     return s + LIVE if s else ""

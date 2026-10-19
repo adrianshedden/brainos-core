@@ -265,7 +265,7 @@ class StarterJobs(unittest.TestCase):
             skills_md = (brain / "skills/SKILLS.md").read_text(encoding="utf-8")
             agents = (brain / "AGENTS.md").read_text(encoding="utf-8").split("## Routing table", 1)[1].split("\n## ", 1)[0]
             manifest = (brain / "brain.yaml").read_text(encoding="utf-8")
-            for name in {**QUESTIONS, **SETUP}:
+            for name in {**QUESTIONS, **SETUP, **ROUTINES}:
                 self.assertIn(f"`{name}/`", skills_md, f"{name} missing from {brain.name}/skills/SKILLS.md")
                 self.assertIn(f"skills/{name}/SKILL.md", agents, f"{name} missing from {brain.name}/AGENTS.md")
                 self.assertIn(f"  - skills/{name}/SKILL.md\n", manifest, f"{name} missing from {brain.name}/brain.yaml")

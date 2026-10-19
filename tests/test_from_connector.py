@@ -191,6 +191,29 @@ class FromConnector(unittest.TestCase):
             {"name": "B Two", "email": "b@example.com", "source": "google-calendar-live"}]}))
         self.assertEqual({s for p in jsonl(self.people) for s in p["source"]}, {"google-calendar-live"})
 
+    def test_the_live_whatsapp_confidence_lives_in_the_shared_merge(self):
+        """common.BASE_CONFIDENCE is the one place: the importer does not patch it while it runs."""
+        import common
+        self.assertEqual(common.BASE_CONFIDENCE.get("whatsapp-live"), "medium")
+        self.assertNotIn("BASE_CONFIDENCE", SCRIPT.read_text(encoding="utf-8"))
+
+    def test_a_source_written_the_setup_guide_way_with_its_day_is_still_one_source(self):
+        """SETUP.md step 4 writes source as the connections.yaml id and the day: "google-calendar, 2026-10-21".
+        Read on two days, it is still one source, so the second read adds nothing new."""
+        day1 = {"people": [{"name": "A One", "email": "a@example.com", "source": "google-calendar, 2026-10-21"}],
+                "interactions": [{"when": "2026-10-20", "with": "A One", "channel": "calendar",
+                                  "source": "google-calendar, 2026-10-21"}]}
+        day2 = json.loads(json.dumps(day1).replace("2026-10-21", "2026-10-22"))
+        self.run_cli(self.brain, self.write(day1, "day1.json"))
+        said = self.run_cli(self.brain, self.write(day2, "day2.json"))
+        self.assertEqual({s for p in jsonl(self.people) for s in p["source"]}, {"google-calendar-live"})
+        self.assertEqual([t["source"] for t in jsonl(self.talks)], ["google-calendar-live"])
+        self.assertIn("1 conversations and meetings read, 0 new, 1 already there", said)
+        self.assertIn("0 new to the brain", said)
+        jo = {"people": [{"name": "Jo Bloggs", "source": "whatsapp, 2026-10-21"}]}
+        self.run_cli(self.brain, self.write(jo, "jo.json"))
+        self.assertEqual(next(p for p in jsonl(self.people) if p["name"] == "Jo Bloggs")["confidence"], "medium")
+
     def test_bad_files_are_refused_in_one_plain_line_and_change_nothing(self):
         self.run_cli(self.brain, self.write(READ_1))
         good = READ_1["people"][0]

@@ -46,7 +46,7 @@ Run these from the top of your BrainOS download. On Windows, type `py` wherever 
 
 1. Check you are ready: `python3 check_setup.py ~/my-brain`. It changes nothing and says what to do next.
 2. Choose your personal domains: the areas of your life your brain keeps, each in its own folder. Pick from network (the people you know and your conversations with them), work, knowledge, family, health and finance. Your AI will suggest three to five that fit you.
-3. Make an empty brain in a new folder: `python3 create_brain.py ~/my-brain --domains network,work`
+3. Make an empty brain in a new folder: `python3 create_brain.py ~/my-brain --domains network,work`. To add more areas later: `python3 create_brain.py ~/my-brain --add family,health`
 4. Put your export files in `~/my-brain/exports/`, then fill the brain from them. `check_setup.py` prints the exact line for each file. Any you have:
    - LinkedIn data archive: `python3 importers/linkedin.py ~/my-brain/exports/Basic_LinkedInDataExport.zip ~/my-brain`
    - WhatsApp chat export: `python3 importers/whatsapp.py ~/my-brain/exports/chat.txt ~/my-brain --me "Your Name"` (your own name as it shows in your chats, given once, so you are never listed as one of your own contacts)
@@ -64,9 +64,11 @@ Each importer prints what it found and what it skipped, and is safe to re-run.
 - `check_setup.py` — checks Python, the kit, the brain folder and your exports, and says the next step. Changes nothing.
 - `SETUP.md` — the guided first run your AI follows when you paste the one line: nine steps, with progress saved.
 - `progress.py` — saves how far the setup has got, in the brain's `setup.yaml`, so you can stop and carry on later.
-- `create_brain.py` — stamps an empty brain from `template/`, with the personal domains you choose.
+- `create_brain.py` — stamps an empty brain from `template/`, with the personal domains you choose; `--add` puts more into a brain you already have (for example `python3 kit/create_brain.py . --add work,family` from inside the brain).
+- `start.sh` and `start.ps1` — the terminal line for a Mac and for Windows: download the kit into your brain folder and start your AI.
+- `connections.yaml` — every account each AI app can connect, with the exact clicks, in the order the setup offers them.
 - `level1.py` — keeps level 1 the same at every AI's front door; each brain gets a copy in `scripts/`.
-- `importers/` — LinkedIn, WhatsApp, calendar, Apple Contacts and X export readers. They only ever read a file you give them.
+- `importers/` — LinkedIn, WhatsApp, calendar, Apple Contacts and X export readers, plus `from_connector.py`, which saves who and when from what your AI read through a connection. They only ever read a file you give them.
 - `jobs.py` — lists the brain's skills and which are due, and marks one done. Each brain gets its own copy in `scripts/`.
 - `publish_github.py` and `GITHUB.md` — back the brain up to a private GitHub repository you own, step by step.
 - `template/` — the brain itself. `LEVEL1.md` is level 1 (who it is for, how to start, the rules), written once and

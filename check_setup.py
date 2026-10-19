@@ -29,8 +29,9 @@ sys.path.insert(0, str(KIT))
 import progress  # noqa: E402
 
 MIN_PYTHON = (3, 8)
-NEEDED = ["create_brain.py", "level1.py", "progress.py", "SETUP.md", "template/brain.yaml", "template/LEVEL1.md", "template/AGENTS.md",
-          "importers/common.py",
+NEEDED = ["create_brain.py", "level1.py", "progress.py", "SETUP.md", "connections.yaml",
+          "template/brain.yaml", "template/LEVEL1.md", "template/AGENTS.md",
+          "importers/common.py", "importers/from_connector.py",
           "importers/linkedin.py", "importers/whatsapp.py", "importers/calendar_ics.py",
           "importers/apple_contacts.py", "importers/x_export.py"]
 # Files that are ours, or the computer's own, in exports/: never reported.
@@ -162,7 +163,8 @@ def brain_state(folder):
         return "not-empty"
     if (folder / "brain.yaml").is_file():
         return "brain"
-    if all(p.name in ("exports", "kit", ".DS_Store") for p in folder.iterdir()):
+    from create_brain import ready_for_brain  # one test for "empty": exports, kit, setup.yaml and .DS_Store may be there
+    if ready_for_brain(folder):
         return "empty"
     return "not-empty"
 

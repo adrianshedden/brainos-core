@@ -4,9 +4,10 @@ Jobs the person has asked their AI app to run by itself on a schedule, such as "
 
 ## How to set one up
 
-- In the Claude desktop app, use its Scheduled feature: make a scheduled task, choose how often, and give it one instruction, for example "Follow `skills/whats-on-my-plate/SKILL.md` in my brain folder." How often it can run, and whether the app must stay open, is in the app's own help pages: check there.
+- In the Claude desktop app, use its Scheduled feature: make a scheduled task, choose how often, and give it one instruction, for example "Follow `skills/morning-brief/SKILL.md` in my brain folder." How often it can run, and whether the app must stay open, is in the app's own help pages: check there.
 - Other AI apps have their own way, or none. If yours has none, run the skill by hand; `python3 scripts/jobs.py list .` shows which are due.
-- Suggested weekly jobs: `whats-on-my-plate` (Monday morning) and `what-am-i-putting-off` (Friday afternoon). Daily: `who-to-reply-to-first`. Monthly: `who-have-i-gone-quiet-with` (it only drafts; you send).
+- Suggested jobs. Daily: `morning-brief` (each morning). Weekly: `weekly-review` (Friday afternoon).
+- Others that work well: `whats-on-my-plate` (Monday morning), `what-am-i-putting-off` (Friday afternoon), `who-to-reply-to-first` (daily) and `who-have-i-gone-quiet-with` (monthly; it only drafts; you send).
 
 ## What goes in
 

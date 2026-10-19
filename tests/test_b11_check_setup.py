@@ -137,6 +137,24 @@ class CheckSetup(unittest.TestCase):
             self.assertIn("- None yet.", lines)
             self.assertIn(str((brain / "exports").resolve()), lines[-1])
 
+    def test_a_folder_holding_only_the_kit_and_saved_progress_is_ready_for_a_brain(self):
+        """The terminal line leaves a folder with only kit/ in it, and setup.yaml may be there too: the same
+        things create_brain.py accepts. Anything else still makes it "not a brain"."""
+        with tempfile.TemporaryDirectory() as tmp:
+            folder = Path(tmp) / "b"
+            (folder / "kit").mkdir(parents=True)
+            (folder / "exports").mkdir()
+            (folder / "setup.yaml").write_text("step: 1\n", encoding="utf-8")
+            self.assertEqual(check_setup.brain_state(folder), "empty")
+            self.assertIn("is empty and ready for create_brain.py", "\n".join(said(folder)))
+            (folder / "notes.txt").write_text("mine", encoding="utf-8")
+            self.assertEqual(check_setup.brain_state(folder), "not-empty")
+
+    def test_the_kit_check_needs_the_kit_2_files(self):
+        for rel in ("connections.yaml", "importers/from_connector.py", "progress.py"):
+            self.assertIn(rel, check_setup.NEEDED)
+            self.assertTrue((CORE / rel).is_file(), rel)
+
     def test_a_brain_made_before_the_exports_folder_is_told_to_make_one(self):
         with tempfile.TemporaryDirectory() as tmp:
             brain = create_brain(Path(tmp) / "b")
