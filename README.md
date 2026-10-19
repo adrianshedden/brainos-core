@@ -37,6 +37,8 @@ Paste this one line into the Claude app, the ChatGPT app (with Codex), Cursor, O
 
 > Set up my brain from the BrainOS kit at github.com/adrianshedden/brainos-core (read its SETUP.md first and follow it). Ask me before you change anything, work only in my brain folder, and never share, upload or post my files.
 
+How it connects each account, tried in order, moving down only when a rung fails: 1. official (the AI app's own buttons), 2. custom (a web address you paste into + Add custom connection), 3. local (a small free program on your laptop), 4. export (a file you download). Outlook shows all four: the work Microsoft 365 button; no custom address for personal accounts, so that rung is skipped; the kit's own local route for personal Hotmail; and a calendar file as the last resort.
+
 Your AI follows `SETUP.md`, in nine steps: it finds or makes your brain (a folder called brain in your Documents, unless you choose another place), shows what it can connect (your calendar, email, documents, Notion, Slack and your existing notes, such as an Obsidian folder; WhatsApp chats you export; LinkedIn, if you like, now or later), gives you the exact clicks for each one, fills your brain, suggests the areas it should keep, learns what matters to you, sets up skills and scheduled jobs, and answers a first real question. Progress is saved after every step: stop any time, paste the same line again, and it carries on, in the same app or another.
 
 Prefer a terminal? One line does the download and starts your AI if it finds one:
