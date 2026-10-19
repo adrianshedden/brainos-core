@@ -52,7 +52,11 @@ class WhereDataGoes(unittest.TestCase):
             self.assertIn("Nothing is published unless you back up to your own private GitHub.", text, rel)
             self.assertIn("Do not stop to offer other ways of doing it.", text, rel)
             self.assertIn("Only the person's own data", text, rel)
-            self.assertRegex(text, r"Never build a live connection here", rel)
+            # 19 Oct 2026: connections are now made in the AI app or on the computer (setup step 3), so the old
+            # "Never build a live connection here" became this, word for word.
+            self.assertIn("Connections live in your AI app or on your computer, never in this folder, "
+                          "and passwords never go in it.", text, rel)
+            self.assertNotIn("Never build a live connection here", text, rel)
 
     def test_every_place_that_says_where_data_goes_uses_the_approved_words(self):
         for rel in SAYS_WHERE:
