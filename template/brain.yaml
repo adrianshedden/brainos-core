@@ -29,6 +29,12 @@ files:
   - skills/what-am-i-putting-off/SKILL.md
   - skills/prep-my-next-meeting/SKILL.md
   - skills/who-have-i-gone-quiet-with/SKILL.md
+  - skills/morning-brief/SKILL.md
+  - skills/weekly-review/SKILL.md
+  - skills/show-it-visually/SKILL.md
+  - skills/show-it-visually/page.html
+  - skills/show-it-visually/style.css
+  - skills/show-it-visually/make_page.py
   - tools/TOOLS.md
   - tools/ai-tools/claude-desktop.md
   - tools/ai-tools/claude-ai.md

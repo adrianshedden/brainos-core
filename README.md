@@ -43,7 +43,7 @@ Run these from the top of your BrainOS download:
    - Apple Contacts export: `python3 importers/apple_contacts.py ~/my-brain/exports/contacts.vcf ~/my-brain`
    - X / Twitter archive: `python3 importers/x_export.py ~/my-brain/exports/twitter-archive.zip ~/my-brain`
 5. Open `~/my-brain/tools/ai-tools/` and follow the card for whichever AI you use. Then ask it to "use the mine-my-context skill": it reads your imports, tells you what it thinks it knows about you, asks up to five short questions, and writes down only what you confirm.
-6. Try the eight skills in `~/my-brain/skills/`, for example "Use the whats-on-my-plate skill". See which are due: `python3 jobs.py list ~/my-brain`
+6. Try the eleven skills in `~/my-brain/skills/`, for example "Use the whats-on-my-plate skill". See which are due: `python3 jobs.py list ~/my-brain`
 7. Back it up to your own private GitHub: follow `GITHUB.md`.
 
 Each importer prints what it found and what it skipped, and is safe to re-run.
@@ -60,7 +60,7 @@ Each importer prints what it found and what it skipped, and is safe to re-run.
 - `template/` — the brain itself. `LEVEL1.md` is level 1 (who it is for, how to start, the rules), written once and
   copied word for word to `CLAUDE.md` (Claude), `GEMINI.md` (Gemini) and the top of `AGENTS.md` (Codex, Cursor and
   others); `AGENTS.md` is level 2 (which folder or skill answers which request) and `DOMAINS.md` lists level 3; five core domains, each with its own instructions file: `automations/`,
-  `memory/`, `scripts/`, `skills/` (eight skills: mine-my-context and one per week-one question), `tools/` (one card per AI tool);
+  `memory/`, `scripts/`, `skills/` (eleven skills: mine-my-context, one per week-one question, morning-brief, weekly-review and show-it-visually), `tools/` (one card per AI tool);
   `exports/`; and `domains/`, the library of personal domains (network, work, knowledge, family, health, finance).
 - `sample/` — a filled brain made of invented people, so you can see the shape. Rebuild it with
   `python3 sample/build_sample.py`.

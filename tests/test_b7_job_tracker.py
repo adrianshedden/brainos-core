@@ -23,6 +23,9 @@ STARTERS = {
     "mine-my-context": "as-needed",
     "prep-my-next-meeting": "as-needed",
     "who-have-i-gone-quiet-with": "monthly",
+    "morning-brief": "daily",
+    "weekly-review": "weekly",
+    "show-it-visually": "as-needed",
 }
 
 

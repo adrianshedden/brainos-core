@@ -2,7 +2,7 @@
 
 Things an AI can do for me. One folder per skill, each with a `SKILL.md`: what question it answers, what to read, what to do, and what never to do. `AGENTS.md` says which skill answers which request.
 
-Eight skills ship with the brain:
+Eleven skills ship with the brain:
 
 - `mine-my-context/`: get to know me from my imported files, ask me to confirm, then write it down. Do this first.
 - `whats-on-my-plate/`: what is on my plate this week?
@@ -12,6 +12,9 @@ Eight skills ship with the brain:
 - `what-am-i-putting-off/`: what have I been putting off?
 - `prep-my-next-meeting/`: prep me for my next meeting.
 - `who-have-i-gone-quiet-with/`: who have I gone quiet with? (drafts a note to each; never sends)
+- `morning-brief/`: what do I need to know this morning? Today's meetings, who to reply to and one thing to prepare. Run it each morning, or schedule it. Never sends.
+- `weekly-review/`: how did my week go, and what are my top three for next week? Saves one dated line in `memory/events.jsonl`. Never sends.
+- `show-it-visually/`: show an answer as one polished page. In the Claude app it appears in the chat; in other apps it is saved in `views/` and opened. Its look is in `style.css` and `page.html`, and works offline.
 
 To run one, tell your AI: "Use the whats-on-my-plate skill" or "Follow `skills/whats-on-my-plate/SKILL.md`." Every answer names the file each point came from, so you can check it.
 
