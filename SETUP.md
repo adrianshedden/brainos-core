@@ -220,6 +220,8 @@ That is the setup. Stop there and wait for the person.
 
 When the person pastes the line again after setup is finished, `check_setup.py` says so on its first line. Ask what they would like: connect something new (step 3 for that one source, then step 4 for it), add a domain (step 5), or a new skill or scheduled job (steps 7 and 8). Only if they ask for a live link to WhatsApp, follow `kit/WHATSAPP-LIVE.md`. Save each change with `kit/progress.py` as above.
 
+**"Connect my Outlook", "Connect my Gmail"** (or any source by name, with or without the one line): go straight to step 3 for that one source, then step 4 for it. Walk the connection ladder below. For Outlook: ask whether it is a work account or a personal Outlook.com or Hotmail one. Work: the **Microsoft 365** button. Personal: the kit's own local route, with the one-time sign-in code on Microsoft's page. The calendar file only if those fail. For a live link to WhatsApp, follow `kit/WHATSAPP-LIVE.md` instead.
+
 ## The connection ladder
 
 Every source is connected by trying four rungs, in this order. Go down a rung only when the one above fails or does not exist for this person. Tell the person in one line which rung you are on ("Claude's own Outlook button needs a work account, so we'll use the kit's own route").

@@ -63,7 +63,8 @@ Read level 1 first: it is the block above (the same words as `CLAUDE.md` and `GE
 | Morning brief, brief me, what's on today, start my day | Follow `skills/morning-brief/SKILL.md` |
 | Weekly review, review my week, plan next week | Follow `skills/weekly-review/SKILL.md` |
 | Show it visually, make it a page, show me that as a page | Follow `skills/show-it-visually/SKILL.md` |
-| Set up my BrainOS, finish my setup, connect something new | Follow `kit/SETUP.md` (the setup guide in the BrainOS kit) |
+| Set up my BrainOS, finish my setup, connect something new: connect my Outlook, connect my Gmail, connect my calendar | Follow `kit/SETUP.md` (the setup guide in the BrainOS kit): "Coming back later", then step 3 for that one source, down the connection ladder |
+| Connect my WhatsApp live, connect my WhatsApp using WHATSAPP-LIVE.md | Follow `kit/WHATSAPP-LIVE.md`: risks and a yes first |
 | Import an export, add my LinkedIn, WhatsApp, calendar, contacts or X | See "Importing" below |
 | Note a decision, or something that happened | Add one line to `memory/decisions.jsonl` or `memory/events.jsonl` (see `memory/MEMORY.md`) |
 | Run something every week, a scheduled job | Read `automations/AUTOMATIONS.md` |

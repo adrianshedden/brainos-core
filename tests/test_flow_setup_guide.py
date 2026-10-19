@@ -112,6 +112,15 @@ class NineSteps(unittest.TestCase):
         self.assertNotIn("cannot connect", ladder)
         self.assertIn("1. official", (CORE / "README.md").read_text(encoding="utf-8"))
 
+    def test_connect_my_outlook_walks_the_ladder(self):
+        later = self.setup.split("## Coming back later", 1)[1].split("## The connection ladder", 1)[0]
+        for must in ('"Connect my Outlook"', '"Connect my Gmail"', "step 3 for that one source", "connection ladder",
+                     "personal Outlook.com or Hotmail", "the kit's own local route", "one-time sign-in code",
+                     "The calendar file only if those fail"):
+            self.assertIn(must, later)
+        agents = (CORE / "template" / "AGENTS.md").read_text(encoding="utf-8")
+        self.assertIn("connect my Outlook, connect my Gmail", agents)
+
     def test_step_two_uses_tick_boxes_when_the_app_has_them(self):
         # Rian's Mac test, 19 Oct 2026 (card UT): "for selecting the connectors it would be tick boxes".
         self.assertNotIn("**Code** tab", self.setup)
