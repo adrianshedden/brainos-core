@@ -2,6 +2,8 @@
 
 BrainOS core makes an empty brain (a folder of Markdown and YAML files) on the person's own computer and fills it from their own exports. Plain Python 3, nothing to install. No script in this kit uses the internet, except the optional GitHub backup, which the person starts themselves (`GITHUB.md`). Run each step for the person and tell them the result in plain English.
 
+On Windows, type `py` wherever this kit says `python3` (`python3` there is usually missing or opens the Microsoft Store); if `py` is missing too, try `python`.
+
 The order is: check, choose domains, create the brain, import, mine my context, first skills.
 
 0. Check the setup first: `python3 check_setup.py <folder>`. It changes nothing. Tell the person what it found, then follow its next step.
