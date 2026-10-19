@@ -28,7 +28,7 @@ class NoNetwork(unittest.TestCase):
 
     def test_importer_source_has_no_network_imports(self):
         for path in sorted((CORE / "importers").glob("*.py")) + [CORE / "create_brain.py", CORE / "check_setup.py"]:
-            for node in ast.walk(ast.parse(path.read_text())):
+            for node in ast.walk(ast.parse(path.read_text(encoding="utf-8"))):
                 names = [a.name for a in node.names] if isinstance(node, ast.Import) else \
                     [node.module or ""] if isinstance(node, ast.ImportFrom) else []
                 for n in names:

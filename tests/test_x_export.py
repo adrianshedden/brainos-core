@@ -147,7 +147,7 @@ class XExport(unittest.TestCase):
         before = {p for p in self.brain.rglob("*") if p.is_file()}
         x_export.run(SAMPLE_X, self.brain)
         after = {p for p in self.brain.rglob("*") if p.is_file()}
-        self.assertEqual({str(p.relative_to(self.brain)) for p in after - before},
+        self.assertEqual({p.relative_to(self.brain).as_posix() for p in after - before},
                          {"memory/conversations/x-posts.yaml", "memory/profile/x-profile.md"})
 
     def test_it_refuses_a_folder_that_is_not_a_brain(self):

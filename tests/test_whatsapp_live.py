@@ -216,7 +216,7 @@ class Switch(unittest.TestCase):
         self.assertIn("Bash(wacli send *)", data["permissions"]["deny"])
         copied = self.brain / "scripts" / "whatsapp_send_guard.py"
         self.assertEqual(copied.read_bytes(), (CORE / "whatsapp_send_guard.py").read_bytes())
-        self.assertIn(str(copied), ours[0]["hooks"][0]["command"])
+        self.assertIn(str(copied.resolve()), ours[0]["hooks"][0]["command"])
         backups = [p for p in self.settings.parent.iterdir() if p.name.endswith(".bak")]
         self.assertEqual(len(backups), 1)
         self.assertEqual(json.loads(backups[0].read_text(encoding="utf-8")), self.BEFORE)
