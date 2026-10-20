@@ -87,6 +87,8 @@ If the app already has connections that can read a source (for example a Google,
 
 Otherwise, send the list as short numbered lines and ask them to pick any (numbers are fine), or "none for now". For a source with two names (Google or Outlook), ask which one they use.
 
+**No files of their own today?** If they cannot or would rather not use their own information yet (a work laptop, privacy, or they just want to try it first), offer the sample brain: a few files about invented people, so they can see how it works. With a yes, copy these from `kit/sample/exports/` into the brain's `exports` folder: `calendar/calendar.ics`, `apple/contacts.vcf` and the two `.txt` chats in `whatsapp/`. Tell them in one line: "These are invented people, so you can see how it works. Swap in your own any time." Save `python3 kit/progress.py . step 4` and go to step 4. When step 4 asks for their name as it shows in the chats, the sample's name is Alex Example.
+
 **Save progress:** `python3 kit/progress.py . pick <id> <id> ...` with the ids from `connections.yaml`, then `python3 kit/progress.py . step 3`. ("None for now" goes straight to `step 4`.)
 
 **If something fails:** if `kit/connections.yaml` is missing or you cannot read it, use this list instead, and the steps in "Export steps" at the end:
