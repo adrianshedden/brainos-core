@@ -1,0 +1,67 @@
+BEGIN:VCARD
+VERSION:3.0
+FN:Priya Shah
+N:Shah;Priya;;;
+ORG:Hollow Oak Design
+TITLE:Manager
+EMAIL;TYPE=INTERNET:priya.shah@hollowoak.example
+TEL;TYPE=CELL:+44 7700 900101
+END:VCARD
+BEGIN:VCARD
+VERSION:3.0
+FN:Ben Carter
+N:Carter;Ben;;;
+ORG:Kestrel & Finch
+TITLE:Client - Operations Director
+EMAIL;TYPE=INTERNET:ben.carter@kestrelfinch.example
+TEL;TYPE=CELL:+44 7700 900102
+END:VCARD
+BEGIN:VCARD
+VERSION:3.0
+FN:Kate Example
+N:Example;Kate;;;
+TITLE:Sister
+EMAIL;TYPE=INTERNET:kate.example@mail.example
+TEL;TYPE=CELL:+44 7700 900103
+END:VCARD
+BEGIN:VCARD
+VERSION:3.0
+FN:Tom Example
+N:Example;Tom;;;
+TITLE:Brother
+EMAIL;TYPE=INTERNET:tom.example@mail.example
+TEL;TYPE=CELL:+44 7700 900104
+END:VCARD
+BEGIN:VCARD
+VERSION:3.0
+FN:Jo Taylor
+N:Taylor;Jo;;;
+TITLE:School-run friend (Leo and Ava's mum)
+EMAIL;TYPE=INTERNET:jo.taylor@mail.example
+TEL;TYPE=CELL:+44 7700 900105
+END:VCARD
+BEGIN:VCARD
+VERSION:3.0
+FN:Hannah Lee
+N:Lee;Hannah;;;
+TITLE:Book club host
+EMAIL;TYPE=INTERNET:hannah.lee@mail.example
+TEL;TYPE=CELL:+44 7700 900106
+END:VCARD
+BEGIN:VCARD
+VERSION:3.0
+FN:Raj Patel
+N:Patel;Raj;;;
+TITLE:Book club
+EMAIL;TYPE=INTERNET:raj.patel@mail.example
+TEL;TYPE=CELL:+44 7700 900107
+END:VCARD
+BEGIN:VCARD
+VERSION:3.0
+FN:Smile Dental Practice
+N:Smile Dental Practice;;;;
+ORG:Smile Dental Practice
+TITLE:Dentist
+EMAIL;TYPE=INTERNET:appointments@smiledental.example
+TEL;TYPE=CELL:+44 1632 960123
+END:VCARD

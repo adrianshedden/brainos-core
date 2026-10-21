@@ -1,0 +1,132 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//BrainOS sample//This week//EN
+CALSCALE:GREGORIAN
+X-WR-CALNAME:Alex Example
+X-WR-TIMEZONE:Europe/London
+BEGIN:VTIMEZONE
+TZID:Europe/London
+BEGIN:DAYLIGHT
+TZOFFSETFROM:+0000
+TZOFFSETTO:+0100
+TZNAME:BST
+DTSTART:19700329T010000
+RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=-1SU
+END:DAYLIGHT
+BEGIN:STANDARD
+TZOFFSETFROM:+0100
+TZOFFSETTO:+0000
+TZNAME:GMT
+DTSTART:19701025T020000
+RRULE:FREQ=YEARLY;BYMONTH=10;BYDAY=-1SU
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+UID:sample-week-01@brainos-sample.example
+DTSTAMP:20261019T090000Z
+DTSTART;TZID=Europe/London:20261021T180000
+DTEND;TZID=Europe/London:20261021T184500
+SUMMARY:Circuits class
+LOCATION:FitHub Gym\, Station Road
+DESCRIPTION:Bring water bottle and gym card. Class is fully booked - cancel by 16:00 if you can't make it.
+END:VEVENT
+BEGIN:VEVENT
+UID:sample-week-02@brainos-sample.example
+DTSTAMP:20261019T090000Z
+DTSTART;TZID=Europe/London:20261022T100000
+DTEND;TZID=Europe/London:20261022T103000
+SUMMARY:1:1 with Priya (manager)
+LOCATION:Meeting room 3 / Teams
+DESCRIPTION:Monthly 1:1. Priya wants 3-4 slides on the Kestrel & Finch proposal and Q4 workload BEFORE the meeting - send by end of Wed 21 Oct.
+END:VEVENT
+BEGIN:VEVENT
+UID:sample-week-03@brainos-sample.example
+DTSTAMP:20261019T090000Z
+DTSTART;TZID=Europe/London:20261022T140000
+DTEND;TZID=Europe/London:20261022T143000
+SUMMARY:Call with Ben Carter (Kestrel & Finch)
+LOCATION:Phone - Ben will call your mobile
+DESCRIPTION:Walk through proposal draft: scope\, timeline\, price. Have the draft and the pricing sheet open.
+END:VEVENT
+BEGIN:VEVENT
+UID:sample-week-04@brainos-sample.example
+DTSTAMP:20261019T090000Z
+DTSTART;TZID=Europe/London:20261022T151500
+DTEND;TZID=Europe/London:20261022T160000
+SUMMARY:School pick-up swap - collect Mia AND Jo's two (Leo and Ava)
+LOCATION:Greenfield Primary\, side gate
+DESCRIPTION:Swap with Jo Taylor: you do Thursday\, Jo does next Tuesday. Leo has football kit to bring home. Need the car (3 booster seats).
+END:VEVENT
+BEGIN:VEVENT
+UID:sample-week-05@brainos-sample.example
+DTSTAMP:20261019T090000Z
+DTSTART;TZID=Europe/London:20261023T070000
+DTEND;TZID=Europe/London:20261023T074500
+SUMMARY:Spin class
+LOCATION:FitHub Gym\, Station Road
+DESCRIPTION:Early class. Pack work clothes the night before.
+END:VEVENT
+BEGIN:VEVENT
+UID:sample-week-06@brainos-sample.example
+DTSTAMP:20261019T090000Z
+DTSTART;TZID=Europe/London:20261023T120000
+DTEND;TZID=Europe/London:20261023T121500
+SUMMARY:DEADLINE: Kestrel & Finch proposal due
+LOCATION:Email to ben.carter@kestrelfinch.example
+DESCRIPTION:Final PDF to Ben by 12:00. Needs: updated pricing\, two case studies\, signed cover letter. Priya to approve wording first.
+END:VEVENT
+BEGIN:VEVENT
+UID:sample-week-07@brainos-sample.example
+DTSTAMP:20261019T090000Z
+DTSTART;TZID=Europe/London:20261024T190000
+DTEND;TZID=Europe/London:20261024T223000
+SUMMARY:Mum's 60th birthday dinner
+LOCATION:Ferraro's\, 14 Market Street
+DESCRIPTION:Table for 9 booked under Example. You are bringing the cake (collect from Crumbs bakery Sat by 4pm) and still need to buy Mum's present. Kate has the card for everyone to sign.
+END:VEVENT
+BEGIN:VEVENT
+UID:sample-week-08@brainos-sample.example
+DTSTAMP:20261019T090000Z
+DTSTART;TZID=Europe/London:20261025T093000
+DTEND;TZID=Europe/London:20261025T110000
+SUMMARY:parkrun with Raj
+LOCATION:Riverside Park
+DESCRIPTION:Clocks go back tonight (Sat-Sun) - extra hour in bed. Bring barcode.
+END:VEVENT
+BEGIN:VEVENT
+UID:sample-week-09@brainos-sample.example
+DTSTAMP:20261019T090000Z
+DTSTART;TZID=Europe/London:20261026T074200
+DTEND;TZID=Europe/London:20261026T081500
+SUMMARY:Train to London Paddington
+LOCATION:Platform 4
+DESCRIPTION:Off-peak ticket won't work - buy an anytime return or use the railcard. Bring laptop\, charger and printed workshop agenda.
+END:VEVENT
+BEGIN:VEVENT
+UID:sample-week-10@brainos-sample.example
+DTSTAMP:20261019T090000Z
+DTSTART;TZID=Europe/London:20261026T100000
+DTEND;TZID=Europe/London:20261026T130000
+SUMMARY:Client workshop in London
+LOCATION:Kestrel & Finch office\, 22 Example Lane\, London
+DESCRIPTION:Half-day workshop. Bring 10 printed agendas. Lunch provided.
+END:VEVENT
+BEGIN:VEVENT
+UID:sample-week-11@brainos-sample.example
+DTSTAMP:20261019T090000Z
+DTSTART;TZID=Europe/London:20261027T084000
+DTEND;TZID=Europe/London:20261027T090000
+SUMMARY:Dentist check-up
+LOCATION:Smile Dental Practice\, 3 High Street
+DESCRIPTION:Arrive 10 minutes early. Fill in the medical history form online before (link in the confirmation email). Bring photo ID.
+END:VEVENT
+BEGIN:VEVENT
+UID:sample-week-12@brainos-sample.example
+DTSTAMP:20261019T090000Z
+DTSTART;TZID=Europe/London:20261027T193000
+DTEND;TZID=Europe/London:20261027T210000
+SUMMARY:Book club - 'The Long Way to Harbour'
+LOCATION:Hannah's house\, 9 Elm Close
+DESCRIPTION:Read chapters 1-9. Your turn to bring snacks. Pick the next book.
+END:VEVENT
+END:VCALENDAR
