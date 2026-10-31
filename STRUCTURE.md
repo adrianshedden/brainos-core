@@ -1,0 +1,70 @@
+# What a BrainOS brain looks like
+
+The folders and files of a new BrainOS brain, names only. The files themselves come with BrainOS from Remyn (https://remyn.me/).
+
+```
+your-brain/
+  automations/
+    AUTOMATIONS.md
+  domains/
+    family.md
+    finance.md
+    health.md
+    knowledge.md
+    network.md
+    work.md
+  exports/
+    README.md
+  memory/
+    decisions.jsonl
+    events.jsonl
+    MEMORY.md
+  scripts/
+    SCRIPTS.md
+  skills/
+    draft-in-my-voice/
+      SKILL.md
+    mine-my-context/
+      SKILL.md
+    morning-brief/
+      SKILL.md
+    prep-my-next-meeting/
+      SKILL.md
+    show-it-visually/
+      make_page.py
+      page.html
+      SKILL.md
+      style.css
+    weekly-review/
+      SKILL.md
+    what-am-i-putting-off/
+      SKILL.md
+    whats-on-my-plate/
+      SKILL.md
+    who-do-i-know-at/
+      SKILL.md
+    who-have-i-gone-quiet-with/
+      SKILL.md
+    who-to-reply-to-first/
+      SKILL.md
+    SKILLS.md
+  tools/
+    ai-tools/
+      chatgpt.md
+      claude-ai.md
+      claude-code.md
+      claude-desktop.md
+      codex.md
+      cursor.md
+      gemini.md
+      opencode.md
+      orca.md
+      other-ai-tools.md
+    TOOLS.md
+  .gitignore
+  AGENTS.md
+  brain.yaml
+  DOMAINS.md
+  LEVEL1.md
+  README.md
+```
