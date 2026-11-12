@@ -241,7 +241,11 @@ class ConnectionsYaml(unittest.TestCase):
                 for system in ("Mac", "Windows"):
                     at = r["notes"].index(f'{system}: "outlook": ') + len(f'{system}: "outlook": ')
                     block = json.JSONDecoder().raw_decode(r["notes"][at:])[0]
-                    self.assertIn("@softeria/ms-365-mcp-server", block["args"], system)
+                    # Pinned exactly: unpinned, 0.184.0 dropped the sign-in tool under --read-only and broke the kit
+                    # check on 12 Nov 2026. Move the pin only after .github/outlook_probe.py passes on the new one.
+                    self.assertIn("@softeria/ms-365-mcp-server@0.170.2", block["args"], system)
+                    self.assertEqual([a for a in block["args"] if "ms-365-mcp-server" in a],
+                                     ["@softeria/ms-365-mcp-server@0.170.2"], system)
                     self.assertIn("--read-only", block["args"], system)
             builtin = next(r for r in DATA["sources"][sid]["routes"] if r["app"] == "claude" and r["type"] == "builtin")
             self.assertIn("Claude's own Microsoft button needs a work account", builtin["notes"], sid)
