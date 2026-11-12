@@ -2,11 +2,11 @@
 
 BrainOS core makes an empty brain (a folder of Markdown and YAML files) on the person's own computer and fills it from their own exports and from the connections in their AI app. Plain Python 3, nothing to install. No script in BrainOS uses the internet, except the optional GitHub backup, which the person starts themselves (`GITHUB.md`). Run each step for the person and tell them the result in plain English.
 
-Setting a brain up for the first time, or carrying on with one, because the person pasted the one line? Follow `SETUP.md` instead: it is the guided first run in nine steps (find or make the brain, choose and connect their accounts, pull everything in, domains, review, skills, scheduled jobs, a first real answer), and it saves progress in the brain's `setup.yaml`. This file is the reference for every step. The one line, from BrainOS's home at github.com/adrianshedden/brainos-core:
+Setting a brain up for the first time, or carrying on with one, because the person pasted the one line? Follow `SETUP.md` instead: it is the guided first run in nine steps (find or make the brain, choose and connect their accounts, pull everything in, domains, review, skills, scheduled jobs, a first real answer), and it saves progress in the brain's `setup.yaml`. This file is the reference for every step. The one line, from BrainOS's home at github.com/adrianshedden/remyn-core:
 
-- In an AI app: Set up my brain with BrainOS from github.com/adrianshedden/brainos-core (read its SETUP.md first and follow it). Ask me before you change anything, work only in my brain folder, and never share, upload or post my files.
-- In a terminal on a Mac: `curl -fsSL https://raw.githubusercontent.com/adrianshedden/brainos-core/main/start.sh | sh`
-- In a terminal on Windows (PowerShell): `irm https://raw.githubusercontent.com/adrianshedden/brainos-core/main/start.ps1 | iex`
+- In an AI app: Set up my brain with BrainOS from github.com/adrianshedden/remyn-core (read its SETUP.md first and follow it). Ask me before you change anything, work only in my brain folder, and never share, upload or post my files.
+- In a terminal on a Mac: `curl -fsSL https://raw.githubusercontent.com/adrianshedden/remyn-core/main/start.sh | sh`
+- In a terminal on Windows (PowerShell): `irm https://raw.githubusercontent.com/adrianshedden/remyn-core/main/start.ps1 | iex`
 
 On Windows, type `py` wherever BrainOS says `python3` (`python3` there is usually missing or opens the Microsoft Store); if `py` is missing too, try `python`.
 

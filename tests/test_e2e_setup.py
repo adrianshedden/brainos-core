@@ -77,7 +77,7 @@ class EndToEnd(unittest.TestCase):
         for name in ("curl", "wget", "open", "xdg-open"):
             stand_in(self.bin, name, f'echo "{name} $*" >> "$CALLS"; ' + ("exit 1" if name in ("curl", "wget") else ""))
         os.symlink(sys.executable, self.bin / "python3")
-        self.zip = kit_zip(root / "kit.zip", top="brainos-core-kit-2.0")
+        self.zip = kit_zip(root / "kit.zip", top="remyn-core-kit-2.0")
         self.root = root
         self.brain = self.home / "Documents" / "brain"
 

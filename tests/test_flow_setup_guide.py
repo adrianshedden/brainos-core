@@ -15,11 +15,11 @@ sys.path.insert(0, str(CORE))
 import progress  # noqa: E402
 from create_brain import create_brain  # noqa: E402
 
-ONE_LINE = ("Set up my brain with BrainOS from github.com/adrianshedden/brainos-core (read its SETUP.md first "
+ONE_LINE = ("Set up my brain with BrainOS from github.com/adrianshedden/remyn-core (read its SETUP.md first "
             "and follow it). Ask me before you change anything, work only in my brain folder, and never share, "
             "upload or post my files.")
-MAC = "curl -fsSL https://raw.githubusercontent.com/adrianshedden/brainos-core/main/start.sh | sh"
-WINDOWS = "irm https://raw.githubusercontent.com/adrianshedden/brainos-core/main/start.ps1 | iex"
+MAC = "curl -fsSL https://raw.githubusercontent.com/adrianshedden/remyn-core/main/start.sh | sh"
+WINDOWS = "irm https://raw.githubusercontent.com/adrianshedden/remyn-core/main/start.ps1 | iex"
 CONNECTIONS = "Connections live in your AI app or on your computer, never in this folder, and passwords never go in it."
 PY_LINE = "`py`"
 OWNED = ["SETUP.md", "README.md", "INSTRUCTIONS.md", "check_setup.py", "progress.py"]
@@ -49,11 +49,11 @@ class OneLine(unittest.TestCase):
             for line in (MAC, WINDOWS):
                 self.assertIn(line, read(rel), rel)
 
-    def test_the_repository_is_called_brainos_core_everywhere(self):
+    def test_the_repository_is_called_remyn_core_everywhere(self):
         for rel in OWNED:
-            self.assertNotIn("remyn-core", read(rel), rel)
+            self.assertNotIn("adrianshedden/brainos-core", read(rel), rel)  # renamed 12 Nov 2026
         for rel in ("SETUP.md", "README.md", "INSTRUCTIONS.md"):
-            self.assertIn("github.com/adrianshedden/brainos-core", read(rel), rel)
+            self.assertIn("github.com/adrianshedden/remyn-core", read(rel), rel)
 
     def test_windows_people_are_told_to_type_py(self):
         for rel in ("SETUP.md", "README.md", "INSTRUCTIONS.md"):

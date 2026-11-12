@@ -73,7 +73,7 @@ class NoWordKit(unittest.TestCase):
         for quoted in re.findall(r'"[^"\n]{12,}"', setup):
             if "Never say" not in quoted:
                 self.assertIsNone(self.KIT_WORDS.search(quoted), quoted)
-        self.assertIn("Set up my brain with BrainOS from github.com/adrianshedden/brainos-core", setup)
+        self.assertIn("Set up my brain with BrainOS from github.com/adrianshedden/remyn-core", setup)
 
 
 if __name__ == "__main__":

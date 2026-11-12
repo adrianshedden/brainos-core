@@ -1,6 +1,6 @@
 # Connect WhatsApp live (afternoon, if you want it)
 
-**Tell your AI:** Connect my WhatsApp using WHATSAPP-LIVE.md from BrainOS at github.com/adrianshedden/brainos-core.
+**Tell your AI:** Connect my WhatsApp using WHATSAPP-LIVE.md from BrainOS at github.com/adrianshedden/remyn-core.
 
 For the AI, when the person sends that line: read this whole guide first, then follow it from section 1. Say the risks and wait for a clear yes before you install or change anything. Work in their brain folder (`SETUP.md` step 1 says how to find it); its `kit` folder holds the scripts named below. If they have no brain yet, offer to set one up first with `SETUP.md`.
 

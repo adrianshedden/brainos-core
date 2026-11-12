@@ -1,6 +1,6 @@
 # BrainOS: the one line to start, on Windows. Paste this into PowerShell:
 #
-#   irm https://raw.githubusercontent.com/adrianshedden/brainos-core/main/start.ps1 | iex
+#   irm https://raw.githubusercontent.com/adrianshedden/remyn-core/main/start.ps1 | iex
 #
 # What it does, and nothing more (the same steps as start.sh on a Mac):
 #   1. Downloads BrainOS from GitHub as one zip file (no git needed).
@@ -27,8 +27,8 @@
     $ProgressPreference = 'SilentlyContinue'
 
     # The AI-app line: the same words everywhere (SETUP.md, README, both start scripts, the tests).
-    $Line = 'Set up my brain with BrainOS from github.com/adrianshedden/brainos-core (read its SETUP.md first and follow it). Ask me before you change anything, work only in my brain folder, and never share, upload or post my files.'
-    $RepoZip = 'https://github.com/adrianshedden/brainos-core/archive/refs/heads'
+    $Line = 'Set up my brain with BrainOS from github.com/adrianshedden/remyn-core (read its SETUP.md first and follow it). Ask me before you change anything, work only in my brain folder, and never share, upload or post my files.'
+    $RepoZip = 'https://github.com/adrianshedden/remyn-core/archive/refs/heads'
     $Allowed = @('kit', 'exports', 'setup.yaml', '.DS_Store', 'desktop.ini', '.git')
 
     function Say([string]$Text) { Write-Host $Text }

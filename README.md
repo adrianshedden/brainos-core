@@ -10,7 +10,7 @@ This is the free edition, under the GNU Affero General Public License v3.0 (AGPL
 product and is not in this folder.
 
 Who makes it: BrainOS is the product, Remyn is the brand, and AI Ops is the company behind both.
-BrainOS lives in the `brainos-core` repository on GitHub: github.com/adrianshedden/brainos-core.
+BrainOS lives in the `remyn-core` repository on GitHub: github.com/adrianshedden/remyn-core.
 
 A second brain is everything the AI remembers about you and your work and life. Facts, history, and how you like things done. The agent is what acts on it, tools are how it acts.
 
@@ -37,7 +37,7 @@ Your AI may already know things about you from its own memory of your past chats
 
 Paste this one line into the Claude app, the ChatGPT app (with Codex), Cursor, OpenCode or Orca on your computer:
 
-> Set up my brain with BrainOS from github.com/adrianshedden/brainos-core (read its SETUP.md first and follow it). Ask me before you change anything, work only in my brain folder, and never share, upload or post my files.
+> Set up my brain with BrainOS from github.com/adrianshedden/remyn-core (read its SETUP.md first and follow it). Ask me before you change anything, work only in my brain folder, and never share, upload or post my files.
 
 How it connects each account, tried in order, moving down only when a rung fails: 1. official (the AI app's own buttons), 2. custom (a web address you paste into + Add custom connection), 3. local (a small free program on your laptop), 4. export (a file you download). Outlook shows all four: the work Microsoft 365 button; no custom address for personal accounts, so that rung is skipped; BrainOS's own local route for personal Hotmail; and a calendar file as the last resort.
 
@@ -45,8 +45,8 @@ Your AI follows `SETUP.md`, in nine steps: it finds or makes your brain (a folde
 
 Prefer a terminal? One line does the download and starts your AI if it finds one:
 
-- Mac: `curl -fsSL https://raw.githubusercontent.com/adrianshedden/brainos-core/main/start.sh | sh`
-- Windows (PowerShell): `irm https://raw.githubusercontent.com/adrianshedden/brainos-core/main/start.ps1 | iex`
+- Mac: `curl -fsSL https://raw.githubusercontent.com/adrianshedden/remyn-core/main/start.sh | sh`
+- Windows (PowerShell): `irm https://raw.githubusercontent.com/adrianshedden/remyn-core/main/start.ps1 | iex`
 
 This is BrainOS core version 2.0 (`VERSION`).
 
