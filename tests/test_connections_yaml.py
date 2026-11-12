@@ -247,9 +247,23 @@ class ConnectionsYaml(unittest.TestCase):
                     self.assertEqual([a for a in block["args"] if "ms-365-mcp-server" in a],
                                      ["@softeria/ms-365-mcp-server@0.170.2"], system)
                     self.assertIn("--read-only", block["args"], system)
+                    # Personal accounts only: on the default "common" sign-in authority their sessions die about an
+                    # hour after login (upstream README, 0.170.2), so the personal route sets "consumers".
+                    self.assertEqual(block.get("env"), {"MS365_MCP_TENANT_ID": "consumers"}, system)
             builtin = next(r for r in DATA["sources"][sid]["routes"] if r["app"] == "claude" and r["type"] == "builtin")
             self.assertIn("Claude's own Microsoft button needs a work account", builtin["notes"], sid)
             self.assertNotIn("cannot connect", builtin["notes"], sid)
+
+    def test_only_personal_outlook_routes_set_the_consumers_tenant(self):
+        # Work and school accounts stay on their own tenant: none of their routes may name the consumers one.
+        for sid, i, r in routes():
+            text = " ".join(r["clicks"]) + " " + r["notes"]
+            if r["type"] == "local" and sid in ("outlook-calendar", "outlook-mail"):
+                self.assertIn("MS365_MCP_TENANT_ID", text, f"{sid} route {i}")
+                self.assertIn("personal Outlook.com or Hotmail", r["clicks"][0], f"{sid} route {i}")
+            else:
+                self.assertNotIn("MS365_MCP_TENANT_ID", text, f"{sid} route {i}")
+                self.assertNotIn("consumers", text, f"{sid} route {i}")
 
     def test_checked_on_is_a_real_date_or_null(self):
         checked = 0

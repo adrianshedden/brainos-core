@@ -38,8 +38,9 @@ def main():
     block = blocks()["windows" if os.name == "nt" else "mac"]
     assert "--read-only" in block["args"], block
     print("Starting:", block["command"], " ".join(block["args"]))
+    assert block.get("env") == {"MS365_MCP_TENANT_ID": "consumers"}, block
     p = subprocess.Popen([block["command"], *block["args"]], stdin=subprocess.PIPE, stdout=subprocess.PIPE,
-                         stderr=subprocess.PIPE, text=True, encoding="utf-8")
+                         stderr=subprocess.PIPE, text=True, encoding="utf-8", env={**os.environ, **block["env"]})
     lines = queue.Queue()
     threading.Thread(target=lambda: [lines.put(line) for line in p.stdout], daemon=True).start()
     threading.Thread(target=lambda: [None for _ in p.stderr], daemon=True).start()
@@ -70,7 +71,7 @@ def main():
         changing = [t for t in tools if CHANGES.search(t) and t not in ("remove-account",)]
         assert not changing, f"tools that change things: {changing}"
         text = json.dumps(ask(3, "tools/call", {"name": "login", "arguments": {}}, wait=90))
-        assert "login.microsoft.com/device" in text, text
+        assert "microsoft.com/link" in text, text  # the personal-account page, because of "consumers"
         assert re.search(r"enter the code [A-Z0-9]{6,}", text), text
         print("Log-in opens Microsoft's sign-in page with a one-time code.")
     finally:
