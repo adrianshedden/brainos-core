@@ -350,7 +350,7 @@ class Guide(unittest.TestCase):
         # Rian's slide review: people reach this page from a QR code and need a line to hand their AI.
         top = GUIDE.split("## 1.", 1)[0]
         self.assertIn("**Tell your AI:** Connect my WhatsApp using WHATSAPP-LIVE.md from BrainOS at "
-                      "github.com/adrianshedden/brainos-core.", top)
+                      "github.com/adrianshedden/remyn-core.", top)
         self.assertIn("follow it from section 1", top)
         self.assertIn("wait for a clear yes before you install or change anything", top)
         agents = (CORE / "template" / "AGENTS.md").read_text(encoding="utf-8")
@@ -361,7 +361,7 @@ class Guide(unittest.TestCase):
                               r"[\w.]+@[\w-]+\.\w+|super-mcp|claudedanger", re.IGNORECASE)
         for name in ("WHATSAPP-LIVE.md", "whatsapp_live.py", "whatsapp_send_guard.py"):
             # The kit's own public address is allowed: it is where people get the kit.
-            text = (CORE / name).read_text(encoding="utf-8").replace("github.com/adrianshedden/brainos-core", "")
+            text = (CORE / name).read_text(encoding="utf-8").replace("github.com/adrianshedden/remyn-core", "")
             self.assertIsNone(personal.search(text), f"{name}: {personal.search(text)}")
 
     def test_setup_leaves_it_out(self):

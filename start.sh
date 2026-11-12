@@ -1,7 +1,7 @@
 #!/bin/sh
 # BrainOS: the one line to start, on a Mac (or Linux) computer. Paste this into Terminal:
 #
-#   curl -fsSL https://raw.githubusercontent.com/adrianshedden/brainos-core/main/start.sh | sh
+#   curl -fsSL https://raw.githubusercontent.com/adrianshedden/remyn-core/main/start.sh | sh
 #
 # What it does, and nothing more:
 #   1. Downloads BrainOS from GitHub as one zip file (no git needed).
@@ -23,8 +23,8 @@
 set -eu
 
 # The AI-app line: the same words everywhere (SETUP.md, README, both start scripts, the tests).
-LINE='Set up my brain with BrainOS from github.com/adrianshedden/brainos-core (read its SETUP.md first and follow it). Ask me before you change anything, work only in my brain folder, and never share, upload or post my files.'
-REPO_ZIP='https://github.com/adrianshedden/brainos-core/archive/refs/heads'
+LINE='Set up my brain with BrainOS from github.com/adrianshedden/remyn-core (read its SETUP.md first and follow it). Ask me before you change anything, work only in my brain folder, and never share, upload or post my files.'
+REPO_ZIP='https://github.com/adrianshedden/remyn-core/archive/refs/heads'
 
 say() {
   printf '%s\n' "$*"

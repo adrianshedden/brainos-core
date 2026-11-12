@@ -2,7 +2,7 @@
 
 For the AI. The person pasted this line into you:
 
-> Set up my brain with BrainOS from github.com/adrianshedden/brainos-core (read its SETUP.md first and follow it). Ask me before you change anything, work only in my brain folder, and never share, upload or post my files.
+> Set up my brain with BrainOS from github.com/adrianshedden/remyn-core (read its SETUP.md first and follow it). Ask me before you change anything, work only in my brain folder, and never share, upload or post my files.
 
 Or they ran the terminal line, which downloaded BrainOS, made the brain folder and started you with that same line. Follow the nine steps below in order. You do the work; the person only clicks where a step says so. Progress is saved after every step (`setup.yaml`, written by `kit/progress.py`), so they can stop at any point and paste the same line again, in this app or another, and you carry on where they left off.
 
@@ -59,9 +59,9 @@ Commands:
    4. Check the three front doors match: `python3 scripts/level1.py check .` It should say level 1 is the same in `CLAUDE.md`, `GEMINI.md` and the top of `AGENTS.md`.
    5. Read level 1 (your front door) and the level 2 manual in `AGENTS.md`. From now on, follow them as well as this guide.
 6. BrainOS lives in the brain's `kit` folder. It is BrainOS's own copy, never the person's files.
-   - **No `kit` folder:** download the newest BrainOS into `kit`. Either `git clone --depth 1 https://github.com/adrianshedden/brainos-core kit`, or download https://github.com/adrianshedden/brainos-core/archive/refs/heads/main.zip and unpack what is inside its top folder into `kit`.
-   - **A `kit` folder is there:** use it; never download a second copy. Compare `kit/VERSION` with https://raw.githubusercontent.com/adrianshedden/brainos-core/main/VERSION. If the online one is newer, ask: "There's a newer version of BrainOS. Shall I update it? Only its kit folder changes: your own files stay exactly as they are." With a yes, download it into a new folder `kit-new` in the brain, check it has `SETUP.md` and `progress.py`, then replace `kit` with it. Never touch anything outside `kit`.
-   - **You cannot download:** ask the person to do it, one step at a time: open https://github.com/adrianshedden/brainos-core, click the green **Code** button, then **Download ZIP**; open the zip; rename the folder inside it to `kit`; drag it into the brain folder (if there is an old `kit`, drag that out to the Desktop first).
+   - **No `kit` folder:** download the newest BrainOS into `kit`. Either `git clone --depth 1 https://github.com/adrianshedden/remyn-core kit`, or download https://github.com/adrianshedden/remyn-core/archive/refs/heads/main.zip and unpack what is inside its top folder into `kit`.
+   - **A `kit` folder is there:** use it; never download a second copy. Compare `kit/VERSION` with https://raw.githubusercontent.com/adrianshedden/remyn-core/main/VERSION. If the online one is newer, ask: "There's a newer version of BrainOS. Shall I update it? Only its kit folder changes: your own files stay exactly as they are." With a yes, download it into a new folder `kit-new` in the brain, check it has `SETUP.md` and `progress.py`, then replace `kit` with it. Never touch anything outside `kit`.
+   - **You cannot download:** ask the person to do it, one step at a time: open https://github.com/adrianshedden/remyn-core, click the green **Code** button, then **Download ZIP**; open the zip; rename the folder inside it to `kit`; drag it into the brain folder (if there is an old `kit`, drag that out to the Desktop first).
 7. Save progress: `python3 kit/progress.py . app <name>` (the name from point 1), then `python3 kit/progress.py . step 2`.
 
 **What you say**

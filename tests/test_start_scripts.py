@@ -19,16 +19,16 @@ nonet.install()
 CORE = Path(__file__).resolve().parents[1]
 START_SH = CORE / "start.sh"
 START_PS1 = CORE / "start.ps1"
-LINE = ("Set up my brain with BrainOS from github.com/adrianshedden/brainos-core (read its SETUP.md first "
+LINE = ("Set up my brain with BrainOS from github.com/adrianshedden/remyn-core (read its SETUP.md first "
         "and follow it). Ask me before you change anything, work only in my brain folder, and never share, "
         "upload or post my files.")
 AI_APPS = ("claude", "codex", "opencode")
 SYSTEM_PATH = "/usr/bin:/bin"
 DEAD_PROXY = "http://127.0.0.1:9"
 # The only web addresses either script may name: the kit on GitHub, and python.org in the install steps.
-ALLOWED_URLS = {"https://raw.githubusercontent.com/adrianshedden/brainos-core/main/start.sh",
-                "https://raw.githubusercontent.com/adrianshedden/brainos-core/main/start.ps1",
-                "https://github.com/adrianshedden/brainos-core/archive/refs/heads"}
+ALLOWED_URLS = {"https://raw.githubusercontent.com/adrianshedden/remyn-core/main/start.sh",
+                "https://raw.githubusercontent.com/adrianshedden/remyn-core/main/start.ps1",
+                "https://github.com/adrianshedden/remyn-core/archive/refs/heads"}
 # Plain words both scripts print for the same step.
 SHARED_WORDS = ("BrainOS: getting your brain folder ready. This takes about a minute.",
                 "Downloading BrainOS...",
@@ -42,7 +42,7 @@ SHARED_WORDS = ("BrainOS: getting your brain folder ready. This takes about a mi
                 "Could not download BrainOS. Check this computer is online")
 
 
-def kit_zip(dest, top="brainos-core-main", leave_out=()):
+def kit_zip(dest, top="remyn-core-main", leave_out=()):
     """A zip shaped like GitHub's download of this kit: one top folder holding the kit's files."""
     with zipfile.ZipFile(dest, "w") as zf:
         for p in sorted(CORE.rglob("*")):
