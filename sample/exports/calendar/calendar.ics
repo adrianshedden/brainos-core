@@ -1,0 +1,40 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Example//Sample Calendar//EN
+X-WR-TIMEZONE:Europe/London
+BEGIN:VEVENT
+UID:weekly-sync@example.com
+SUMMARY:Weekly sync
+DTSTART:20240104T100000Z
+DTEND:20240104T103000Z
+RRULE:FREQ=WEEKLY;COUNT=6
+ORGANIZER;CN=Alex Example:mailto:alex@example.com
+ATTENDEE;CN=Priya Demo:mailto:priya@example.com
+ATTENDEE;CN=Sam Sample:mailto:sam@example.com
+END:VEVENT
+BEGIN:VEVENT
+UID:planning@example.com
+SUMMARY:Planning
+DTSTART:20240201T140000Z
+DTEND:20240201T150000Z
+ORGANIZER;CN=Alex Example:mailto:alex@example.com
+ATTENDEE;CN=Priya Demo:mailto:priya@example.com
+ATTENDEE;CN=Jo Placeholder:mailto:jo@example.org
+END:VEVENT
+BEGIN:VEVENT
+UID:offsite@example.com
+SUMMARY:Team offsite
+DTSTART;VALUE=DATE:20240315
+DTEND;VALUE=DATE:20240316
+ORGANIZER;CN=Alex Example:mailto:alex@example.com
+ATTENDEE;CN=Sam Sample:mailto:sam@example.com
+END:VEVENT
+BEGIN:VEVENT
+UID:cancelled@example.com
+SUMMARY:Cancelled review
+STATUS:CANCELLED
+DTSTART:20240220T090000Z
+ORGANIZER;CN=Alex Example:mailto:alex@example.com
+ATTENDEE;CN=Jo Placeholder:mailto:jo@example.org
+END:VEVENT
+END:VCALENDAR

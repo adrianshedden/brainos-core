@@ -1,0 +1,60 @@
+BEGIN:VCARD
+VERSION:3.0
+PRODID:-//Apple Inc.//macOS 14.5//EN
+N:Demo;Priya;;;
+FN:Priya Demo
+ORG:Demo Analytics;Founder's office;
+TITLE:Founder
+item1.EMAIL;type=INTERNET;type=WORK;type=pref:priya@example.com
+item1.X-ABLabel:_$!<Work>!$_
+TEL;type=CELL;type=VOICE;type=pref:+44 7700 900111
+NOTE:Runs the Thursday growers' meet-up. Wants a hand with the sp
+ ring seed order.
+END:VCARD
+BEGIN:VCARD
+VERSION:2.1
+N:Sample;Sam;;;
+FN:Sam Sample
+ORG:Example Widgets Ltd;
+TITLE:Head of Operations
+TEL;CELL;VOICE;PREF:+44 7700 900222
+TEL;WORK;VOICE:+44 117 496 0001
+EMAIL;INTERNET:sam@example.com
+NOTE;ENCODING=QUOTED-PRINTABLE;CHARSET=UTF-8:Allotment caf=C3=A9 rota. Pays =
+by bank transfer.
+END:VCARD
+BEGIN:VCARD
+VERSION:3.0
+N:Placeholder;Jo;;;
+FN:Jo Placeholder
+ORG:Placeholder & Co;
+TITLE:Consultant
+EMAIL;type=INTERNET;type=HOME:jo@example.org
+EMAIL;type=INTERNET;type=WORK;type=pref:jo.placeholder@example.org
+URL;type=pref:https://example.org/jo
+BDAY:1979-11-04
+PHOTO;ENCODING=b;TYPE=JPEG:/9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAgGBgoKDQ0NDRIN
+ DQ0SEhISEhISEhISEhISEhISEhISEhISEhISEhISEhISEhISEhISEhISEhISEhIS=
+NOTE:Invoices monthly. Prefers a call to a thread.
+END:VCARD
+BEGIN:VCARD
+VERSION:3.0
+N:Testerman;Tomás;;;
+FN:Tomás Testerman
+ORG:Fictional Foods;
+TITLE:Buyer\, Northern Region
+TEL;type=WORK;type=VOICE:+44 161 496 0002
+NOTE:Two things outstanding:\nthe seed order\, then the open day date.
+END:VCARD
+BEGIN:VCARD
+VERSION:3.0
+N:Dummy;Dani;;;
+FN:Dani Dummy
+ORG:Sample Garden Centre;
+TEL;type=CELL;type=VOICE:+44 7700 900333
+END:VCARD
+BEGIN:VCARD
+VERSION:3.0
+TEL;type=CELL;type=VOICE:+44 7700 900999
+NOTE:A card with no name on it at all.
+END:VCARD

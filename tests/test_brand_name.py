@@ -1,0 +1,58 @@
+"""The product is written "BrainOS": one word, never with a space, hyphen or underscore between "Brain" and "OS",
+in any mix of capitals (decided 16 Oct 2026).
+
+Checks every file name and every text file in this kit. The only spelling allowed with a gap is the
+all-lower-case identifier `brain-os` (an email stand-in, a folder name, a price key), which is code,
+not the product's name."""
+import re
+import unittest
+from pathlib import Path
+
+KIT = Path(__file__).resolve().parents[1]
+WRONG = re.compile(r"\bbrain[ \-_]+o\s?s\b", re.IGNORECASE)
+ALLOWED = {"brain-os"}
+
+
+def wrong_spellings(root, skip=lambda rel: False):
+    found = []
+    for p in sorted(root.rglob("*")):
+        rel = p.relative_to(root).as_posix()
+        if ".git/" in f"{rel}/" or "__pycache__" in rel or skip(rel):
+            continue
+        for m in WRONG.finditer(rel):
+            if m.group(0) not in ALLOWED:
+                found.append(f"{rel} (file name): {m.group(0)}")
+        if not p.is_file():
+            continue
+        try:
+            text = p.read_text(encoding="utf-8")
+        except (UnicodeDecodeError, OSError):
+            continue
+        for n, line in enumerate(text.splitlines(), 1):
+            for m in WRONG.finditer(line):
+                if m.group(0) not in ALLOWED:
+                    found.append(f"{rel}:{n}: {m.group(0)}")
+    return found
+
+
+class BrandName(unittest.TestCase):
+    def test_the_guard_catches_every_wrong_spelling(self):
+        for bad in ("Brain" + gap + os for gap in (" ", "-", "_", "  ") for os in ("OS", "Os", "os")):
+            self.assertTrue(WRONG.search(bad) and WRONG.search(bad).group(0) not in ALLOWED, bad)
+        for good in ("BrainOS", "brain-os@localhost", "~/.brain-os/", "my brain, os"):
+            hit = WRONG.search(good)
+            self.assertTrue(hit is None or hit.group(0) in ALLOWED, good)
+
+    def test_no_file_in_the_kit_spells_it_with_a_gap(self):
+        self.assertEqual(wrong_spellings(KIT), [])
+
+    def test_readme_names_the_product_the_brand_and_the_company(self):
+        # Decided 16 Oct 2026 (final): AI Ops is the company, Remyn the brand, BrainOS the product.
+        readme = (KIT / "README.md").read_text(encoding="utf-8")
+        self.assertIn("BrainOS is the product, Remyn is the brand, and AI Ops is the company", readme)
+        for wrong in ("the product is Remyn", "Remyn is the product", "AI Ops is the brand", "BrainOS is the brand"):
+            self.assertNotIn(wrong, readme)
+
+
+if __name__ == "__main__":
+    unittest.main()

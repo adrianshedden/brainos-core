@@ -1,0 +1,40 @@
+# The declared shape of this brain. create_brain.py stamps it; tests/check_brain.py verifies it.
+brain_os_version: 2
+# Your own name as it shows in your WhatsApp chats, so you are never listed as one of your own contacts.
+# Set by the WhatsApp importer the first time you give it --me "<your name>".
+whatsapp_names: []
+domains: {{DOMAIN_LIST}}
+files:
+  - brain.yaml
+  - CLAUDE.md
+  - AGENTS.md
+  - DOMAINS.md
+  - README.md
+  - .gitignore
+  - exports/README.md
+  - automations/AUTOMATIONS.md
+  - memory/MEMORY.md
+  - memory/decisions.jsonl
+  - memory/events.jsonl
+  - scripts/SCRIPTS.md
+  - scripts/jobs.py
+  - skills/SKILLS.md
+  - skills/mine-my-context/SKILL.md
+  - skills/whats-on-my-plate/SKILL.md
+  - skills/who-to-reply-to-first/SKILL.md
+  - skills/who-do-i-know-at/SKILL.md
+  - skills/draft-in-my-voice/SKILL.md
+  - skills/what-am-i-putting-off/SKILL.md
+  - skills/prep-my-next-meeting/SKILL.md
+  - skills/who-have-i-gone-quiet-with/SKILL.md
+  - tools/TOOLS.md
+  - tools/ai-tools/claude-desktop.md
+  - tools/ai-tools/claude-ai.md
+  - tools/ai-tools/claude-code.md
+  - tools/ai-tools/chatgpt.md
+  - tools/ai-tools/codex.md
+  - tools/ai-tools/opencode.md
+  - tools/ai-tools/cursor.md
+  - tools/ai-tools/orca.md
+  - tools/ai-tools/other-ai-tools.md
+{{PERSONAL_FILES}}
