@@ -1,0 +1,14 @@
+# The factory's contract for this repo. Fields: skills repo system/metafactory-orchestrator/references/factory.schema.yaml
+schema_version: 1
+default_branch: main
+owner_lane: orchestrator
+build: {none: "Python and shell scripts; nothing compiles"}
+test: {command: "bash tests/run_all.sh"}
+lint: {none: "no linter configured yet"}
+live_address: https://github.com/adrianshedden/remyn-core
+paths:
+  spec: {none: "no specs folder; specs live on the ticket"}
+  adr: {none: "decisions are recorded in MetaNova memory/decisions.jsonl"}
+  prd: {none: "product briefs live on the ticket"}
+  plan: {none: "no plans folder; plans live on the ticket"}
+  memory: {none: "public kit; template/memory is shipped to users, not this repo's memory"}
