@@ -13,6 +13,8 @@ Three stages, in this order. Do not skip ahead: nothing is written until the per
 ## 1. Gather (read, write nothing)
 
 - Read what the imports produced: `memory/profile/` (what LinkedIn and X say about me), `{{PEOPLE}}people.jsonl` and `{{PEOPLE}}interactions.jsonl`, `memory/calendar/events.yaml`, and a sample of `memory/conversations/` (the most recent chats first, my own messages above all).
+- If `exports/` holds my existing notes (an Obsidian folder, or a Notion export), read their titles and a few of the newest notes: they show what I work on and care about. Copy nothing from them into the brain except what I confirm in stage 3.
+- If you also know something about me from your app's own memory of our past chats, keep it apart: it is not from my files. Mark it "from your AI's memory", confidence low, and ask before writing it.
 - For large files, count and sample rather than reading every line. Note which files you read and how many lines each had.
 - If a file is missing, say which export would fill it. Do not stop.
 
@@ -32,7 +34,7 @@ Work out, each with the file(s) it rests on and how sure you are (high: stated o
 - Show the person a short summary, in plain English, with the source and confidence after each point.
 - Ask at most five short questions, the ones that matter most: anything low confidence, the goals, and any domain you recommend. Accept "skip".
 - Then write only what they confirmed or corrected:
-  - `CLAUDE.md`: fill "Who this is for" and "Goals this quarter". After each line, in brackets: the source file(s), the confidence, and "confirmed by you on YYYY-MM-DD".
+  - `CLAUDE.md`: fill "Who this is for" and "Goals this quarter". After each line, in brackets: the source file(s), the confidence, and "confirmed by you on YYYY-MM-DD". Then run `python3 scripts/level1.py sync .` so `GEMINI.md` and the top of `AGENTS.md` say the same.
   - Each relevant `{DOMAIN}.md`: replace the placeholder under "What's here" with one to three lines, each with its source and confidence (for example `memory/MEMORY.md` and `network/NETWORK.md`).
   - `memory/decisions.jsonl`: one line for each choice the person made here (goals, a domain added or declined), shaped as `memory/MEMORY.md` says, with `"source": "mine-my-context, confirmed by you"` and a `confidence`.
   - A domain they agree to add: follow "Adding a domain" in `DOMAINS.md`.

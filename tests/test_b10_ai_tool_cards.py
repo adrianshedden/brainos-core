@@ -14,7 +14,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 import check_brain  # noqa: E402
 from create_brain import create_brain  # noqa: E402
 
-TOOLS = {"claude-desktop.md", "claude-ai.md", "claude-code.md", "chatgpt.md", "codex.md", "opencode.md",
+TOOLS = {"claude-desktop.md", "claude-ai.md", "claude-code.md", "chatgpt.md", "codex.md", "gemini.md", "opencode.md",
          "cursor.md", "orca.md"}
 CARDS = TOOLS | {"other-ai-tools.md"}
 SECTIONS = ("## How to point it at your brain", "## What it can do", "## What it cannot do")
@@ -23,7 +23,7 @@ SOURCED = re.compile(r"\(Source: (https://\S+), checked (\d{1,2} [A-Z][a-z]+ \d{
 SEEN = re.compile(r"\(Source: ([A-Z][^()]*? on an? [A-Z][^(),]*), seen (\d{1,2} [A-Z][a-z]+ \d{4})\)$")
 UNCHECKED = re.compile(r"\(Not checked: [^()]+\.\)$")
 # The latest date a card may claim to have been checked. Move it forward when a card is re-checked.
-LAST_CHECK = date(2026, 10, 15)
+LAST_CHECK = date(2026, 10, 18)
 
 
 def when(text):

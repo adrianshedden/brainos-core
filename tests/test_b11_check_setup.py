@@ -1,5 +1,6 @@
 """B11: the setup check. Read-only, always exit 0 on good arguments, names every export in exports/
 with the exact importer line to run, and gives one next step. No network."""
+import os
 import shlex
 import shutil
 import subprocess
@@ -106,7 +107,7 @@ class CheckSetup(unittest.TestCase):
                 for name, script in EXPECTED.items():
                     if line.startswith(f"- {name}: looks like"):
                         commands[name] = lines[i + 1].strip()
-                        self.assertIn(f"importers/{script}", commands[name], name)
+                        self.assertIn(f"importers/{script}", commands[name].replace("\\", "/"), name)
             self.assertEqual(set(commands), set(EXPECTED), "\n".join(lines))
             self.assertTrue(any(l.startswith("- holiday-photo.jpg: not recognised") for l in lines))
             self.assertFalse(any("README.md" in l for l in lines))
@@ -120,8 +121,11 @@ class CheckSetup(unittest.TestCase):
 
             # Every printed line is a real command: running it imports the export into the brain.
             for name, command in commands.items():
-                argv = shlex.split(command)
-                self.assertEqual(argv[0], "python3")
+                if os.name == "nt":  # Windows prints py and double quotes (check_setup.command)
+                    argv = [a.strip('"') for a in shlex.split(command, posix=False)]
+                else:
+                    argv = shlex.split(command)
+                self.assertEqual(argv[0], "py" if os.name == "nt" else "python3")
                 self.assertEqual(argv[-1], str(brain.resolve()))
                 r = subprocess.run([sys.executable, *argv[1:]], capture_output=True, text=True)
                 self.assertEqual(r.returncode, 0, f"{name}: {r.stderr}")
@@ -136,6 +140,44 @@ class CheckSetup(unittest.TestCase):
             lines = said(brain)
             self.assertIn("- None yet.", lines)
             self.assertIn(str((brain / "exports").resolve()), lines[-1])
+
+    def test_existing_notes_are_named_and_need_no_import(self):
+        # Drummond call, 19 Oct 2026: an Obsidian folder or a Notion export is one more source. Nothing imports
+        # it; the AI reads it when it gets to know the person.
+        with tempfile.TemporaryDirectory() as tmp:
+            brain = create_brain(Path(tmp) / "b")
+            vault = brain / "exports" / "My Vault"
+            (vault / "Projects").mkdir(parents=True)
+            (vault / "Projects" / "Launch plan.md").write_text("# Launch plan\n", encoding="utf-8")
+            (vault / ".obsidian").mkdir()
+            zip_of(brain / "exports" / "Export-notion.zip", [vault / "Projects" / "Launch plan.md"])
+            before = snapshot(brain)
+            lines = said(brain)
+            self.assertEqual(snapshot(brain), before, "the check changed something")
+            for name in ("My Vault", "Export-notion.zip"):
+                line = next(l for l in lines if l.startswith(f"- {name}:"))
+                self.assertIn("your existing notes", line)
+                self.assertIn("Nothing to import", line)
+            self.assertNotIn("Import it with:", "\n".join(lines))
+            self.assertIn("Your notes are in.", lines[-1])
+
+    def test_a_folder_holding_only_the_kit_and_saved_progress_is_ready_for_a_brain(self):
+        """The terminal line leaves a folder with only kit/ in it, and setup.yaml may be there too: the same
+        things create_brain.py accepts. Anything else still makes it "not a brain"."""
+        with tempfile.TemporaryDirectory() as tmp:
+            folder = Path(tmp) / "b"
+            (folder / "kit").mkdir(parents=True)
+            (folder / "exports").mkdir()
+            (folder / "setup.yaml").write_text("step: 1\n", encoding="utf-8")
+            self.assertEqual(check_setup.brain_state(folder), "empty")
+            self.assertIn("is empty and ready for create_brain.py", "\n".join(said(folder)))
+            (folder / "notes.txt").write_text("mine", encoding="utf-8")
+            self.assertEqual(check_setup.brain_state(folder), "not-empty")
+
+    def test_the_kit_check_needs_the_kit_2_files(self):
+        for rel in ("connections.yaml", "importers/from_connector.py", "progress.py"):
+            self.assertIn(rel, check_setup.NEEDED)
+            self.assertTrue((CORE / rel).is_file(), rel)
 
     def test_a_brain_made_before_the_exports_folder_is_told_to_make_one(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -170,6 +212,15 @@ class CheckSetup(unittest.TestCase):
                 self.assertNotEqual(r.returncode, 0, argv)
                 self.assertIn("Usage:", r.stderr)
 
+
+    def test_windows_lines_use_py_and_double_quotes(self):
+        # On Windows `python3` is missing or opens the Microsoft Store, and cmd.exe ignores single quotes.
+        import check_setup
+        line = check_setup.command(r"C:\Users\A B\brain\kit\importers\whatsapp.py", r"C:\Users\A B\brain\exports\chat.txt", ".", windows=True)
+        self.assertTrue(line.startswith("py "), line)
+        self.assertIn('"C:\\Users\\A B\\brain\\exports\\chat.txt"', line)
+        self.assertNotIn("'", line)
+        self.assertTrue(check_setup.command("x.py", windows=False).startswith("python3 "))
 
 if __name__ == "__main__":
     unittest.main()

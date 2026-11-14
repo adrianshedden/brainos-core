@@ -9,8 +9,9 @@ Pick the card for your tool, in `ai-tools/`:
 - `claude-desktop.md`: the Claude app's Chat tab (Cowork, the old name, is now part of Chat)
 - `claude-ai.md`: Claude in a web browser
 - `claude-code.md`: Claude Code
-- `chatgpt.md`: ChatGPT
+- `chatgpt.md`: ChatGPT (use the desktop app's Codex for your brain)
 - `codex.md`: OpenAI Codex
+- `gemini.md`: Gemini, in Google's Antigravity app
 - `opencode.md`: OpenCode
 - `cursor.md`: Cursor
 - `orca.md`: Orca
@@ -18,7 +19,7 @@ Pick the card for your tool, in `ai-tools/`:
 
 Every line on a card names where it comes from and the date it was checked, or says plainly that it was not checked. Tools change. If a card disagrees with the tool's own help page, the help page wins.
 
-Your brain is stored as plain files on your laptop. When you use a cloud AI provider (Anthropic, OpenAI and others), whatever their agent reads is processed by that provider, like any chat. Run it with a local model in the future and it stays fully private on your machine. That is what we are working towards.
+Your brain's files stay in your folder. When you ask a question, the parts the AI reads go to the AI company to work out the answer, the same as any chat with it. BrainOS sends nothing anywhere else.
 
 ## Connectors that are on
 

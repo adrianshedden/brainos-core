@@ -10,7 +10,7 @@ KIT = Path(__file__).resolve().parents[1]
 WORDS = {w: i for i, w in enumerate("zero one two three four five six seven eight nine ten eleven twelve".split())}
 COUNT = re.compile(r"\b(\d+|" + "|".join(WORDS) + r") (?:starter |first |week-one )?skills\b", re.IGNORECASE)
 # Places a person or an AI reads the count. sample/brain is a build of the template, so it is checked too.
-FILES = ["README.md", "INSTRUCTIONS.md", "template/skills/SKILLS.md", "template/AGENTS.md", "template/CLAUDE.md",
+FILES = ["README.md", "INSTRUCTIONS.md", "template/skills/SKILLS.md", "template/AGENTS.md", "template/LEVEL1.md",
          "template/README.md", "sample/brain/skills/SKILLS.md", "sample/brain/README.md"]
 
 

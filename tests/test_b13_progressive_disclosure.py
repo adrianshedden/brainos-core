@@ -52,7 +52,7 @@ class Spine(unittest.TestCase):
             self.assertTrue((brain / name).is_file(), name)
         claude = (brain / "CLAUDE.md").read_text(encoding="utf-8")
         for must in ("## Who this is for", "## How to start a session", "## Rules", "AGENTS.md",
-                     "Only the person's own data", "processed by that provider", "`source`", "`confidence`"):
+                     "Only the person's own data", "go to the AI company", "`source`", "`confidence`"):
             self.assertIn(must, claude)
         agents = (brain / "AGENTS.md").read_text(encoding="utf-8")
         for must in ("## Routing table", "## File index", "## Conventions", "`source`", "`confidence`"):
@@ -244,7 +244,7 @@ class MineMyContext(unittest.TestCase):
         self.assertEqual(at, sorted(at), "INSTRUCTIONS.md steps are out of order")
         readme = (CORE / "README.md").read_text(encoding="utf-8")
         at = [readme.index(s) for s in ("check_setup.py", "Choose your personal domains", "--domains",
-                                        "importers/linkedin.py", "mine-my-context", "Try the eight skills")]
+                                        "importers/linkedin.py", "mine-my-context", "Try the eleven skills")]
         self.assertEqual(at, sorted(at), "README.md steps are out of order")
 
 

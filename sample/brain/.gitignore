@@ -1,3 +1,5 @@
 # Raw export files stay on this computer: they are never part of the GitHub backup.
 exports/*
 !exports/README.md
+# The BrainOS kit (downloaded by the setup) is public already: it is not part of your backup.
+kit/
